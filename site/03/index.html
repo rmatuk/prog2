@@ -1,0 +1,2341 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Entendimiento básico sobre API, HTTP, JSON y la estructura del proyecto">
+      
+      
+      
+        <link rel="canonical" href="https://rmatuk.github.io/progra2-stack/03/">
+      
+      
+        <link rel="prev" href="../02/">
+      
+      
+        <link rel="next" href="../04/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/Logo_UNSAM.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Estructurando el proyecto y creando rutas CRUD - Programación 2 (LCD)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../assets/_markdown_exec_ansi.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+
+  <script>
+    const preferencesKey = "fonts-preferences";
+    const preferencesId = "md-fonts-style";
+
+    const loadSetPreferences = () => {
+      let prefStyles = document.querySelector(`#${preferencesId}`);
+
+      if (!prefStyles) {
+        prefStyles = document.createElement("style");
+        prefStyles.id = preferencesId;
+        document.head.appendChild(prefStyles);
+      }
+
+      prefStyles.innerHTML = "";
+
+      const loadedPreferences = __md_get(preferencesKey);
+
+      if (!loadedPreferences) {
+        __md_set(preferencesKey, {
+          "__global": { "cssRaw": "" }
+        });
+        return;
+      }
+
+      prefStyles.innerHTML = loadedPreferences["__global"]["cssRaw"];
+    };
+
+    loadSetPreferences();
+  </script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#estructurando-el-proyecto-y-creando-rutas-crud" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+
+<header class="md-header md-header--shadow" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="Cabecera">
+	<a href=".." title="Programación 2 (LCD)" class="md-header__button md-logo" aria-label="Programación 2 (LCD)" data-md-component="logo">
+	    
+  <img src="../assets/Logo_UNSAM.png" alt="logo">
+
+	</a>
+	<label class="md-header__button md-icon" for="__drawer">
+	    
+	    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+	</label>
+	<div class="md-header__title" data-md-component="header-title">
+	    <div class="md-header__ellipsis">
+		<div class="md-header__topic">
+		    <span class="md-ellipsis">
+			Programación 2 (LCD)
+		    </span>
+		</div>
+		<div class="md-header__topic" data-md-component="header-topic">
+		    <span class="md-ellipsis">
+			
+			Estructurando el proyecto y creando rutas CRUD
+			
+		    </span>
+		</div>
+	    </div>
+	</div>
+	
+	
+	<form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Modo noturno"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo noturno" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+	
+	
+	
+	<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+	
+
+	<!-- Selector de fuentes -->
+	<div class="md-header__option">
+    <div class="md-select">
+	
+	<button class="md-header__button md-icon" aria-label="Seleccionar fuente">
+	    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 8h3v12h1v1h-4v-1h1v-3h-4l-1.5 3H14v1h-4v-1h1zm1 1-3.5 7H18zM5 3h5c1.11 0 2 .89 2 2v11H9v-5H6v5H3V5c0-1.11.89-2 2-2m1 2v4h3V5z"/></svg>
+	</button>
+	<div class="md-select__inner">
+	    <ul class="md-select__list">
+		
+		<li class="md-select__item">
+		    <a id="md-fonts"
+               data-text="Default"
+               data-code=""
+               data-src=""
+               class="md-select__link">
+			Default
+		    </a>
+		</li>
+		
+		<li class="md-select__item">
+		    <a id="md-fonts"
+               data-text="Roboto"
+               data-code="Roboto Mono"
+               data-src=""
+               class="md-select__link">
+			Roboto
+		    </a>
+		</li>
+		
+		<li class="md-select__item">
+		    <a id="md-fonts"
+               data-text="OpenDyslexic"
+               data-code="OpenDyslexicMono"
+               data-src="https://fonts.cdnfonts.com/css/opendyslexic"
+               class="md-select__link">
+			OpenDyslexic
+		    </a>
+		</li>
+		
+	    </ul>
+	</div>
+    </div>
+</div>
+
+	
+	
+	<label class="md-header__button md-icon" for="__search">
+	    
+	    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+	</label>
+	<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+	
+	
+	<div class="md-header__source">
+	    <a href="https://github.com/rmatuk/progra2-stack" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rmatuk/progra2-stack
+  </div>
+</a>
+	</div>
+	
+    </nav>
+    
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Programación 2 (LCD)" class="md-nav__button md-logo" aria-label="Programación 2 (LCD)" data-md-component="logo">
+      
+  <img src="../assets/Logo_UNSAM.png" alt="logo">
+
+    </a>
+    Programación 2 (LCD)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rmatuk/progra2-stack" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rmatuk/progra2-stack
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programación 2 (LCD) - UNSAM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurando el entorno de desarrollo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción al desarrollo WEB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructurando el proyecto y creando rutas CRUD
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructurando el proyecto y creando rutas CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crud-y-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRUD y HTTP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CRUD y HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respuestas-de-la-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuestas de la API
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementando-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando endpoints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iniciando-la-implementacion-de-la-ruta-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Iniciando la implementación de la ruta POST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Iniciando la implementación de la ruta POST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-del-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementación del endpoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación del endpoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status-code-de-respuesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status code de respuesta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelado-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelado de datos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelado de datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modelo-de-entrada-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo de entrada de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelo-de-salida-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo de salida de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacion-y-pydantic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validación y pydantic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validación y pydantic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extendiendo-la-validacion-con-e-mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extendiendo la validación con e-mail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion-de-la-respuesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validación de la respuesta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#de-vuelta-al-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        De vuelta al POST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="De vuelta al POST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creando-una-base-de-datos-falsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creando una base de datos falsa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementando-el-test-de-la-ruta-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando el test de la ruta POST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementando el test de la ruta POST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#no-te-repitas-dry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No te repitas (DRY)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementando-la-ruta-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando la Ruta GET
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementando la Ruta GET">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementando-el-test-de-la-ruta-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando el test de la ruta GET
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementando-la-ruta-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando la Ruta PUT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementando la Ruta PUT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementando-el-test-de-la-ruta-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando el test de la ruta PUT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementando-la-ruta-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando la Ruta DELETE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementando la Ruta DELETE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementando-el-test-de-la-ruta-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando el test de la ruta DELETE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificando-todo-antes-del-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificando todo antes del commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aislamiento-de-los-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aislamiento de los tests
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Aislamiento de los tests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#se-podria-haber-sabido-esto-antes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Se podría haber sabido esto antes?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo-de-esta-leccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código de esta lección
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurando la base de datos y gestionando migraciones con Alembic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrando la base de datos a la API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios resueltos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ejercicios resueltos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejercicios_resueltos/aula_01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios de la sección 01
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejercicios_resueltos/aula_02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios de la sección 02
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejercicios_resueltos/aula_03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios de la sección 03
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejercicios_resueltos/aula_04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios de la sección 04
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejercicios_resueltos/aula_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios de la sección 05
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crud-y-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRUD y HTTP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CRUD y HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respuestas-de-la-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuestas de la API
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementando-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando endpoints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iniciando-la-implementacion-de-la-ruta-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Iniciando la implementación de la ruta POST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Iniciando la implementación de la ruta POST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-del-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementación del endpoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación del endpoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status-code-de-respuesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status code de respuesta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelado-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelado de datos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelado de datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modelo-de-entrada-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo de entrada de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelo-de-salida-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo de salida de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacion-y-pydantic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validación y pydantic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validación y pydantic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extendiendo-la-validacion-con-e-mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extendiendo la validación con e-mail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion-de-la-respuesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validación de la respuesta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#de-vuelta-al-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        De vuelta al POST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="De vuelta al POST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creando-una-base-de-datos-falsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creando una base de datos falsa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementando-el-test-de-la-ruta-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando el test de la ruta POST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementando el test de la ruta POST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#no-te-repitas-dry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No te repitas (DRY)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementando-la-ruta-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando la Ruta GET
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementando la Ruta GET">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementando-el-test-de-la-ruta-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando el test de la ruta GET
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementando-la-ruta-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando la Ruta PUT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementando la Ruta PUT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementando-el-test-de-la-ruta-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando el test de la ruta PUT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementando-la-ruta-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando la Ruta DELETE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementando la Ruta DELETE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementando-el-test-de-la-ruta-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementando el test de la ruta DELETE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificando-todo-antes-del-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificando todo antes del commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aislamiento-de-los-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aislamiento de los tests
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Aislamiento de los tests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#se-podria-haber-sabido-esto-antes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Se podría haber sabido esto antes?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo-de-esta-leccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código de esta lección
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="estructurando-el-proyecto-y-creando-rutas-crud">Estructurando el proyecto y creando rutas CRUD</h1>
+<hr />
+<p>Objetivos de esta clase:</p>
+<ul>
+<li>Comprender la estructura de un proyecto FastAPI y cómo estructurar rutas CRUD (Crear, Leer, Actualizar, Eliminar)</li>
+<li>Mejorar nuestro conocimiento sobre Pydantic y su utilidad en la validación y serialización de datos</li>
+<li>Implementación de rutas CRUD en FastAPI</li>
+<li>Escritura y ejecución de tests para validar el comportamiento de las rutas</li>
+</ul>
+<hr />
+<p>Bienvenidos de nuevo a nuestra serie de clases sobre la construcción de una aplicación utilizando FastAPI. En la última clase, abordamos conceptos básicos del desarrollo web y finalizamos la configuración de nuestro entorno. Hoy avanzaremos en la estructuración de los primeros endpoints de nuestra API, concentrándonos en las cuatro operaciones fundamentales de <strong>CRUD</strong> - Crear, Leer, Actualizar y Eliminar. Exploraremos cómo estas operaciones se aplican tanto a la comunicación web como a la interacción con la base de datos.</p>
+<p>El objetivo de esta clase es implementar un sistema de registro de usuarios en nuestra aplicación. Al final, podrás registrar, listar, modificar y eliminar usuarios, además de realizar tests para validar estas funcionalidades.</p>
+<details class="note">
+<summary>Nota para personas <strong>más experimentadas</strong> sobre esta clase</summary>
+<p>El principio detrás de esta clase es demostrar cómo construir los endpoints y los tests más básicos posibles.</p>
+<p>Tal vez te cause extrañeza el uso de una base de datos en una lista y los tests construidos a partir de efectos colaterales. Pero el objetivo principal es que las personas puedan concentrarse en la creación de los primeros tests sin mucho roce.</p>
+<p>Estas cuestiones se resolverán en las clases siguientes.</p>
+</details>
+<h2 id="crud-y-http">CRUD y HTTP</h2>
+<p>En el desarrollo de APIs, existen cuatro acciones principales que hacemos con los datos: crear, leer, actualizar y eliminar. Estas acciones ayudan a gestionar los datos en la base de datos y en la aplicación web. Nos enfocaremos en este primer momento en las relaciones entre los datos.</p>
+<p>CRUD es un acrónimo que representa las cuatro operaciones básicas que puedes realizar en cualquier base de datos persistente:</p>
+<ul>
+<li><strong>C</strong>reate (Crear): agregar nuevos registros a la base de datos.</li>
+<li><strong>R</strong>ead (Leer): recuperar registros existentes de la base de datos.</li>
+<li><strong>U</strong>pdate (Actualizar): modificar registros existentes en la base de datos.</li>
+<li><strong>D</strong>elete (Eliminar): eliminar registros existentes de la base de datos.</li>
+</ul>
+<p>Con estas operaciones podemos realizar cualquier tipo de comportamiento en una base de datos. Podemos crear un registro, luego modificarlo y, tal vez después de todo eso, eliminarlo.</p>
+<p>Cuando hablamos de APIs que sirven datos, todas estas operaciones tienen alguna forma similar en el protocolo HTTP. El protocolo tiene verbos para indicar esas mismas acciones que queremos representar en la base de datos.</p>
+<ul>
+<li><strong>POST</strong>: se usa para solicitar que el servidor acepte un dato (recurso) enviado por el cliente.</li>
+<li><strong>GET</strong>: se usa cuando el cliente desea solicitar una información del servidor.</li>
+<li><strong>PUT</strong>: se usa en el momento en que el cliente desea informar alguna modificación de los datos al servidor.</li>
+<li><strong>DELETE</strong>: se usa para decirle al servidor que elimine determinado recurso.</li>
+</ul>
+<p>De esta forma podemos crear asociaciones entre los endpoints y la base de datos. Por ejemplo: cuando queramos insertar un dato en la base de datos, nosotros como clientes debemos comunicar esa intención al servidor usando el método POST enviando los datos (en nuestro caso en formato JSON) que deben persistirse en la base de datos. Con esto iniciamos el proceso de <em>create</em> en la base de datos.</p>
+<h3 id="respuestas-de-la-api">Respuestas de la API</h3>
+<p>Usamos códigos de estado para informar al cliente el resultado de las operaciones en el servidor, como si un dato fue creado, encontrado, actualizado o eliminado con éxito. </p>
+<p>Los códigos a los que debemos prestar atención para responder correctamente las solicitudes incluyen:</p>
+<ul>
+<li><strong>200 OK</strong>: Indica éxito en la solicitud.<ul>
+<li><strong>GET</strong>: Cuando un dato es solicitado y devuelto con éxito.</li>
+<li><strong>PUT</strong>: Cuando los datos son modificados con éxito.</li>
+</ul>
+</li>
+<li><strong>201 CREATED</strong>: Significa que la solicitud resultó en la creación de un nuevo recurso.<ul>
+<li><strong>POST</strong>: Aplicable cuando un dato es enviado y creado con éxito.</li>
+<li><strong>PUT</strong>: Usado cuando una modificación resulta en la creación de un nuevo recurso.</li>
+</ul>
+</li>
+<li><strong>204 NO CONTENT</strong>: Retorno del servidor sin contenido en el mensaje.<ul>
+<li><strong>PUT</strong>: Aplicable si la modificación no genera un retorno.</li>
+<li><strong>DELETE</strong>: Usado cuando la acción de eliminar no genera un retorno.</li>
+</ul>
+</li>
+</ul>
+<p>Los códigos de error más comunes que tenemos que conocer para manejar posibles errores en la aplicación son:</p>
+<ul>
+<li><strong>404 NOT FOUND</strong>: El recurso solicitado no pudo ser encontrado.</li>
+<li><strong>422 UNPROCESSABLE ENTITY</strong>: la petición estaba bien formada (es decir, sintácticamente correcta), pero no pudo ser procesada.</li>
+<li><strong>500 INTERNAL SERVER ERROR</strong>: Un mensaje de error genérico, dado cuando se encontró una condición inesperada. Generalmente ocurre cuando nuestra aplicación presenta un error.</li>
+</ul>
+<p>Comprendiendo estos códigos, estamos listos para iniciar la implementación de algunos endpoints y poner estos conceptos en práctica.</p>
+<h2 id="implementando-endpoints">Implementando endpoints</h2>
+<p>Para facilitar el aprendizaje, podemos dividir la creación de nuevos endpoints en tres etapas:</p>
+<ol>
+<li>Relación con el HTTP: Determinar el verbo HTTP esperado y los códigos de respuesta para situaciones de éxito y error.</li>
+<li>Modelos de Datos: Definir el formato del JSON esperado, campos y sus tipos, y pensar en los modelos de respuesta para situaciones de éxito y error.</li>
+<li>Implementación del Cuerpo: Decidir el tratamiento de los datos recibidos y el tipo de procesamiento aplicado.</li>
+</ol>
+<p>Las dos primeras etapas nos ayudan a definir la interfaz de comunicación y cómo será documentada. La tercera etapa es más específica e involucra decisiones sobre la interacción con la base de datos, validaciones adicionales y la definición de lo que constituye éxito o error en la solicitud.</p>
+<p>Estas etapas nos orientan en la implementación completa del endpoint, garantizando que nada sea olvidado.</p>
+<h2 id="iniciando-la-implementacion-de-la-ruta-post">Iniciando la implementación de la ruta POST</h2>
+<p>En esta clase, nuestro foco principal será desarrollar un sistema de registro de usuarios. Para eso, la implementación de una forma eficiente para crear nuevos usuarios en la base de datos es esencial. Exploraremos cómo utilizar el verbo HTTP POST, fundamental para comunicar al servidor nuestra intención de enviar nuevos datos, como en el registro de usuarios.</p>
+<h3 id="implementacion-del-endpoint">Implementación del endpoint</h3>
+<p>Para iniciar, crearemos un endpoint que acepta el verbo <code>POST</code> con datos en formato JSON. Este endpoint responderá con el status <code>201</code> en caso de éxito en la creación del recurso. Con esto, establecemos la base para nuestra funcionalidad de registro.</p>
+<p>Usaremos el decorador <code class="language-python highlight"><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">()</span></code> de FastAPI para definir nuestro endpoint, que comenzará con la URL <code>/users/</code>, indicando dónde recibiremos los datos para crear nuevos usuarios:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">():</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="o">...</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="status-code-de-respuesta">Status code de respuesta</h4>
+<p>Es crucial definir que, al registrar un usuario con éxito, el sistema debe devolver el código de respuesta <code class="language-python highlight"><span class="mi">201</span> <span class="n">CREATED</span></code>, indicando la creación exitosa del recurso. Para eso, agregamos el parámetro <code>status_code</code> al decorador:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span><span class="p">)</span>
+</span></span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">():</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a>    <span class="o">...</span>
+</span></code></pre></div></td></tr></table></div>
+<blockquote>
+<p>Conversaremos en breve sobre los códigos de respuesta en el tópico de <a href="#validacion-y-pydantic" target="_blank">pydantic</a></p>
+</blockquote>
+<h3 id="modelado-de-datos">Modelado de datos</h3>
+<p>El modelado de datos es una parte fundamental, donde consideramos tanto los datos recibidos del cliente como los datos que serán devueltos a él. Este enfoque asegura una comunicación eficaz y clara.</p>
+<h4 id="modelo-de-entrada-de-datos">Modelo de entrada de datos</h4>
+<p>Para los datos de entrada, como estamos pensando en un registro de usuario en la aplicación, es importante que tengamos insumos para identificarlo como el <code>email</code>, una contraseña (<code>password</code>) para que pueda hacer login en el futuro y su nombre de usuario (<code>username</code>). De esta forma, podemos imaginar un modelo de entrada de esta manera:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"joao123"</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"joao123@email.com"</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"segredo123"</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Para que la aplicación pueda exponer este modelo en la documentación, debemos crear una clase de pydantic en nuestro archivo de schemas (<code>fast_zero/schemas.py</code>) que represente ese schema:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/schemas.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserSchema</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10"></a>    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11"></a>    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Como ya tenemos el endpoint definido, necesitamos hacer la asociación del modelo con él. Para hacer eso basta que el endpoint reciba un parámetro y ese parámetro esté asociado a un modelo vía anotación de parámetros:</p>
+<div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fast_zero.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">Message</span><span class="p">,</span> <span class="n">UserSchema</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># ...</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">UserSchema</span><span class="p">):</span>
+</span></span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="o">...</span>
+</span></code></pre></div>
+<p>De esta forma, el modelo de entrada, lo que el endpoint espera recibir, ya está documentado y aparecerá en el swagger UI.</p>
+<p>Para visualizarlo, tenemos que iniciar el servidor:</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>poetry<span class="w"> </span>serve
+</span></code></pre></div>
+<p>Y acceder a la página <a href="http://localhost:8000/docs" target="_blank">http://127.0.0.1:8000/docs</a>. Esto nos mostrará las definiciones de nuestro endpoint usando el modelo en el swagger:</p>
+<p><img alt="Captura de pantalla del swagger UI mostrando el modelo de pydantic descrito arriba" class="center" src="../assets/03/swagger_exibindo_o_schema_de_entrada_de_create_user.png" width="400" /></p>
+<h4 id="modelo-de-salida-de-datos">Modelo de salida de datos</h4>
+<p>El modelo de salida explica al cliente qué datos serán devueltos cuando se haga la llamada a este endpoint. Para que la API tenga un uso fluido, tenemos que especificar el retorno correctamente en la documentación.</p>
+<p>Si miramos el estado actual de respuesta de nuestra API, podemos ver que la respuesta en el swagger es <code class="language-python highlight"><span class="s2">"string"</span></code> para el código de respuesta <code class="language-python highlight"><span class="mi">201</span></code>:</p>
+<p><img alt="descripción" class="center shadow" src="../assets/03/swagger_sem_modelo_de_resposta.png" /></p>
+<p>Cuando hacemos una llamada con el método POST lo esperado es que los datos creados sean devueltos al cliente. Podríamos usar el mismo modelo de antes, el <code>UserSchema</code>, sin embargo, por una cuestión de seguridad, sería ideal no devolver la contraseña del usuario. Cuanto menos trafique en la red, mejor.</p>
+<p>De esta forma, podemos pensar en el mismo schema, pero sin la contraseña. Algo como:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"joao123"</span><span class="p">,</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"joao123@email.com"</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Transcribiendo esto en un modelo de pydantic en nuestro archivo de schemas (<code>fast_zero/schemas.py</code>) tenemos esto:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/schemas.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserPublic</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a>    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a>    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Para aplicar un modelo a la respuesta del endpoint, tenemos que pasar el modelo al parámetro <code>response_model</code>, como hicimos en la <a href="../02/#integrando-pydantic-con-fastapi" target="_blank">clase pasada</a>:</p>
+<div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">fast_zero.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">Message</span><span class="p">,</span> <span class="n">UserPublic</span><span class="p">,</span> <span class="n">UserSchema</span>
+</span></span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># Código omitido</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">UserPublic</span><span class="p">)</span>
+</span></span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">UserSchema</span><span class="p">):</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="o">...</span>
+</span></code></pre></div>
+<p>Teniendo un modelo descriptivo de respuesta para el cliente en la documentación:</p>
+<p><img alt="descripción" class="center shadow" src="../assets/03/modelo_de_resposta_do_swagger.png" /></p>
+<h2 id="validacion-y-pydantic">Validación y pydantic</h2>
+<p>Un punto crucial de Pydantic es su habilidad para verificar si los datos son correctos mientras el programa está corriendo, garantizando que todo esté conforme a lo esperado. Haciendo que, en caso de que el cliente envíe un dato que no corresponde con el schema definido, se levante un error <code class="language-python highlight"><span class="mi">422</span></code>. Y en caso de que nuestra respuesta como servidor tampoco siga el schema, se levantará un error <code class="language-python highlight"><span class="mi">500</span></code>. Haciendo que sea una garantía de dos vías: nuestra API sigue la especificación de la documentación.</p>
+<p>Cuando relacionamos un modelo a la respuesta del endpoint, Pydantic de forma automática crea un schema llamado <code>HTTPValidationError</code>:</p>
+<p><img alt="descripción" class="center shadow" src="../assets/03/422_no_swagger.png" /></p>
+<p>Este modelo se usa cuando el JSON enviado en la solicitud no cumple con los requisitos del schema.</p>
+<p>Por ejemplo, si hacemos una solicitud que se aparta de los patrones definidos en el schema:</p>
+<p><img alt="descripción" class="center shadow" src="../assets/03/chamada_com_schema_errado_no_swagger.png" width="500" /></p>
+<p>Esta solicitud se aparta de los patrones, ya que no envía el campo <code>password</code> y envía el tipo de dato erróneo para <code>email</code>.</p>
+<p>Con esto, recibiremos un error <code>422 UNPROCESSABLE ENTITY</code>, diciendo que nuestro schema fue violado y la respuesta contiene los detalles de los campos faltantes o mal formateados:</p>
+<p><img alt="descripción" class="center shadow" src="../assets/03/resposta_do_422_no_swagger.png" width="500" /></p>
+<p>El mensaje completo de retorno del servidor muestra de forma detallada los errores de validación encontrados en cada campo, individualmente en el campo <code>details</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  <span class="s2">"detail"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="p">{</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string_type"</span><span class="p">,</span> <span class="c1"># (1)!</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>      <span class="s2">"loc"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>        <span class="s2">"body"</span><span class="p">,</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>        <span class="s2">"email"</span> <span class="c1"># (2)!</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>      <span class="p">],</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>      <span class="s2">"msg"</span><span class="p">:</span> <span class="s2">"Input should be a valid string"</span><span class="p">,</span> <span class="c1">#(3)!</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>      <span class="s2">"input"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://errors.pydantic.dev/2.5/v/string_type"</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="p">},</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="p">{</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"missing"</span><span class="p">,</span> <span class="c1">#(4)!</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>      <span class="s2">"loc"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>        <span class="s2">"body"</span><span class="p">,</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>        <span class="s2">"password"</span> <span class="c1">#(5)!</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>      <span class="p">],</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>      <span class="s2">"msg"</span><span class="p">:</span> <span class="s2">"Field required"</span><span class="p">,</span> <span class="c1">#(6)!</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>      <span class="s2">"input"</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>        <span class="s2">"email"</span><span class="p">:</span> <span class="mi">1</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>      <span class="p">},</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://errors.pydantic.dev/2.5/v/missing"</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>    <span class="p">}</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>  <span class="p">]</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li>Tipo de error en el campo: Se esperaba que el valor fuera string (<em>string_type</em>)</li>
+<li>Campo notificado</li>
+<li>Mensaje que acompaña al error</li>
+<li>Tipo de error en el campo: Se esperaba que el valor fuera enviado (<em>missing</em>)</li>
+<li>Campo notificado</li>
+<li>Mensaje que acompaña al error</li>
+</ol>
+<p>Vemos que pydantic desempeña un papel bastante importante en el funcionamiento y seguridad de la API. Puede “bloquear” el request antes de que sea expuesto a nuestra función de endpoint, evitando que casos extraños ingresen a la API. Pydantic valida tanto en relación a los tipos de los campos, como en relación a los campos que deberían ser enviados, pero no lo fueron.</p>
+<h3 id="extendiendo-la-validacion-con-e-mail">Extendiendo la validación con e-mail</h3>
+<p>Otro punto que debe ser considerado es la capacidad de extender los campos usados por pydantic en las anotaciones de tipo.</p>
+<p>Para garantizar que el campo <code>email</code> realmente contenga un e-mail válido, podemos usar una herramienta especial de Pydantic que verifica si el e-mail tiene el formato correcto, como la presencia de <code>@</code> y un dominio válido.</p>
+<p>Para eso, pydantic tiene un tipo de dato específico, el <a href="https://docs.pydantic.dev/latest/api/networks/#pydantic.networks.EmailStr" target="_blank"><code>EmailStr</code></a>. Que garantiza que el valor que será recibido por el schema sea de hecho un e-mail en formato válido. Podemos agregarlo al campo <code>email</code> en los modelos <code>UserSchema</code> y <code>UserPublic</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">EmailStr</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Código omitido</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserSchema</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserPublic</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span>
+</span></code></pre></div>
+<p>Con esto, pydantic ofrecerá un ejemplo de email en el swagger <code>"user@example.com"</code> y ajustará los schemas para hacer esas validaciones:</p>
+<p><img alt="descripción" class="center shadow" src="../assets/03/schema_com_email_no_swagger.png" /></p>
+<p>De esta forma, el campo esperará no solamente un string como antes, sino una dirección de email válida.</p>
+<h3 id="validacion-de-la-respuesta">Validación de la respuesta</h3>
+<p>Después de perfeccionar nuestros modelos de Pydantic para garantizar que los datos de entrada y salida estén correctamente validados, llegamos a un punto crucial: la implementación del cuerpo de nuestro endpoint. Hasta ahora, nuestro endpoint está definido, pero sin una lógica de procesamiento real, como se muestra a continuación:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-13">13</a></span>
+<span class="normal"><a href="#__codelineno-11-14">14</a></span>
+<span class="normal"><a href="#__codelineno-11-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">UserPublic</span><span class="p">)</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">UserSchema</span><span class="p">):</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="hll">    <span class="o">...</span>
+</span></span></code></pre></div></td></tr></table></div>
+<p>Este es el momento perfecto para realizar un request y observar directamente la actuación de Pydantic en la validación de la respuesta. Al intentar ejecutar un request válido, sin la implementación adecuada del endpoint, nos encontramos con una situación interesante: Pydantic intenta validar la respuesta que nuestro endpoint debería proporcionar, pero, como todavía no implementamos esa lógica, el resultado no cumple con el schema definido.</p>
+<p><img alt="Captura de pantalla del swagger con el schema correcto siendo enviado" class="center shadow" src="../assets/03/request_correto_para_post_com_resposta_incorreta.png" /></p>
+<p>El intento resulta en un mensaje de error mostrado directamente en el Swagger, indicando un error de servidor interno (HTTP 500). Este tipo de error sugiere que algo salió mal del lado del servidor, pero no ofrece detalles específicos sobre la naturaleza del problema para el cliente. El error 500 es una respuesta genérica para indicar fallos en el servidor.</p>
+<p><img alt="captura de pantalla del swagger respondiendo el error 500" class="center shadow" src="../assets/03/erro_500_do_servidor.png" /></p>
+<p>Para investigar la causa exacta del error 500, es necesario consultar la consola o los logs de nuestra aplicación, donde se registran los detalles del error. En este caso, el error presentado en los logs es el siguiente:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">raise</span> <span class="n">ResponseValidationError</span><span class="p">(</span> <span class="c1"># (1)!</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">fastapi</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ResponseValidationError</span><span class="p">:</span> <span class="mi">1</span> <span class="n">validation</span> <span class="n">errors</span><span class="p">:</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">{</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  <span class="s2">"type"</span><span class="p">:</span><span class="s2">"model_attributes_type"</span><span class="p">,</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>  <span class="s2">"loc"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"response"</span><span class="p">),</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  <span class="s2">"msg"</span><span class="p">:</span><span class="s2">"Input should be a valid dictionary or object to extract fields from"</span><span class="p">,</span><span class="c1">#(2)!</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>  <span class="s2">"input"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span> <span class="c1">#(3)!</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>  <span class="s2">"url"</span><span class="p">:</span><span class="s2">"https://errors.pydantic.dev/2.6/v/model_attributes_type"</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li>El json de este mensaje de error aparece en una única línea. Yo hice el salto de línea para que fuera más fácil de leer la respuesta.</li>
+<li>El mensaje de error dice que el input pasado al modelo de pydantic debería ser un diccionario válido o un objeto del cual se pudieran extraer los campos.</li>
+<li>El objeto enviado al modelo</li>
+</ol>
+<p>Esencialmente, el error nos informa que el modelo esperaba recibir un objeto válido para procesamiento, pero, en cambio, recibió <code>None</code>. Esto ocurre porque todavía no implementamos la lógica para procesar el input recibido y devolver una respuesta adecuada que corresponda al modelo <code>UserPublic</code>.</p>
+<p>Ahora, habiendo identificado la capacidad de Pydantic para validar las respuestas y encontrarnos con un error debido a la falta de implementación, podemos proceder con una solución simple. Para comenzar, podemos utilizar directamente los datos recibidos en <code>user</code> y devolverlos. Esta acción simple ya es suficiente para satisfacer el schema, ya que el objeto <code>user</code> contiene los atributos <code>email</code> y <code>username</code>, esperados por el modelo <code>UserPublic</code>:</p>
+<div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">UserPublic</span><span class="p">)</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">UserSchema</span><span class="p">):</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="hll">    <span class="k">return</span> <span class="n">user</span>
+</span></span></code></pre></div>
+<p>Este retorno simple del objeto <code>user</code> garantiza que el schema sea cumplido. Ahora, al realizar nuevamente la llamada en el Swagger, el objeto que enviamos es devuelto conforme a lo esperado, pero sin exponer la contraseña, alineado al modelo <code>UserPublic</code> y emitiendo una respuesta con el código 201:</p>
+<p><img alt="Captura de pantalla del swagger mostrando el modelo de respuesta UserPublic correctamente con el código 201" class="center" src="../assets/03/swagger_sem_senha.png" /></p>
+<p>Este enfoque nos permite cerrar el ciclo de validación, demostrando la eficacia de Pydantic en la garantía de que los datos de respuesta estén correctos. Con esta implementación simple, establecemos la base para el desarrollo real del código del endpoint POST, preparando el terreno para una lógica más compleja que involucrará la creación y el manejo de usuarios dentro de nuestra aplicación.</p>
+<h2 id="de-vuelta-al-post">De vuelta al POST</h2>
+<p>Ahora que ya dominamos la definición de los modelos, podemos continuar con la clase y la implementación de los endpoints. Vamos a retomar la implementación del POST, agregando una base de datos falsa/simulada en memoria. Esto nos permitirá explorar las operaciones del CRUD sin la complejidad de la implementación de una base de datos real, facilitando la asimilación de los muchos conceptos discutidos en esta clase.</p>
+<h3 id="creando-una-base-de-datos-falsa">Creando una base de datos falsa</h3>
+<p>Para interactuar con estas rutas de manera práctica, vamos a crear una lista provisional que simulará una base de datos. Esto nos permitirá agregar datos y entender el funcionamiento de FastAPI. Por lo tanto, introducimos una lista provisional para actuar como nuestra “base” y modificamos nuestro endpoint para insertar nuestros modelos de Pydantic en esa lista:</p>
+<div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fast_zero.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">Message</span><span class="p">,</span> <span class="n">UserDB</span><span class="p">,</span> <span class="n">UserPublic</span><span class="p">,</span> <span class="n">UserSchema</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># código omitido</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="hll"><span class="n">database</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1">#(1)!</span>
+</span></span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># código omitido</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">UserPublic</span><span class="p">)</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">UserSchema</span><span class="p">):</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="hll">    <span class="n">user_with_id</span> <span class="o">=</span> <span class="n">UserDB</span><span class="p">(</span><span class="o">**</span><span class="n">user</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span> <span class="nb">id</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">database</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1">#(2)!</span>
+</span></span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="hll">
+</span></span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="hll">    <span class="n">database</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_with_id</span><span class="p">)</span>
+</span></span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="hll">
+</span></span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="hll">    <span class="k">return</span> <span class="n">user_with_id</span>
+</span></span></code></pre></div>
+<ol>
+<li>
+<p>La lista <code>database</code> es provisional. Está aquí solo para que entendamos los conceptos de crud; en las próximas clases trabajaremos con la creación de la base de datos definitiva.</p>
+</li>
+<li>
+<p><code>.model_dump()</code> es un método de modelos de pydantic que convierte el objeto en diccionario. Por ejemplo, <code>user.model_dump()</code> haría la conversión en <code class="language-python highlight"><span class="p">{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'nombre del usuario'</span><span class="p">,</span> <span class="s1">'password'</span><span class="p">:</span> <span class="s1">'contraseña del usuario'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'email del usuario'</span><span class="p">}</span></code>. Los <code>**</code> quieren decir que el diccionario será desempaquetado en parámetros. Haciendo que la llamada sea equivalente a <code class="language-python highlight"><span class="n">UserDB</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">'nombre del usuario'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">'contraseña del usuario'</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">'email del usuario'</span><span class="p">,</span>  <span class="nb">id</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">database</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></p>
+</li>
+</ol>
+<p>Para simular una base de datos de forma más realista, es esencial que cada usuario tenga un ID único. Por lo tanto, ajustamos nuestro modelo de respuesta pública (<code>UserPublic</code>) para incluir el ID del usuario. También introducimos un nuevo modelo, <code>UserDB</code>, que incluye tanto la contraseña del usuario como su identificador único:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/schemas.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-14">14</a></span>
+<span class="normal"><a href="#__codelineno-15-15">15</a></span>
+<span class="normal"><a href="#__codelineno-15-16">16</a></span>
+<span class="normal"><a href="#__codelineno-15-17">17</a></span>
+<span class="normal"><a href="#__codelineno-15-18">18</a></span>
+<span class="normal"><a href="#__codelineno-15-19">19</a></span>
+<span class="normal"><a href="#__codelineno-15-20">20</a></span>
+<span class="normal"><a href="#__codelineno-15-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserPublic</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15"></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16"></a>    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17"></a>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span>
+</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18"></a>
+</span><span id="__span-15-19"><a id="__codelineno-15-19" name="__codelineno-15-19"></a>
+</span><span id="__span-15-20"><a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserDB</span><span class="p">(</span><span class="n">UserSchema</span><span class="p">):</span>
+</span><span id="__span-15-21"><a id="__codelineno-15-21" name="__codelineno-15-21"></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Este enfoque simple nos permite avanzar en la construcción de los otros endpoints. Es crucial probar este endpoint para asegurar su correcto funcionamiento.</p>
+<h3 id="implementando-el-test-de-la-ruta-post">Implementando el test de la ruta POST</h3>
+<p>Antes de continuar, vamos a verificar la cobertura de nuestros tests:</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="c1"># parte de la respuesta fue omitida</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>----------<span class="w"> </span>coverage:<span class="w"> </span>platform<span class="w"> </span>linux,<span class="w"> </span>python<span class="w"> </span><span class="m">3</span>.11.3-final-0<span class="w"> </span>-----------
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>Name<span class="w">                    </span>Stmts<span class="w">   </span>Miss<span class="w">  </span>Cover
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>-------------------------------------------
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>fast_zero/__init__.py<span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">   </span><span class="m">100</span>%
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>fast_zero/app.py<span class="w">           </span><span class="m">12</span><span class="w">      </span><span class="m">3</span><span class="w">    </span><span class="m">75</span>%
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>fast_zero/schemas.py<span class="w">       </span><span class="m">11</span><span class="w">      </span><span class="m">0</span><span class="w">   </span><span class="m">100</span>%
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>-------------------------------------------
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>TOTAL<span class="w">                      </span><span class="m">23</span><span class="w">      </span><span class="m">3</span><span class="w">    </span><span class="m">87</span>%
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="c1"># parte de la respuesta fue omitida</span>
+</span></code></pre></div>
+<p>Vemos que tenemos 3 Miss. Posiblemente de las líneas que acabamos de escribir. Podemos mirar el HTML del coverage para estar seguros:</p>
+<p><img alt="descripción" class="center shadow" src="../assets/03/cobertura_get_sem_testes.png" width="700" /></p>
+<p>Entonces, vamos a escribir nuestro test. Este test para la ruta POST necesita verificar si la creación de un nuevo usuario funciona correctamente. Enviamos una solicitud POST con un nuevo usuario a la ruta /users/. Luego, verificamos si la respuesta tiene el status HTTP 201 (Creado) y si la respuesta contiene el nuevo usuario creado.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-17">17</a></span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span>
+<span class="normal"><a href="#__codelineno-17-19">19</a></span>
+<span class="normal"><a href="#__codelineno-17-20">20</a></span>
+<span class="normal"><a href="#__codelineno-17-21">21</a></span>
+<span class="normal"><a href="#__codelineno-17-22">22</a></span>
+<span class="normal"><a href="#__codelineno-17-23">23</a></span>
+<span class="normal"><a href="#__codelineno-17-24">24</a></span>
+<span class="normal"><a href="#__codelineno-17-25">25</a></span>
+<span class="normal"><a href="#__codelineno-17-26">26</a></span>
+<span class="normal"><a href="#__codelineno-17-27">27</a></span>
+<span class="normal"><a href="#__codelineno-17-28">28</a></span>
+<span class="normal"><a href="#__codelineno-17-29">29</a></span>
+<span class="normal"><a href="#__codelineno-17-30">30</a></span>
+<span class="normal"><a href="#__codelineno-17-31">31</a></span>
+<span class="normal"><a href="#__codelineno-17-32">32</a></span>
+<span class="normal"><a href="#__codelineno-17-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_create_user</span><span class="p">():</span>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18"></a>    <span class="n">client</span> <span class="o">=</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19"></a>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21"></a>        <span class="s1">'/users/'</span><span class="p">,</span>
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22"></a>        <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23"></a>            <span class="s1">'username'</span><span class="p">:</span> <span class="s1">'alice'</span><span class="p">,</span>
+</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24"></a>            <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'alice@example.com'</span><span class="p">,</span>
+</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25"></a>            <span class="s1">'password'</span><span class="p">:</span> <span class="s1">'secret'</span><span class="p">,</span>
+</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26"></a>        <span class="p">},</span>
+</span><span id="__span-17-27"><a id="__codelineno-17-27" name="__codelineno-17-27"></a>    <span class="p">)</span>
+</span><span id="__span-17-28"><a id="__codelineno-17-28" name="__codelineno-17-28"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span>
+</span><span id="__span-17-29"><a id="__codelineno-17-29" name="__codelineno-17-29"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span>
+</span><span id="__span-17-30"><a id="__codelineno-17-30" name="__codelineno-17-30"></a>        <span class="s1">'username'</span><span class="p">:</span> <span class="s1">'alice'</span><span class="p">,</span>
+</span><span id="__span-17-31"><a id="__codelineno-17-31" name="__codelineno-17-31"></a>        <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'alice@example.com'</span><span class="p">,</span>
+</span><span id="__span-17-32"><a id="__codelineno-17-32" name="__codelineno-17-32"></a>        <span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-17-33"><a id="__codelineno-17-33" name="__codelineno-17-33"></a>    <span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Al ejecutar el test:</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1"># parte de la respuesta fue omitida</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>tests/test_app.py::test_root_deve_retornar_ok_e_ola_mundo<span class="w"> </span>PASSED
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>tests/test_app.py::test_create_user<span class="w"> </span>PASSED
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>----------<span class="w"> </span>coverage:<span class="w"> </span>platform<span class="w"> </span>linux,<span class="w"> </span>python<span class="w"> </span><span class="m">3</span>.11.3-final-0<span class="w"> </span>-----------
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>Name<span class="w">                    </span>Stmts<span class="w">   </span>Miss<span class="w">  </span>Cover
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>-------------------------------------------
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>fast_zero/__init__.py<span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">   </span><span class="m">100</span>%
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>fast_zero/app.py<span class="w">           </span><span class="m">12</span><span class="w">      </span><span class="m">0</span><span class="w">   </span><span class="m">100</span>%
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>fast_zero/schemas.py<span class="w">       </span><span class="m">11</span><span class="w">      </span><span class="m">0</span><span class="w">   </span><span class="m">100</span>%
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>-------------------------------------------
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>TOTAL<span class="w">                      </span><span class="m">23</span><span class="w">      </span><span class="m">0</span><span class="w">   </span><span class="m">100</span>%
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="c1"># parte de la respuesta fue omitida</span>
+</span></code></pre></div>
+<h4 id="no-te-repitas-dry">No te repitas (DRY)</h4>
+<p>Debes haber notado que la línea <code>client = TestClient(app)</code> está repetida en la primera línea de los dos tests que hicimos. Repetir código puede hacer que la gestión de tests sea más compleja a medida que crece, y es aquí donde el principio de “No te repitas” (<a href="https://es.wikipedia.org/wiki/No_te_repitas" target="_blank">DRY</a>) entra en juego. DRY incentiva la reducción de la repetición, creando un código más limpio y mantenible.</p>
+<p>Para solucionar esa repetición, podemos usar una funcionalidad de pytest llamada Fixture. Una fixture es como una función que prepara datos o estado necesarios para el test. Puede pensarse como una forma de no repetir la fase de Arrange de un test, simplificando la llamada y no repitiendo código.</p>
+<p>En este caso, crearemos una fixture que retorna nuestro <code>client</code>. Para hacer eso, necesitamos crear el archivo <code>tests/conftest.py</code>. El archivo <code>conftest.py</code> es un archivo especial reconocido por pytest que permite definir fixtures que pueden ser reutilizadas en diferentes módulos de test en un proyecto. Es una forma de centralizar recursos comunes de test.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/conftest.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<span class="normal"><a href="#__codelineno-19-2">2</a></span>
+<span class="normal"><a href="#__codelineno-19-3">3</a></span>
+<span class="normal"><a href="#__codelineno-19-4">4</a></span>
+<span class="normal"><a href="#__codelineno-19-5">5</a></span>
+<span class="normal"><a href="#__codelineno-19-6">6</a></span>
+<span class="normal"><a href="#__codelineno-19-7">7</a></span>
+<span class="normal"><a href="#__codelineno-19-8">8</a></span>
+<span class="normal"><a href="#__codelineno-19-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fast_zero.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5"></a>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6"></a>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">client</span><span class="p">():</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a>    <span class="k">return</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ahora, en lugar de repetir la creación del <code>client</code> en cada test, podemos simplemente pasar la fixture como un argumento en nuestros tests:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-20-10">10</a></span>
+<span class="normal"><a href="#__codelineno-20-11">11</a></span>
+<span class="normal"><a href="#__codelineno-20-12">12</a></span>
+<span class="normal"><a href="#__codelineno-20-13">13</a></span>
+<span class="normal"><a href="#__codelineno-20-14">14</a></span>
+<span class="normal"><a href="#__codelineno-20-15">15</a></span>
+<span class="normal"><a href="#__codelineno-20-16">16</a></span>
+<span class="normal"><a href="#__codelineno-20-17">17</a></span>
+<span class="normal"><a href="#__codelineno-20-18">18</a></span>
+<span class="normal"><a href="#__codelineno-20-19">19</a></span>
+<span class="normal"><a href="#__codelineno-20-20">20</a></span>
+<span class="normal"><a href="#__codelineno-20-21">21</a></span>
+<span class="normal"><a href="#__codelineno-20-22">22</a></span>
+<span class="normal"><a href="#__codelineno-20-23">23</a></span>
+<span class="normal"><a href="#__codelineno-20-24">24</a></span>
+<span class="normal"><a href="#__codelineno-20-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPStatus</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">test_root_deve_retornar_ok_e_ola_mundo</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+</span></span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'Olá Mundo!'</span><span class="p">}</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9"></a>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10"></a>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">test_create_user</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+</span></span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13"></a>        <span class="s1">'/users/'</span><span class="p">,</span>
+</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14"></a>        <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15"></a>            <span class="s1">'username'</span><span class="p">:</span> <span class="s1">'alice'</span><span class="p">,</span>
+</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16"></a>            <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'alice@example.com'</span><span class="p">,</span>
+</span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17"></a>            <span class="s1">'password'</span><span class="p">:</span> <span class="s1">'secret'</span><span class="p">,</span>
+</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18"></a>        <span class="p">},</span>
+</span><span id="__span-20-19"><a id="__codelineno-20-19" name="__codelineno-20-19"></a>    <span class="p">)</span>
+</span><span id="__span-20-20"><a id="__codelineno-20-20" name="__codelineno-20-20"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span>
+</span><span id="__span-20-21"><a id="__codelineno-20-21" name="__codelineno-20-21"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span>
+</span><span id="__span-20-22"><a id="__codelineno-20-22" name="__codelineno-20-22"></a>        <span class="s1">'username'</span><span class="p">:</span> <span class="s1">'alice'</span><span class="p">,</span>
+</span><span id="__span-20-23"><a id="__codelineno-20-23" name="__codelineno-20-23"></a>        <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'alice@example.com'</span><span class="p">,</span>
+</span><span id="__span-20-24"><a id="__codelineno-20-24" name="__codelineno-20-24"></a>        <span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-20-25"><a id="__codelineno-20-25" name="__codelineno-20-25"></a>    <span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Con este simple cambio, logramos hacer nuestro código más limpio y fácil de mantener, siguiendo el principio DRY.</p>
+<hr />
+<p>Vemos que estamos en el camino correcto. Ahora que la ruta POST está implementada, seguiremos con la próxima operación CRUD: Read.</p>
+<h2 id="implementando-la-ruta-get">Implementando la Ruta GET</h2>
+<p>La ruta GET se usa para recuperar información de uno o más usuarios de nuestro sistema. En el contexto del CRUD, el verbo HTTP GET está asociado a la operación “Read”. Si la solicitud es exitosa, la ruta debe devolver el status HTTP 200 (OK).</p>
+<p>Para estructurar la respuesta de esta ruta, podemos crear un nuevo modelo llamado <code>UserList</code>. Este modelo representará una lista de usuarios y contiene solo un campo llamado <code>users</code>, que es una lista de <code>UserPublic</code>. Esto nos permite devolver múltiples usuarios a la vez.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/schemas.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-24">24</a></span>
+<span class="normal"><a href="#__codelineno-21-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-24"><a id="__codelineno-21-24" name="__codelineno-21-24"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserList</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-21-25"><a id="__codelineno-21-25" name="__codelineno-21-25"></a>    <span class="n">users</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">UserPublic</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Con este modelo definido, podemos crear nuestro endpoint GET. Este endpoint devolverá una instancia de <code>UserList</code>, que a su vez contiene una lista de <code>UserPublic</code>. Cada <code>UserPublic</code> se crea a partir de los datos de un usuario en nuestra base de datos ficticia.</p>
+<div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fast_zero.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">Message</span><span class="p">,</span> <span class="n">UserDB</span><span class="p">,</span> <span class="n">UserList</span><span class="p">,</span> <span class="n">UserPublic</span><span class="p">,</span> <span class="n">UserSchema</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="c1"># código omitido</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">UserList</span><span class="p">)</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_users</span><span class="p">():</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'users'</span><span class="p">:</span> <span class="n">database</span><span class="p">}</span>
+</span></code></pre></div>
+<p>Con esta implementación, nuestra API ahora puede devolver una lista de usuarios. Sin embargo, nuestro trabajo todavía no terminó. El siguiente paso es escribir tests para garantizar que nuestra ruta GET está funcionando correctamente. Esto nos ayudará a identificar y corregir cualquier problema antes de continuar con la implementación de otras rutas.</p>
+<h4 id="implementando-el-test-de-la-ruta-get">Implementando el test de la ruta GET</h4>
+<p>Nuestro test de la ruta GET tiene que verificar si la recuperación de los usuarios está funcionando correctamente. Enviamos una solicitud GET a la ruta /users/. Luego, verificamos si la respuesta tiene el status HTTP 200 (OK) y si la respuesta contiene la lista de usuarios.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-28">28</a></span>
+<span class="normal"><a href="#__codelineno-23-29">29</a></span>
+<span class="normal"><a href="#__codelineno-23-30">30</a></span>
+<span class="normal"><a href="#__codelineno-23-31">31</a></span>
+<span class="normal"><a href="#__codelineno-23-32">32</a></span>
+<span class="normal"><a href="#__codelineno-23-33">33</a></span>
+<span class="normal"><a href="#__codelineno-23-34">34</a></span>
+<span class="normal"><a href="#__codelineno-23-35">35</a></span>
+<span class="normal"><a href="#__codelineno-23-36">36</a></span>
+<span class="normal"><a href="#__codelineno-23-37">37</a></span>
+<span class="normal"><a href="#__codelineno-23-38">38</a></span>
+<span class="normal"><a href="#__codelineno-23-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-28"><a id="__codelineno-23-28" name="__codelineno-23-28"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_read_users</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+</span><span id="__span-23-29"><a id="__codelineno-23-29" name="__codelineno-23-29"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">)</span>
+</span><span id="__span-23-30"><a id="__codelineno-23-30" name="__codelineno-23-30"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span>
+</span><span id="__span-23-31"><a id="__codelineno-23-31" name="__codelineno-23-31"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span>
+</span><span id="__span-23-32"><a id="__codelineno-23-32" name="__codelineno-23-32"></a>        <span class="s1">'users'</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-23-33"><a id="__codelineno-23-33" name="__codelineno-23-33"></a>            <span class="p">{</span>
+</span><span id="__span-23-34"><a id="__codelineno-23-34" name="__codelineno-23-34"></a>                <span class="s1">'username'</span><span class="p">:</span> <span class="s1">'alice'</span><span class="p">,</span>
+</span><span id="__span-23-35"><a id="__codelineno-23-35" name="__codelineno-23-35"></a>                <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'alice@example.com'</span><span class="p">,</span>
+</span><span id="__span-23-36"><a id="__codelineno-23-36" name="__codelineno-23-36"></a>                <span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-23-37"><a id="__codelineno-23-37" name="__codelineno-23-37"></a>            <span class="p">}</span>
+</span><span id="__span-23-38"><a id="__codelineno-23-38" name="__codelineno-23-38"></a>        <span class="p">]</span>
+</span><span id="__span-23-39"><a id="__codelineno-23-39" name="__codelineno-23-39"></a>    <span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Con las rutas POST y GET implementadas, ahora podemos crear y recuperar usuarios. Implementaremos la próxima operación CRUD: Update.</p>
+<h2 id="implementando-la-ruta-put">Implementando la Ruta PUT</h2>
+<p>La ruta PUT se usa para actualizar las informaciones de un usuario existente. En el contexto del CRUD, el verbo HTTP PUT está asociado a la operación “Update”. Si la solicitud es exitosa, la ruta debe devolver el status HTTP 200 (OK). Sin embargo, si el usuario solicitado no es encontrado, deberíamos devolver el status HTTP 404 (No Encontrado).</p>
+<p>Una característica importante del verbo PUT es que está dirigido a un recurso en específico. En este caso, estamos dirigiendo la modificación a un <code>user</code> específico en la base de datos. El identificador de <code>user</code> es el campo <code>id</code> que estamos usando en los modelos de Pydantic. En este caso, nuestro endpoint debe recibir el identificador de quién será modificado.</p>
+<p>Para hacer esa identificación del recurso en la <a href="../02/#url" target="_blank">URL</a> usamos la siguiente combinación <code>/camino/recurso</code>. Pero, como el recurso es dinámico, debe ser enviado por el cliente. Haciendo que el valor tenga que ser una variable.</p>
+<p>Dentro de FastAPI, las variables de recursos se describen dentro de {}, como <code>{user_id}</code>. Haciendo que el camino completo de nuestro endpoint sea <code class="language-python highlight"><span class="s1">'/users/</span><span class="si">{user_id}</span><span class="s1">'</span></code>. De la siguiente forma:</p>
+<div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="c1"># ...</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">'/users/</span><span class="si">{user_id}</span><span class="s1">'</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">UserPublic</span><span class="p">)</span>
+</span></span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">update_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserSchema</span><span class="p">):</span>
+</span></span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="k">if</span> <span class="n">user_id</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">database</span><span class="p">)</span> <span class="ow">or</span> <span class="n">user_id</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="c1">#(1)!</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>            <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NOT_FOUND</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">'User not found'</span>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>        <span class="p">)</span> <span class="c1">#(2)!</span>
+</span><span id="__span-24-11"><a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>
+</span><span id="__span-24-12"><a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>    <span class="n">user_with_id</span> <span class="o">=</span> <span class="n">UserDB</span><span class="p">(</span><span class="o">**</span><span class="n">user</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span> <span class="nb">id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+</span><span id="__span-24-13"><a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>    <span class="n">database</span><span class="p">[</span><span class="n">user_id</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_with_id</span> <span class="c1">#(3)!</span>
+</span><span id="__span-24-14"><a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>
+</span><span id="__span-24-15"><a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>    <span class="k">return</span> <span class="n">user_with_id</span>
+</span></code></pre></div>
+<ol>
+<li>Aquí hacemos una validación simple, verificamos si el id no es mayor que el tamaño de la lista <code class="language-python highlight"><span class="n">user_id</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">database</span><span class="p">)</span></code> y el número enviado para el <code>user_id</code> es un valor positivo <code class="language-python highlight"><span class="n">user_id</span> <span class="o">&lt;</span> <span class="mi">1</span></code>.</li>
+<li>Levantamos un error del tipo <code>HTTPException</code> para decir que el usuario no existe en la base de datos. Este modelo ya está presente en el swagger con <code>HTTPValidationError</code>.</li>
+<li>En esta línea, estamos reemplazando la posición (<code>user_id - 1</code>) en la lista por el nuevo objeto.</li>
+</ol>
+<p>Para que esa variable definida en la URL sea transferida a nuestro endpoint, debemos agregar un parámetro en la función con el mismo nombre de la variable definida. Como <code class="language-python highlight"><span class="k">def</span><span class="w"> </span><span class="nf">update_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span></code> en la línea destacada.</p>
+<h4 id="implementando-el-test-de-la-ruta-put">Implementando el test de la ruta PUT</h4>
+<p>Nuestro test de la ruta PUT necesita verificar si la actualización de un usuario existente funciona correctamente. Enviamos una solicitud PUT con las nuevas informaciones del usuario a la ruta <code>/users/{user_id}</code>. Luego, verificamos si la respuesta tiene el status HTTP 200 (OK) y si la respuesta contiene el usuario actualizado.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-42">42</a></span>
+<span class="normal"><a href="#__codelineno-25-43">43</a></span>
+<span class="normal"><a href="#__codelineno-25-44">44</a></span>
+<span class="normal"><a href="#__codelineno-25-45">45</a></span>
+<span class="normal"><a href="#__codelineno-25-46">46</a></span>
+<span class="normal"><a href="#__codelineno-25-47">47</a></span>
+<span class="normal"><a href="#__codelineno-25-48">48</a></span>
+<span class="normal"><a href="#__codelineno-25-49">49</a></span>
+<span class="normal"><a href="#__codelineno-25-50">50</a></span>
+<span class="normal"><a href="#__codelineno-25-51">51</a></span>
+<span class="normal"><a href="#__codelineno-25-52">52</a></span>
+<span class="normal"><a href="#__codelineno-25-53">53</a></span>
+<span class="normal"><a href="#__codelineno-25-54">54</a></span>
+<span class="normal"><a href="#__codelineno-25-55">55</a></span>
+<span class="normal"><a href="#__codelineno-25-56">56</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-42"><a id="__codelineno-25-42" name="__codelineno-25-42"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_update_user</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+</span><span id="__span-25-43"><a id="__codelineno-25-43" name="__codelineno-25-43"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+</span><span id="__span-25-44"><a id="__codelineno-25-44" name="__codelineno-25-44"></a>        <span class="s1">'/users/1'</span><span class="p">,</span>
+</span><span id="__span-25-45"><a id="__codelineno-25-45" name="__codelineno-25-45"></a>        <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-25-46"><a id="__codelineno-25-46" name="__codelineno-25-46"></a>            <span class="s1">'username'</span><span class="p">:</span> <span class="s1">'bob'</span><span class="p">,</span>
+</span><span id="__span-25-47"><a id="__codelineno-25-47" name="__codelineno-25-47"></a>            <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'bob@example.com'</span><span class="p">,</span>
+</span><span id="__span-25-48"><a id="__codelineno-25-48" name="__codelineno-25-48"></a>            <span class="s1">'password'</span><span class="p">:</span> <span class="s1">'mynewpassword'</span><span class="p">,</span>
+</span><span id="__span-25-49"><a id="__codelineno-25-49" name="__codelineno-25-49"></a>        <span class="p">},</span>
+</span><span id="__span-25-50"><a id="__codelineno-25-50" name="__codelineno-25-50"></a>    <span class="p">)</span>
+</span><span id="__span-25-51"><a id="__codelineno-25-51" name="__codelineno-25-51"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span>
+</span><span id="__span-25-52"><a id="__codelineno-25-52" name="__codelineno-25-52"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span>
+</span><span id="__span-25-53"><a id="__codelineno-25-53" name="__codelineno-25-53"></a>        <span class="s1">'username'</span><span class="p">:</span> <span class="s1">'bob'</span><span class="p">,</span>
+</span><span id="__span-25-54"><a id="__codelineno-25-54" name="__codelineno-25-54"></a>        <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'bob@example.com'</span><span class="p">,</span>
+</span><span id="__span-25-55"><a id="__codelineno-25-55" name="__codelineno-25-55"></a>        <span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-25-56"><a id="__codelineno-25-56" name="__codelineno-25-56"></a>    <span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Con las rutas POST, GET y PUT implementadas, ahora podemos crear, recuperar y actualizar usuarios. La última operación CRUD que necesitamos implementar es Delete.</p>
+<h2 id="implementando-la-ruta-delete">Implementando la Ruta DELETE</h2>
+<p>La ruta DELETE se usa para eliminar un usuario de nuestro sistema. En el contexto del CRUD, el verbo HTTP DELETE está asociado a la operación “Delete”. Si la solicitud es exitosa, la ruta debe devolver el status HTTP 200 (OK). Sin embargo, si el usuario solicitado no es encontrado, deberíamos devolver el status HTTP 404 (No Encontrado).</p>
+<p>Este endpoint recibirá el ID del usuario que queremos eliminar. Nota que estamos lanzando una excepción HTTP cuando el ID del usuario está fuera del rango de nuestra lista (simulación de nuestra base de datos). Cuando logramos eliminar el usuario con éxito, devolvemos el mensaje de éxito en un modelo del tipo <code>Message</code>.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-44">44</a></span>
+<span class="normal"><a href="#__codelineno-26-45">45</a></span>
+<span class="normal"><a href="#__codelineno-26-46">46</a></span>
+<span class="normal"><a href="#__codelineno-26-47">47</a></span>
+<span class="normal"><a href="#__codelineno-26-48">48</a></span>
+<span class="normal"><a href="#__codelineno-26-49">49</a></span>
+<span class="normal"><a href="#__codelineno-26-50">50</a></span>
+<span class="normal"><a href="#__codelineno-26-51">51</a></span>
+<span class="normal"><a href="#__codelineno-26-52">52</a></span>
+<span class="normal"><a href="#__codelineno-26-53">53</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-26-44"><a id="__codelineno-26-44" name="__codelineno-26-44"></a><span class="nd">@app</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">'/users/</span><span class="si">{user_id}</span><span class="s1">'</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">Message</span><span class="p">)</span>
+</span><span id="__span-26-45"><a id="__codelineno-26-45" name="__codelineno-26-45"></a><span class="k">def</span><span class="w"> </span><span class="nf">delete_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span id="__span-26-46"><a id="__codelineno-26-46" name="__codelineno-26-46"></a>    <span class="k">if</span> <span class="n">user_id</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">database</span><span class="p">)</span> <span class="ow">or</span> <span class="n">user_id</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-26-47"><a id="__codelineno-26-47" name="__codelineno-26-47"></a>        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span><span id="__span-26-48"><a id="__codelineno-26-48" name="__codelineno-26-48"></a>            <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NOT_FOUND</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">'User not found'</span>
+</span><span id="__span-26-49"><a id="__codelineno-26-49" name="__codelineno-26-49"></a>        <span class="p">)</span>
+</span><span id="__span-26-50"><a id="__codelineno-26-50" name="__codelineno-26-50"></a>
+</span><span id="__span-26-51"><a id="__codelineno-26-51" name="__codelineno-26-51"></a>    <span class="k">del</span> <span class="n">database</span><span class="p">[</span><span class="n">user_id</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-26-52"><a id="__codelineno-26-52" name="__codelineno-26-52"></a>
+</span><span id="__span-26-53"><a id="__codelineno-26-53" name="__codelineno-26-53"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'User deleted'</span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Con la implementación de la ruta DELETE concluida, es fundamental garantizar que esta ruta está funcionando conforme a lo esperado. Para eso, necesitamos escribir tests para esta ruta.</p>
+<h4 id="implementando-el-test-de-la-ruta-delete">Implementando el test de la ruta DELETE</h4>
+<p>Nuestro test de la ruta DELETE necesita verificar si la eliminación de un usuario existente funciona correctamente. Enviamos una solicitud DELETE a la ruta /users/{user_id}. Luego, verificamos si la respuesta tiene el status HTTP 200 (OK) y si la respuesta contiene un mensaje informando que el usuario fue eliminado.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-59">59</a></span>
+<span class="normal"><a href="#__codelineno-27-60">60</a></span>
+<span class="normal"><a href="#__codelineno-27-61">61</a></span>
+<span class="normal"><a href="#__codelineno-27-62">62</a></span>
+<span class="normal"><a href="#__codelineno-27-63">63</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-27-59"><a id="__codelineno-27-59" name="__codelineno-27-59"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_delete_user</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+</span><span id="__span-27-60"><a id="__codelineno-27-60" name="__codelineno-27-60"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">'/users/1'</span><span class="p">)</span>
+</span><span id="__span-27-61"><a id="__codelineno-27-61" name="__codelineno-27-61"></a>
+</span><span id="__span-27-62"><a id="__codelineno-27-62" name="__codelineno-27-62"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span>
+</span><span id="__span-27-63"><a id="__codelineno-27-63" name="__codelineno-27-63"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'User deleted'</span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="verificando-todo-antes-del-commit">Verificando todo antes del commit</h4>
+<p>Antes de hacer el commit, es una buena práctica verificar todo el código, y podemos hacerlo con las acciones que creamos con poe.</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>$<span class="w"> </span>poetry<span class="w"> </span>lint
+</span></code></pre></div>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>$<span class="w"> </span>poetry<span class="w"> </span>format
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="m">6</span><span class="w"> </span>files<span class="w"> </span>left<span class="w"> </span>unchanged
+</span></code></pre></div>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>$<span class="w"> </span>poetry<span class="w"> </span><span class="nb">test</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>...
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>tests/test_app.py::test_root_deve_retornar_ok_e_ola_mundo<span class="w"> </span>PASSED
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>tests/test_app.py::test_create_user<span class="w"> </span>PASSED
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>tests/test_app.py::test_read_users<span class="w"> </span>PASSED
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>tests/test_app.py::test_update_user<span class="w"> </span>PASSED
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>tests/test_app.py::test_delete_user<span class="w"> </span>PASSED
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>
+</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>----------<span class="w"> </span>coverage:<span class="w"> </span>platform<span class="w"> </span>linux,<span class="w"> </span>python<span class="w"> </span><span class="m">3</span>.11.4-final-0<span class="w"> </span>-----------
+</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a>Name<span class="w">                   </span>Stmts<span class="w">   </span>Miss<span class="w">  </span>Cover
+</span><span id="__span-30-11"><a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a>------------------------------------------
+</span><span id="__span-30-12"><a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a>fastzero/__init__.py<span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">   </span><span class="m">100</span>%
+</span><span id="__span-30-13"><a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a>fastzero/app.py<span class="w">           </span><span class="m">28</span><span class="w">      </span><span class="m">2</span><span class="w">    </span><span class="m">93</span>%
+</span><span id="__span-30-14"><a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a>fastzero/schemas.py<span class="w">       </span><span class="m">15</span><span class="w">      </span><span class="m">0</span><span class="w">   </span><span class="m">100</span>%
+</span><span id="__span-30-15"><a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a>------------------------------------------
+</span><span id="__span-30-16"><a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a>TOTAL<span class="w">                     </span><span class="m">43</span><span class="w">      </span><span class="m">2</span><span class="w">    </span><span class="m">95</span>%
+</span><span id="__span-30-17"><a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a>
+</span><span id="__span-30-18"><a id="__codelineno-30-18" name="__codelineno-30-18" href="#__codelineno-30-18"></a>
+</span><span id="__span-30-19"><a id="__codelineno-30-19" name="__codelineno-30-19" href="#__codelineno-30-19"></a><span class="o">============================</span><span class="w"> </span><span class="m">5</span><span class="w"> </span>passed<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span>.48s<span class="w"> </span><span class="o">=============================</span>
+</span><span id="__span-30-20"><a id="__codelineno-30-20" name="__codelineno-30-20" href="#__codelineno-30-20"></a>Wrote<span class="w"> </span>HTML<span class="w"> </span>report<span class="w"> </span>to<span class="w"> </span>htmlcov/index.html
+</span></code></pre></div>
+<h2 id="aislamiento-de-los-tests">Aislamiento de los tests</h2>
+<p>Todos los tests que hicimos hasta este momento son excelentes, realmente prueban lo que deberían probar. Sin embargo, existe un problema en la dinámica en que ocurren. Estos tests solo funcionan si se ejecutan en el exacto orden en que fueron escritos. Existe una interdependencia entre ellos.</p>
+<p>Actualmente, los tests se ejecutan en este orden:</p>
+<ul>
+<li>Test 1: crea un <code>User</code> en la “base de datos” y valida si fue creado</li>
+<li>Test 2: lee un <code>User</code> existente en la base de datos</li>
+<li>Test 3: modifica un <code>User</code> existente en la base de datos</li>
+<li>Test 4: elimina un <code>User</code> existente en la base de datos</li>
+</ul>
+<p>Es decir, para que todos los tests pasen, el primero necesita pasar. Eso quiere decir que los tests no están aislados. No dependen solamente de sí mismos para ser ejecutados.</p>
+<p>Una forma de entender este comportamiento es ejecutando un único test, que no sea el primero, de forma aislada. Pytest puede llamar a un test en un archivo específico, si el nombre del test es seguido de un <code>::</code>. Algo como:</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>pytest<span class="w"> </span>tests/test_app.py::test_read_users
+</span></code></pre></div>
+<p>En nuestro caso, como estamos utilizando el comando de <code>test</code>, podemos hacer así:</p>
+<div class="language-python highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">poetry</span> <span class="n">test</span> <span class="n">tests</span><span class="o">/</span><span class="n">test_app</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_read_users</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="c1"># parte de la respuesta fue omitida</span>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="n">tests</span><span class="o">/</span><span class="n">test_app</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_read_users</span> <span class="n">FAILED</span>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="o">====================================</span> <span class="n">short</span> <span class="n">test</span> <span class="n">summary</span> <span class="n">info</span> <span class="o">====================================</span>
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="n">FAILED</span> <span class="n">tests</span><span class="o">/</span><span class="n">test_app</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_read_users</span> <span class="o">-</span> <span class="ne">AssertionError</span><span class="p">:</span> <span class="k">assert</span> <span class="p">{</span><span class="s1">'users'</span><span class="p">:</span> <span class="p">[]}</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'users'</span><span class="p">:</span> <span class="p">[{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'alice'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'alice@example.com'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]}</span>
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>
+</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>  <span class="n">Differing</span> <span class="n">items</span><span class="p">:</span>
+</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>  <span class="p">{</span><span class="s1">'users'</span><span class="p">:</span> <span class="p">[]}</span> <span class="o">!=</span> <span class="p">{</span><span class="s1">'users'</span><span class="p">:</span> <span class="p">[{</span><span class="s1">'email'</span><span class="p">:</span> <span class="s1">'alice@example.com'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'username'</span><span class="p">:</span> <span class="s1">'alice'</span><span class="p">}]}</span>
+</span><span id="__span-32-12"><a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>
+</span><span id="__span-32-13"><a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a>  <span class="n">Full</span> <span class="n">diff</span><span class="p">:</span>
+</span><span id="__span-32-14"><a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a>    <span class="p">{</span>
+</span><span id="__span-32-15"><a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a>  <span class="o">-</span>     <span class="s1">'users'</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-32-16"><a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a>  <span class="o">+</span>     <span class="s1">'users'</span><span class="p">:</span> <span class="p">[],</span>
+</span><span id="__span-32-17"><a id="__codelineno-32-17" name="__codelineno-32-17" href="#__codelineno-32-17"></a>  <span class="err">?</span>               <span class="o">++</span>
+</span><span id="__span-32-18"><a id="__codelineno-32-18" name="__codelineno-32-18" href="#__codelineno-32-18"></a>  <span class="o">-</span>         <span class="p">{</span>
+</span><span id="__span-32-19"><a id="__codelineno-32-19" name="__codelineno-32-19" href="#__codelineno-32-19"></a>  <span class="o">-</span>             <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'alice@example.com'</span><span class="p">,</span>
+</span><span id="__span-32-20"><a id="__codelineno-32-20" name="__codelineno-32-20" href="#__codelineno-32-20"></a>  <span class="o">-</span>             <span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-32-21"><a id="__codelineno-32-21" name="__codelineno-32-21" href="#__codelineno-32-21"></a>  <span class="o">-</span>             <span class="s1">'username'</span><span class="p">:</span> <span class="s1">'alice'</span><span class="p">,</span>
+</span><span id="__span-32-22"><a id="__codelineno-32-22" name="__codelineno-32-22" href="#__codelineno-32-22"></a>  <span class="o">-</span>         <span class="p">},</span>
+</span><span id="__span-32-23"><a id="__codelineno-32-23" name="__codelineno-32-23" href="#__codelineno-32-23"></a>  <span class="o">-</span>     <span class="p">],</span>
+</span><span id="__span-32-24"><a id="__codelineno-32-24" name="__codelineno-32-24" href="#__codelineno-32-24"></a>    <span class="p">}</span>
+</span><span id="__span-32-25"><a id="__codelineno-32-25" name="__codelineno-32-25" href="#__codelineno-32-25"></a><span class="err">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span> <span class="n">stopping</span> <span class="n">after</span> <span class="mi">1</span> <span class="n">failures</span> <span class="err">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+</span></code></pre></div>
+<p>Eso quiere decir que hizo un GET en <code>/users</code>, pero no recibió el dato esperado. Es decir, tenemos la visión explícita de la interdependencia de los tests.</p>
+<hr />
+<p>En la implementación actual, no es posible escapar de esto sin dar un rodeo grande e innecesario en la implementación, ya que no vamos a mantener esta base “falsa”; lo que queremos es exactamente lo opuesto: utilizar una base de datos real.</p>
+<p>Para que el aislamiento funcione adecuadamente, necesitaremos de un mecanismo que reinicie la base de datos en cada test, pero todavía no tenemos una base de datos real. Será introducida en la aplicación en la <a href="../04/" target="_blank">clase 04</a>, todavía con algunas interferencias. El mecanismo que hará que los tests no interfieran en otros y sean independientes será introducido en la <a href="../05/#testeando-el-endpoint-post-users-con-pytest-y-fixtures" target="_blank">clase 05</a>.</p>
+<h3 id="se-podria-haber-sabido-esto-antes">¿Se podría haber sabido esto antes?</h3>
+<p>Sí, es posible descubrirlo simplemente cambiando el orden de los tests. El problema es que variar el orden manualmente podría acarrear otros casos parecidos. Randomizar la ejecución de todos los tests es una buena solución, haciendo que estos casos no ocurran más, sin depender del conocimiento tácito de todos los tests por quien los implementó.</p>
+<p>Pytest tiene un plugin para eso llamado <a href="https://github.com/pytest-dev/pytest-random-order" target="_blank">pytest-random-order</a>, que puede cambiar el orden de todos los tests en cada ejecución:</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>--group<span class="w"> </span>dev<span class="w"> </span>pytest-random-order
+</span></code></pre></div>
+<p>De esta forma, siempre que queramos verificar si los tests funcionan en orden aleatorio, podemos ejecutar los tests así:</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>poetry<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--random-order
+</span></code></pre></div>
+<p>Y nuestro resultado será algo parecido a:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1"># parte de la respuesta fue omitida</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>tests/test_app.py::test_update_user<span class="w"> </span>FAILED<span class="w"> </span><span class="c1">#(1)!</span>
+</span></code></pre></div>
+<ol>
+<li>Nota que, como el orden es aleatorio, otro test puede haber fallado en tu ejecución.</li>
+</ol>
+<p>De esta forma, tests interdependientes fallarán, porque el orden cambia durante la ejecución. Aunque hayamos instalado pytest-random-order, todavía no lo vamos a agregar a nuestro flujo estándar de tests, porque fallarán siempre, mientras la situación de la base de datos real no sea resuelta en la <a href="../05/#testeando-el-endpoint-post-users-con-pytest-y-fixtures" target="_blank">clase 05</a>.</p>
+<blockquote>
+<p>Una cosa interesante a hacer aquí es correr varias veces el comando y ver fallar diferentes :)</p>
+</blockquote>
+<h2 id="commit">Commit</h2>
+<p>Después de toda esta jornada de aprendizaje, construcción y test de rutas, llegó la hora de registrar nuestro progreso utilizando git. Hacer commits regulares es una buena práctica, porque mantiene un historial detallado de los cambios y facilita volver a una versión anterior del código, si es necesario.</p>
+<p>En primer lugar, verificaremos los cambios hechos en el proyecto con el comando <code>git status</code>. Este comando nos mostrará todos los archivos modificados que todavía no fueron incluidos en un commit.</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>git<span class="w"> </span>status
+</span></code></pre></div>
+<p>A continuación, agregaremos todos los cambios para el próximo commit. El comando <code>git add .</code> agrega todos los cambios hechos en todos los archivos del proyecto.</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
+</span></code></pre></div>
+<p>Ahora, estamos listos para hacer el commit. Con el comando <code>git commit</code>, creamos una nueva entrada en el historial de nuestro proyecto. Es importante agregar un mensaje descriptivo al commit, para que, en el futuro, otras personas o nosotros mismos entendamos qué fue modificado. En este caso, el mensaje del commit podría ser “Implementando rutas CRUD”.</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"feat: implementa rutas CRUD"</span>
+</span></code></pre></div>
+<p>Por último, enviamos nuestros cambios al repositorio remoto con <code>git push</code>. Si tienes varias branches, asegúrate de estar en la branch correcta antes de ejecutar este comando.</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>git<span class="w"> </span>push
+</span></code></pre></div>
+<p>¡Y listo! Los cambios están seguros en el historial de git, y podemos continuar con el próximo paso del proyecto.</p>
+<h2 id="ejercicios">Ejercicios</h2>
+<ol>
+<li>Escribir un test para el error de <code class="language-python highlight"><span class="mi">404</span></code> (NOT FOUND) para el endpoint de PUT;</li>
+<li>Escribir un test para el error de <code class="language-python highlight"><span class="mi">404</span></code> (NOT FOUND) para el endpoint de DELETE;</li>
+<li>Crear un endpoint de GET para obtener un único recurso como <code>users/{id}</code> y hacer sus tests para <code class="language-python highlight"><span class="mi">200</span></code> y <code class="language-python highlight"><span class="mi">404</span></code>.</li>
+</ol>
+<p><a class="md-button" href="../ejercicios_resueltos/aula_03/">Ejercicios resueltos <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 7V5h2V4a2 2 0 0 1 2-2h6v7l2.5-1.5L18 9V2h1c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm4 4H5v2h2zm0-4V5H5v2zm0 12v-2H5v2z"/></svg></span></a></p>
+<h2 id="codigo-de-esta-leccion">Código de esta lección</h2>
+<p><a class="md-button" href="https://github.com/rmatuk/progra2-stack/tree/master/codigo_das_aulas/03">Código <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M360.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m64.6 136.1c-12.5 12.5-12.5 32.8 0 45.3l73.4 73.4-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0zm-274.7 0c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l73.3-73.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span></a></p>
+<h2 id="conclusion">Conclusión</h2>
+<p>Con la implementación exitosa de las rutas CRUD, dimos un paso significativo en la construcción de una API funcional con FastAPI. Ahora podemos manipular usuarios - crear, leer, actualizar y eliminar - lo que es fundamental para muchos sistemas de información.</p>
+<p>El papel de los tests en cada etapa no puede ser subestimado. Los tests no solo nos ayudan a asegurar que nuestro código está funcionando como se espera, sino que también nos permiten refinar nuestras soluciones y detectar problemas potenciales antes de que afecten la funcionalidad general de nuestro sistema. ¡Nunca subestimes la importancia de ejecutar tus tests siempre que hagas un cambio en tu código!</p>
+<p>Hasta aquí, sin embargo, trabajamos con una “base de datos” provisional, en forma de una lista de Python, que es volátil y no persiste los datos de una ejecución de la aplicación a otra. Para que nuestra aplicación sea útil en un escenario del mundo real, necesitamos almacenar nuestros datos de forma más duradera. Ahí es donde entran las bases de datos.</p>
+<p>Otro punto que debe destacarse es que nuestras implementaciones de tests sufren interferencia de los tests anteriores. Los tests deben funcionar de forma aislada, sin la dependencia de un test anterior. Vamos a ajustar eso en el futuro.</p>
+<p>En el próximo tópico, exploraremos una de las partes más críticas de cualquier aplicación - la conexión e interacción con una base de datos. Aprenderemos a integrar nuestra aplicación FastAPI con una base de datos real, permitiendo la persistencia de nuestros datos de usuario entre las sesiones de la aplicación.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <!-- Footer -->
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page -->
+  
+
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+  
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="../assets/javascripts/extra.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+
+  </body>
+</html>

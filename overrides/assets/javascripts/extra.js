@@ -1,0 +1,40 @@
+/*
+ * Licence MIT - Copyright (c) 2024 Kamil Krzyśków (HRY)
+ */
+
+function updateFontPreference(event) {
+    let cssRaw = "";
+    let root = "";
+
+    const text = event.target.dataset["text"] || "";
+    const code = event.target.dataset["code"] || "";
+    const src = event.target.dataset["src"] || "";
+
+    if (src !== "") {
+        cssRaw += `@import url('${src}');`;
+    }
+    if (text !== "") {
+        root += `--md-text-font: "${text}";`;
+    }
+    if (code !== "") {
+        root += `--md-code-font: "${code}";`;
+    }
+    if (root !== "") {
+        cssRaw += `:root { ${root} }`;
+    }
+
+    // Actualizar preferencias
+    const loadedPreferences = __md_get(preferencesKey);
+    loadedPreferences["__global"]["cssRaw"] = cssRaw;
+    __md_set(preferencesKey, loadedPreferences);
+    loadSetPreferences();
+}
+
+// Se ejecuta al cargar para evitar parpadeo
+(() => {
+    const fonts = document.querySelectorAll("#md-fonts");
+    fonts.forEach((font) => {
+        const event_type = (font.tagName.toLowerCase() === "a") ? "click" : "change";
+        font.addEventListener(event_type, updateFontPreference);
+    });
+})();
