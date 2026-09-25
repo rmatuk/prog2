@@ -1490,17 +1490,17 @@
 <p>Abstracción de base de datos: Los ORMs permiten que cambies de un tipo de base de datos a otro con pocos cambios en el código.</p>
 </li>
 <li>
-<p>Seguridad: Los ORMs generalmente lidian con el escape de consultas y para prevenir inyecciones SQL, un tipo común de vulnerabilidad de seguridad.</p>
+<p>Seguridad: Los ORMs generalmente pueden lidiar con el escape de consultas y  prevenir inyecciones SQL, un tipo común de vulnerabilidad de seguridad.</p>
 </li>
 <li>
-<p>Eficiencia en el desarrollo: Los ORMs pueden generar automáticamente esquemas, realizar migraciones y otras tareas que serían demoradas de hacer manualmente.</p>
+<p>Eficiencia en el desarrollo: Los ORMs pueden generar automáticamente esquemas, realizar migraciones y otras tareas que son engorrosas de hacer manualmente.</p>
 </li>
 </ul>
 <h3 id="configuraciones-de-entorno-y-los-12-factores">Configuraciones de entorno y los 12 factores</h3>
 <p>Una buena práctica en el desarrollo de aplicaciones es separar las configuraciones del código, especialmente para datos sensibles como credenciales de base de datos. Este enfoque resuelve dos problemas futuros:</p>
 <ol>
 <li><strong>Variación entre entornos</strong>: Las configuraciones suelen cambiar entre entornos diferentes (desarrollo, test y producción), y mezclarlas con el código puede tornar el proceso de cambio entre estos entornos complicado y propenso a errores.</li>
-<li><strong>Seguridad</strong>: Exponer credenciales de base de datos y otras informaciones sensibles en el código-fuente es una práctica de seguridad mala, pues si ocurriera una filtración comprometería el acceso a tus recursos.</li>
+<li><strong>Seguridad</strong>: Exponer credenciales de base de datos y otras informaciones sensibles en el código-fuente es una mala práctica de seguridad, pues si ocurriera una filtración comprometería el acceso a tus recursos.</li>
 </ol>
 <p>Esta práctica está alineada con la metodología de los <a href="https://12factor.net/es/">12 factores</a> (específicamente el 3º factor: <a href="https://12factor.net/es/config">Config</a>), que recomienda almacenar configuraciones variables en el entorno y no en el código.</p>
 <p>Para gestionar y separar nuestras configuraciones del código de forma segura y estructurada, usaremos <code>pydantic-settings</code>. Esta biblioteca permite que definas configuraciones tanto en variables de entorno como en archivos separados (como <code>.env</code>), evitando la escritura de configuraciones directamente en el código-fuente.</p>
