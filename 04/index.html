@@ -1506,7 +1506,7 @@
 <p>Para gestionar y separar nuestras configuraciones del código de forma segura y estructurada, usaremos <code>pydantic-settings</code>. Esta biblioteca permite que definas configuraciones tanto en variables de entorno como en archivos separados (como <code>.env</code>), evitando la escritura de configuraciones directamente en el código-fuente.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>pydantic-settings
 </span></code></pre></div>
-<p>Ahora que entendemos mejor estos conceptos, comenzaremos instalando SQLAlchemy, un ORM que nos permite trabajar con bases de datos SQL de manera Pythónica. Además, Alembic, que es una herramienta de migración de base de datos, funciona muy bien con SQLAlchemy y nos ayudará a gestionar las alteraciones del esquema de nuestra base de datos.</p>
+<p>Ahora que entendemos mejor estos conceptos, comenzaremos instalando SQLAlchemy, un ORM que nos permite trabajar con bases de datos SQL de manera Pythónica. Además, instalaremos Alembic, que es una herramienta de migración de base de datos, funciona muy bien con SQLAlchemy y nos ayudará a gestionar las alteraciones del esquema de nuestra base de datos.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>sqlalchemy
 </span></code></pre></div>
 <p>¡Ahora estamos listos para sumergirnos en la configuración de nuestra base de datos! Vamos adelante.</p>
@@ -1561,7 +1561,7 @@
 </span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="n">created_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span>
 </span></code></pre></div></td></tr></table></div>
 <p>Aquí, <code>Mapped</code> se refiere a un atributo Python que está asociado (o mapeado) a una columna específica en una tabla de base de datos. Por ejemplo, <code class="language-python highlight"><span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span></code> indica que este atributo es un entero que será mapeado a una columna correspondiente en una tabla de base de datos. De la misma forma, <code class="language-python highlight"><span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code> se referiría a un atributo de string que sería mapeado a una columna de string correspondiente. Este enfoque permite a SQLAlchemy realizar la conversión entre los tipos de datos Python y los tipos de datos de la base de datos, además de ofrecer una interfaz Pythónica para la interacción entre ellos.</p>
-<p>En especial, debemos prestar atención al campo <code>__tablename__</code>. Se refiere al nombre que la tabla tendrá en la base de datos. Como generalmente un objeto en python representa solamente una entidad, usaré <code class="language-python highlight"><span class="s1">'users'</span></code> en plural para representar la tabla.</p>
+<p>En especial, debemos prestar atención al campo <code>__tablename__</code>. Se refiere al nombre que la tabla tendrá en la base de datos. Como generalmente un objeto en python representa solamente una entidad, usaremos <code class="language-python highlight"><span class="s1">'users'</span></code> en plural para representar la tabla.</p>
 <h3 id="el-uso-del-modelo">El uso del modelo</h3>
 <p>Si queremos usar este objeto, se comporta como una dataclass tradicional. Pudiendo ser instanciado de la forma tradicional:</p>
 <div class="language-python highlight"><span class="filename">Código de ejemplo</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">eduardo</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span>
@@ -1582,7 +1582,7 @@
 <li>Identificadores para los registros (<code>primary_key</code>)</li>
 </ul>
 <p>Para estos casos, SQLAlchemy cuenta con la función <code>mapped_column</code>. Dentro de ella, puedes definir diversas propiedades.</p>
-<p>Para nuestro caso, me gustaría que <code>email</code> y <code>username</code> no se repitan en la base de datos y que las columnas <code>id</code> y <code>created_at</code> tuvieran el valor definido por la propia base de datos, cuando el registro fuera creado.</p>
+<p>Para nuestro caso, queremos que <code>email</code> y <code>username</code> no se repitan en la base de datos y que las columnas <code>id</code> y <code>created_at</code> tuvieran el valor definido por la propia base de datos, cuando el registro fuera creado.</p>
 <p>Para eso, vamos a aplicar algunos parámetros en las columnas usando <code>mapped_column</code>:</p>
 <div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/models.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -1638,8 +1638,7 @@
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">username</span><span class="o">=</span><span class="s1">'dunossauro'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">'senha123'</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">'duno@ssauro.com'</span><span class="p">,</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">)</span>
 </span></code></pre></div>
-<p>Por no pasar estos parámetros a <code>User</code>, SQLAlchemy se encargará de atribuir los valores a ellos de forma automática.</p>
-<p>El campo <code>created_at</code> será rellenado por el resultado de la función pasada en <code>server_default</code>. El campo <code>id</code>, por contar con <code>primary_key=True</code>, será autorellenado con el id correspondiente cuando sea almacenado en la base de datos.</p>
+<p>Por no pasar esos parámetros a <code>User</code>, SQLAlchemy se encargará de atribuir los valores a ellos de forma automática. El campo <code>created_at</code> será rellenado por el resultado de la función pasada en <code>server_default</code>. El campo <code>id</code>, por contar con <code>primary_key=True</code>, será autorellenado con el id correspondiente cuando sea almacenado en la base de datos.</p>
 <blockquote>
 <p>Existen diversas opciones en esta función. En caso de que quieras ver más posibilidades de mapeo, aquí está la <a href="https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.mapped_column" target="_blank">referencia para más campos</a></p>
 </blockquote>
@@ -1647,7 +1646,7 @@
 <p>Antes de proseguir, una buena práctica sería crear un test para validar si toda la estructura de la base de datos funciona. Crearemos un archivo para validar eso: <code>test_db.py</code>.</p>
 <p>A partir de aquí, puedes proseguir con la estructuración del contenido de ese archivo para definir los tests necesarios para validar tu modelo de usuario y su interacción con la base de datos.</p>
 <h3 id="antes-de-escribir-los-tests">Antes de Escribir los Tests</h3>
-<p>A esta altura, si estuviéramos buscando solo cobertura, podríamos simplemente testear utilizando el modelo, y eso sería suficiente. Sin embargo, queremos verificar si toda nuestra interacción con la base de datos ocurrirá con éxito. Esto incluye saber si los tipos de datos en la tabla fueron mapeados correctamente, si es posible interactuar con la base de datos, si el ORM está estructurado adecuadamente con la clase base. Necesitamos garantizar que todo este esquema funcione.</p>
+<p>A esta altura, si estuviéramos buscando sólo cobertura, podríamos simplemente testear utilizando el modelo, y eso sería suficiente. Sin embargo, queremos verificar si toda nuestra interacción con la base de datos ocurrirá con éxito. Esto incluye saber si los tipos de datos en la tabla fueron mapeados correctamente, si es posible interactuar con la base de datos, si el ORM está estructurado adecuadamente con la clase base. Necesitamos garantizar que todo este esquema funcione:</p>
 <pre class="mermaid"><code>graph
   A[Aplicativo Python] -- utiliza --&gt; B[SQLAlchemy ORM]
   B -- proporciona --&gt; D[Session]
