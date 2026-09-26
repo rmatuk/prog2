@@ -1741,8 +1741,8 @@
 </span></code></pre></div></td></tr></table></div>
 <ol>
 <li>El método <code>.add</code> de la sesión, agrega el registro a la sesión. El dato queda en un estado transiente. Todavía no fue agregado a la base de datos. Pero ya está reservado en la sesión. Es una aplicación del patrón de proyecto <a href="https://martinfowler.com/eaaCatalog/unitOfWork.html" target="_blank">Unidad de trabajo</a>.</li>
-<li>En el momento en que existen datos transientes en la sesión y queremos "performar" efectivamente las acciones en la base de datos. Usamos el método <code>.commit</code>.</li>
-<li>El método <code>.scalar</code> se usa para performar búsquedas en la base (queries). Toma el primer resultado de la búsqueda y hace una operación de convertir el resultado de la base de datos en un Objeto creado por SQLAlchemy, en este caso, caso encuentre un resultado, convertirá en la clase <code>User</code>. La función de <code>select</code> es una función de búsqueda de datos en la base. En este caso estamos buscando en todos los <code>Users</code> donde (<code>where</code>) el nombre es igual a <code class="language-python highlight"><span class="s2">"alice"</span></code>.</li>
+<li>Cuando existen datos transientes en la sesión y queremos realizar efectivamente las acciones en la base de datos, usamos el método <code>.commit</code>.</li>
+<li>El método <code>.scalar</code> se usa para hacer búsquedas en la base (queries). Toma el primer resultado de la búsqueda y hace una operación de convertir el resultado que produjo la base de datos en un Objeto creado por SQLAlchemy. En este caso, si encuentra un resultado, lo convertirá en la clase <code>User</code>. La función <code>select</code> es una función de búsqueda de datos en la base. En este caso estamos buscando todos los <code>Users</code> donde (<code>where</code>) el nombre es igual a <code class="language-python highlight"><span class="s2">"alice"</span></code>.</li>
 </ol>
 <h3 id="ejecutando-el-test">Ejecutando el test</h3>
 <p>La ejecución de tests es una parte vital del desarrollo de cualquier aplicación. Los tests nos ayudan a identificar y corregir problemas antes de que se tornen más serios. También proporcionan la confianza de que nuestros cambios no rompieron ninguna funcionalidad existente. En nuestro caso, ejecutaremos los tests para validar nuestros modelos de usuario y garantizar que estén funcionando como se espera.</p>
@@ -1886,7 +1886,7 @@
 </ol>
 <p>El test permanece prácticamente igual, con la diferencia de que todas las operaciones involucrando la creación de <code>User</code> en la base de datos suceden en el alcance de <code>mock_db_time</code>.</p>
 <p>Esto hace que durante el <code>commit</code>, cuando los objetos son persistidos de la sesión para la base de datos, el evento de <code>before_insert</code> sea ejecutado para cada objeto del modelo pasado en <code>mock_db_time(model=*MODEL*)</code>.</p>
-<p>Por cuenta del campo <code>created_at</code> ahora ser determinístico podemos hacer una comparación completa de los campos.</p>
+<p>Como el campo <code>created_at</code> ahora es determinístico podemos hacer una comparación completa de los campos.</p>
 <p>Para simplificar la comparación de todos los campos, como nuestros objetos de modelo son dataclasses, la función <code>dataclass.asdict()</code>, convierte una dataclass a un diccionario:</p>
 <div class="language-python highlight"><span class="filename">Estudiando la comparación</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>    <span class="k">assert</span> <span class="n">asdict</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>        <span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -1896,7 +1896,7 @@
 </span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>        <span class="s1">'created_at'</span><span class="p">:</span> <span class="n">time</span><span class="p">,</span>
 </span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    <span class="p">}</span>
 </span></code></pre></div>
-<p>Como el tiempo ahora es determinístico y contenido en nuestro gestor de contexto, podemos hacer la comparación exacta entre todos los campos. Inclusive <code>created_at</code>.</p>
+<p>Como el tiempo ahora es determinístico y contenido en nuestro gestor de contexto, podemos hacer la comparación exacta entre todos los campos, inclusive <code>created_at</code>.</p>
 <p>De esta forma, con nuestros modelos y tests de base de datos en orden, estamos listos para avanzar a la próxima fase de configuración de nuestra base de datos y gestión de migraciones.</p>
 <h2 id="configuracion-del-entorno-de-la-base-de-datos">Configuración del entorno de la base de datos</h2>
 <p>Por fin, configuraremos nuestra base de datos. Primero, crearemos un nuevo archivo llamado <code>settings.py</code> dentro del directorio <code>fast_zero</code>. Aquí, usaremos Pydantic para crear una clase <code>Settings</code> que tomará las configuraciones de nuestro archivo <code>.env</code>. En este archivo, la clase <code>Settings</code> se define como:</p>
