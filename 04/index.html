@@ -637,10 +637,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#creando-una-fixture-para-interacciones-con-la-base-de-datos" class="md-nav__link">
+  <a href="#creando-un-fixture-para-interacciones-con-la-base-de-datos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Creando una Fixture para interacciones con la Base de Datos
+        Creando un Fixture para interacciones con la Base de Datos
       
     </span>
   </a>
@@ -699,10 +699,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#transformando-el-evento-en-una-fixture" class="md-nav__link">
+  <a href="#transformando-el-evento-en-un-fixture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Transformando el evento en una fixture
+        Transformando el evento en un fixture
       
     </span>
   </a>
@@ -1231,10 +1231,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#creando-una-fixture-para-interacciones-con-la-base-de-datos" class="md-nav__link">
+  <a href="#creando-un-fixture-para-interacciones-con-la-base-de-datos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Creando una Fixture para interacciones con la Base de Datos
+        Creando un Fixture para interacciones con la Base de Datos
       
     </span>
   </a>
@@ -1293,10 +1293,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#transformando-el-evento-en-una-fixture" class="md-nav__link">
+  <a href="#transformando-el-evento-en-un-fixture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Transformando el evento en una fixture
+        Transformando el evento en un fixture
       
     </span>
   </a>
@@ -1659,10 +1659,10 @@
   C -- se asocia a --&gt; H[Metadata]
   H -- mantiene informaciones de --&gt; G[Tablas en la Base de Datos]</code></pre>
 <p>En este diagrama, vemos la relación completa entre la aplicación Python y la base de datos. La conexión se establece a través del SQLAlchemy ORM, que proporciona una Session para interactuar con los Modelos. Estos modelos son mapeados a las tablas en la base de datos, mientras la Engine se conecta con la base de datos y depende de Metadata para mantener las informaciones de las tablas.</p>
-<p>Por lo tanto, crearemos una fixture para poder usar todo este esquema siempre que sea necesario.</p>
-<h3 id="creando-una-fixture-para-interacciones-con-la-base-de-datos">Creando una Fixture para interacciones con la Base de Datos</h3>
-<p>Para testear la base, tenemos que hacer diversos pasos, y eso puede tornar el código de nuestro test bastante grande. Una fixture puede ayudar a aislar toda esta configuración de la base de datos fuera del test. De esta forma, evitaremos repetir el mismo código en todos los tests y además garantizaremos que cada test tenga su propia versión limpia de la base de datos.</p>
-<p>Crearemos una fixture para la conexión con la base de datos llamada <code>session</code>:</p>
+<p>Por lo tanto, crearemos un fixture para poder usar todo este esquema siempre que sea necesario.</p>
+<h3 id="creando-un-fixture-para-interacciones-con-la-base-de-datos">Creando un Fixture para interacciones con la Base de Datos</h3>
+<p>Para testear la base, tenemos que hacer diversos pasos, y eso puede tornar el código de nuestro test bastante grande. Un fixture puede ayudar a aislar toda esta configuración de la base de datos fuera del test. De esta forma, evitaremos repetir el mismo código en todos los tests y además garantizaremos que cada test tenga su propia versión limpia de la base de datos.</p>
+<p>Crearemos un fixture para la conexión con la base de datos llamada <code>session</code>:</p>
 <div class="language-python highlight"><span class="filename">tests/conftest.py</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span>
@@ -1695,16 +1695,16 @@
 <p><code>create_engine('sqlite:///:memory:')</code>: crea un mecanismo de base de datos SQLite en memoria usando SQLAlchemy. Este mecanismo será usado para crear una sesión de base de datos para nuestros tests.</p>
 </li>
 <li>
-<p><code>table_registry.metadata.create_all(engine)</code>: crea todas las tablas en la base de datos de test antes de cada test que usa la fixture <code>session</code>.</p>
+<p><code>table_registry.metadata.create_all(engine)</code>: crea todas las tablas en la base de datos de test antes de cada test que usa el fixture <code>session</code>.</p>
 </li>
 <li>
 <p><code>Session(engine)</code>: crea una sesión <code>Session</code> para que los tests puedan comunicarse con la base de datos vía <code>engine</code>.</p>
 </li>
 <li>
-<p><code>yield session</code>: proporciona una instancia de Session que será inyectada en cada test que solicita la fixture <code>session</code>. Esta sesión será usada para interactuar con la base de datos de test.</p>
+<p><code>yield session</code>: proporciona una instancia de Session que será inyectada en cada test que solicita el fixture <code>session</code>. Esta sesión será usada para interactuar con la base de datos de test.</p>
 </li>
 <li>
-<p><code>table_registry.metadata.drop_all(engine)</code>: después de cada test que usa la fixture <code>session</code>, todas las tablas de la base de datos de test son eliminadas, garantizando que cada test sea ejecutado contra una base de datos limpia.</p>
+<p><code>table_registry.metadata.drop_all(engine)</code>: después de cada test que usa el fixture <code>session</code>, todas las tablas de la base de datos de test son eliminadas, garantizando que cada test sea ejecutado contra una base de datos limpia.</p>
 </li>
 <li>
 <p><code>engine.dispose()</code>: cierra todas las conexiones abiertas asociadas al <code>engine</code>, liberando los recursos del sistema. Esto garantiza que el mecanismo de base de datos sea completamente finalizado después del test, evitando fugas de conexión y otros problemas relacionados a la persistencia de estado entre tests.</p>
@@ -1821,16 +1821,16 @@
 <li>Retorna el datetime en la apertura del gestión de contexto.</li>
 <li>Después del final del gestión de contexto el hook de los eventos es removido.</li>
 </ol>
-<p>La idea detrás de esta función es ser un gestor de contexto (para ser llamado en un bloque <code class="language-python highlight"><span class="k">with</span></code>). Toda vez que un registro de <code>model</code> sea insertado en la base de datos, si tiene el campo <code>created_at</code>, por defecto, el campo será cadastrado con su fecha pre-fijada '01/01/2024'. Facilitando el mantenimiento de los tests que necesitan de la comparación de fecha, pues será determinística.</p>
-<h4 id="transformando-el-evento-en-una-fixture">Transformando el evento en una fixture</h4>
-<p>Ahora que tenemos la función gestora de contexto, para evitar el sistema de importación durante los tests, podemos crear una fixture para él. De forma bien simple, solamente retornando la función <code>_mock_db_time</code>:</p>
+<p>La idea detrás de esta función es ser un gestor de contexto (para ser llamado en un bloque <code class="language-python highlight"><span class="k">with</span></code>). Toda vez que un registro de <code>model</code> sea insertado en la base de datos, si tiene el campo <code>created_at</code>, por defecto, el campo será registrado con su fecha pre-fijada '01/01/2024'. Facilitando así el mantenimiento de los tests que necesitan de la comparación de fecha, pues será determinística.</p>
+<h4 id="transformando-el-evento-en-un-fixture">Transformando el evento en un fixture</h4>
+<p>Ahora que tenemos la función gestora de contexto, para evitar el sistema de importación durante los tests, podemos crear un fixture para él. De forma bien simple, solamente retornando la función <code>_mock_db_time</code>:</p>
 <div class="language-python highlight"><span class="filename">tests/conftest.py</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">mock_db_time</span><span class="p">():</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="k">return</span> <span class="n">_mock_db_time</span>
 </span></code></pre></div>
 <p>De esta forma podemos hacer la llamada directa en el test.</p>
 <h3 id="agregando-el-evento-al-test">Agregando el evento al test</h3>
-<p>Ahora que tenemos una fixture para tratar el caso de la fecha de creación, podemos hacer la comparación del objeto completo:</p>
+<p>Ahora que tenemos un fixture para tratar el caso de la fecha de creación, podemos hacer la comparación del objeto completo:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_db.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
