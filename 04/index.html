@@ -525,10 +525,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuraciones-de-entorno-y-los-12-factores" class="md-nav__link">
+  <a href="#configuracion-del-entorno-y-los-12-factores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuraciones de entorno y los 12 factores
+        Configuración del entorno y los 12 factores
       
     </span>
   </a>
@@ -1119,10 +1119,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuraciones-de-entorno-y-los-12-factores" class="md-nav__link">
+  <a href="#configuracion-del-entorno-y-los-12-factores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuraciones de entorno y los 12 factores
+        Configuración del entorno y los 12 factores
       
     </span>
   </a>
@@ -1482,31 +1482,31 @@
 <p>Con los endpoints de nuestra API ya establecidos, estamos, por ahora, utilizando una base de datos simulada, almacenando una lista en memoria. En esta clase, iniciaremos el proceso de configuración de nuestra base de datos real. Nuestra agenda incluye la instalación de SQLAlchemy, la definición del modelo de usuarios, y la ejecución de la primera migración con Alembic para una base de datos evolutiva. Además, exploraremos cómo desacoplar las configuraciones de la base de datos de la aplicación, siguiendo los principios de los 12 factores.</p>
 <p>Antes de proseguir con la instalación y la configuración, es crucial entender algunos conceptos fundamentales sobre ORMs (<em>Object-Relational Mapping</em>).</p>
 <h3 id="que-es-un-orm-y-por-que-usamos-uno">¿Qué es un ORM y por qué usamos uno?</h3>
-<p>ORM significa Mapeo Objeto-Relacional. Es una técnica de programación que vincula (o mapea) objetos a registros de base de datos. En otras palabras, un ORM permite que interactúes con tu base de datos, como si estuvieras trabajando con objetos Python.</p>
-<p>SQLAlchemy es un ejemplo de ORM. Permite que trabajes con bases de datos SQL de manera más natural para los programadores Python. En vez de escribir consultas SQL crudas, puedes usar métodos y atributos Python para manipular tus registros de base de datos.</p>
+<p>ORM significa <em>Mapeo Objeto-Relacional</em>. Es una técnica de programación que vincula (o mapea) objetos de un programa a registros de una base de datos. En otras palabras, un ORM permite que interactúes con tu base de datos, como si estuvieras trabajando con objetos Python.</p>
+<p>SQLAlchemy es un ejemplo de ORM. Permite que trabajes con bases de datos SQL de manera más natural para los programadores Python. En vez de escribir consultas SQL crudas, puedes usar métodos y atributos Python para manipular tus registros de la base de datos.</p>
 <p>¿Pero por qué usaríamos un ORM? Aquí están algunas razones:</p>
 <ul>
 <li>
-<p>Abstracción de base de datos: Los ORMs permiten que cambies de un tipo de base de datos a otro con pocos cambios en el código.</p>
+<p><strong>Abstracción de base de datos:</strong> Los ORMs permiten que cambies de un motor de base de datos a otro con pocos cambios en el código.</p>
 </li>
 <li>
-<p>Seguridad: Los ORMs generalmente pueden lidiar con el escape de consultas y  prevenir inyecciones SQL, un tipo común de vulnerabilidad de seguridad.</p>
+<p><strong>Seguridad:</strong> Los ORMs generalmente pueden lidiar con escapes de consultas y prevenir inyecciones SQL, un tipo común de vulnerabilidad de seguridad.</p>
 </li>
 <li>
-<p>Eficiencia en el desarrollo: Los ORMs pueden generar automáticamente esquemas, realizar migraciones y otras tareas que son engorrosas de hacer manualmente.</p>
+<p><strong>Eficiencia en el desarrollo:</strong> Los ORMs pueden generar esquemas automáticamente, realizar migraciones y otras tareas que son engorrosas de hacer manualmente.</p>
 </li>
 </ul>
-<h3 id="configuraciones-de-entorno-y-los-12-factores">Configuraciones de entorno y los 12 factores</h3>
-<p>Una buena práctica en el desarrollo de aplicaciones es separar las configuraciones del código, especialmente para datos sensibles como credenciales de base de datos. Este enfoque resuelve dos problemas futuros:</p>
+<h3 id="configuracion-del-entorno-y-los-12-factores">Configuración del entorno y los 12 factores</h3>
+<p>Una buena práctica en el desarrollo de aplicaciones es separar las configuraciones del código, <strong>especialmente para datos sensibles como credenciales</strong> de base de datos. Este enfoque resuelve dos problemas futuros:</p>
 <ol>
 <li><strong>Variación entre entornos</strong>: Las configuraciones suelen cambiar entre entornos diferentes (desarrollo, test y producción), y mezclarlas con el código puede tornar el proceso de cambio entre estos entornos complicado y propenso a errores.</li>
-<li><strong>Seguridad</strong>: Exponer credenciales de base de datos y otras informaciones sensibles en el código-fuente es una mala práctica de seguridad, pues si ocurriera una filtración comprometería el acceso a tus recursos.</li>
+<li><strong>Seguridad</strong>: Exponer credenciales de base de datos y otras informaciones sensibles en el código-fuente es una mala práctica de seguridad, pues si ocurriera una filtración del código comprometería el acceso a tus recursos.</li>
 </ol>
 <p>Esta práctica está alineada con la metodología de los <a href="https://12factor.net/es/">12 factores</a> (específicamente el 3º factor: <a href="https://12factor.net/es/config">Config</a>), que recomienda almacenar configuraciones variables en el entorno y no en el código.</p>
 <p>Para gestionar y separar nuestras configuraciones del código de forma segura y estructurada, usaremos <code>pydantic-settings</code>. Esta biblioteca permite que definas configuraciones tanto en variables de entorno como en archivos separados (como <code>.env</code>), evitando la escritura de configuraciones directamente en el código-fuente.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>pydantic-settings
 </span></code></pre></div>
-<p>Ahora que entendemos mejor estos conceptos, comenzaremos instalando SQLAlchemy, un ORM que nos permite trabajar con bases de datos SQL de manera Pythónica. Además, instalaremos Alembic, que es una herramienta de migración de base de datos, funciona muy bien con SQLAlchemy y nos ayudará a gestionar las alteraciones del esquema de nuestra base de datos.</p>
+<p>Ahora que entendemos mejor estos conceptos, comenzaremos instalando SQLAlchemy, un ORM que nos permite trabajar con bases de datos SQL de manera Pythónica. Además, instalaremos Alembic, que es una herramienta de migración de base de datos que funciona muy bien con SQLAlchemy y nos ayudará a gestionar las alteraciones del esquema de nuestra base de datos.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>sqlalchemy
 </span></code></pre></div>
 <p>¡Ahora estamos listos para sumergirnos en la configuración de nuestra base de datos! Vamos adelante.</p>
@@ -1514,7 +1514,7 @@
 <p>SQLAlchemy es una biblioteca Python versátil, concebida para intermediar la interacción entre Python y bases de datos relacionales, como MySQL, PostgreSQL y SQLite. La biblioteca está constituida por dos partes principales: el Core y el ORM (Object Relational Mapper).</p>
 <ul>
 <li>
-<p><strong>Core</strong>: El Core de SQLAlchemy disponibiliza una interfaz SQL abstracta, que posibilita la manipulación de bases de datos relacionales de manera segura, alineada con las convenciones de Python. A través del Core, es posible construir, analizar y ejecutar instrucciones SQL, además de conectarse a diversos tipos de bases de datos utilizando la misma API.</p>
+<p><strong>Core</strong>: El Core de SQLAlchemy disponibiliza una interfaz SQL abstracta, que posibilita la manipulación de bases de datos relacionales de manera segura, alineada con las convenciones de Python. A través del Core, es posible construir, analizar y ejecutar instrucciones SQL, además de conectarse a diversos motores de bases de datos utilizando la misma API.</p>
 </li>
 <li>
 <p><strong>ORM</strong>: ORM, o Mapeo Objeto-Relacional, es una técnica que facilita la comunicación entre el código orientado a objetos y bases de datos relacionales. Con el ORM de SQLAlchemy, los desarrolladores pueden interactuar con la base de datos utilizando clases y objetos Python, eliminando la necesidad de escribir instrucciones SQL directamente.</p>
@@ -1527,9 +1527,9 @@
 <p>En cuanto a la persistencia de datos y consultas a la base de datos utilizando el ORM, la Session es la principal interfaz. Actúa como un intermediario entre la aplicación Python y la base de datos, mediada por la Engine. La Session se encarga de todas las transacciones, proporcionando una API para conducirlas.</p>
 <p>Ahora que conocemos la Engine y la Session, vamos a explorar la definición de modelos de datos.</p>
 <h2 id="definiendo-los-modelos-de-datos-con-sqlalchemy">Definiendo los Modelos de Datos con SQLAlchemy</h2>
-<p>Los modelos de datos definen la estructura de cómo los datos serán almacenados en la base de datos. En el ORM de SQLAlchemy, estos modelos se definen como clases Python que pueden ser heredadas o registradas (esto depende de cómo uses el ORM). Vamos a usar el registrador de tablas, que ya hace la conversión automática de las clases en <a href="https://docs.python.org/es/3/library/dataclasses.html" target="_blank">dataclasses</a></p>
+<p><strong>Los modelos de datos definen la estructura de cómo los datos serán almacenados en la base de datos.</strong> En el ORM de SQLAlchemy, estos modelos se definen como clases Python que pueden ser heredadas o registradas (esto depende de cómo uses el ORM). Vamos a usar el registrador de tablas, que hace la conversión automática de las clases en <a href="https://docs.python.org/es/3/library/dataclasses.html" target="_blank">dataclasses</a>.</p>
 <p>Cada clase que es registrada por el objeto <code>registry</code> es automáticamente mapeada a una tabla en la base de datos. Adicionalmente, la clase base incluye un objeto de metadatos que es una colección de todas las tablas declaradas. Este objeto se utiliza para gestionar operaciones como creación, modificación y exclusión de tablas.</p>
-<p>Ahora definiremos nuestro modelo <code>User</code>. En el directorio <code>fast_zero</code>, crea un nuevo archivo llamado <code>models.py</code> e incluiremos el siguiente código en el archivo:</p>
+<p>Ahora definiremos nuestro modelo <code>User</code>. En el directorio <code>fast_zero</code>, crea un nuevo archivo llamado <code>models.py</code> e incluí el siguiente código en el archivo:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/models.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -1560,7 +1560,7 @@
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="n">email</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="n">created_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span>
 </span></code></pre></div></td></tr></table></div>
-<p>Aquí, <code>Mapped</code> se refiere a un atributo Python que está asociado (o mapeado) a una columna específica en una tabla de base de datos. Por ejemplo, <code class="language-python highlight"><span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span></code> indica que este atributo es un entero que será mapeado a una columna correspondiente en una tabla de base de datos. De la misma forma, <code class="language-python highlight"><span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code> se referiría a un atributo de string que sería mapeado a una columna de string correspondiente. Este enfoque permite a SQLAlchemy realizar la conversión entre los tipos de datos Python y los tipos de datos de la base de datos, además de ofrecer una interfaz Pythónica para la interacción entre ellos.</p>
+<p>Aquí, <code>Mapped</code> se refiere a un atributo Python que está asociado (o mapeado) a una columna específica en una tabla de base de datos. Por ejemplo, <code class="language-python highlight"><span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span></code> indica que este atributo es un entero que será mapeado a una columna correspondiente en una tabla de base de datos. De la misma forma, <code class="language-python highlight"><span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code> se refiere a un atributo de string que será mapeado a una columna de string correspondiente en la tabla. Este enfoque permite a SQLAlchemy realizar la conversión entre los tipos de datos de Python y los tipos de datos de la base de datos, además de ofrecer una interfaz Pythónica para la interacción entre ellos.</p>
 <p>En especial, debemos prestar atención al campo <code>__tablename__</code>. Se refiere al nombre que la tabla tendrá en la base de datos. Como generalmente un objeto en python representa solamente una entidad, usaremos <code class="language-python highlight"><span class="s1">'users'</span></code> en plural para representar la tabla.</p>
 <h3 id="el-uso-del-modelo">El uso del modelo</h3>
 <p>Si queremos usar este objeto, se comporta como una dataclass tradicional. Pudiendo ser instanciado de la forma tradicional:</p>
@@ -1573,7 +1573,7 @@
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">)</span>
 </span></code></pre></div>
 <p>Por defecto, todos los atributos necesitan ser especificados. Lo que puede no ser muy interesante, pues algunos datos deben ser rellenados por la base de datos. Como el identificador de la fila en la base o la hora en que el registro fue creado.</p>
-<p>Para eso, necesitamos agregar más informaciones al modelo.</p>
+<p>Para salvar eso, necesitaremos agregar más informaciones al modelo.</p>
 <h3 id="configuraciones-de-columnas">Configuraciones de columnas</h3>
 <p>Cuando definimos tablas en la base de datos, las columnas pueden presentar propiedades específicas. Por ejemplo:</p>
 <ul>
@@ -1582,8 +1582,8 @@
 <li>Identificadores para los registros (<code>primary_key</code>)</li>
 </ul>
 <p>Para estos casos, SQLAlchemy cuenta con la función <code>mapped_column</code>. Dentro de ella, puedes definir diversas propiedades.</p>
-<p>Para nuestro caso, queremos que <code>email</code> y <code>username</code> no se repitan en la base de datos y que las columnas <code>id</code> y <code>created_at</code> tuvieran el valor definido por la propia base de datos, cuando el registro fuera creado.</p>
-<p>Para eso, vamos a aplicar algunos parámetros en las columnas usando <code>mapped_column</code>:</p>
+<p>Para nuestro caso, queremos que <code>email</code> y <code>username</code> no se repitan en la base de datos y que las columnas <code>id</code> y <code>created_at</code> tengan el valor definido por la propia base de datos, cuando el registro es creado en la base.</p>
+<p>Para lograr eso, vamos a aplicar algunos parámetros en las columnas usando <code>mapped_column</code>:</p>
 <div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/models.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -1627,10 +1627,10 @@
 <li><code>unique=True</code> dice que ese campo no debe repetirse en la tabla. Por ejemplo, si tuviéramos un username "dunossauro", no podemos tener otro con el mismo valor.</li>
 <li><code>server_default=func.now()</code> dice que, cuando la clase sea instanciada, el resultado de <code>func.now()</code> será el valor atribuido a ese atributo. En este caso, la fecha y hora en que fue instanciado.</li>
 </ol>
-<p>De esta forma, unimos tanto el uso que queremos tener en python, cuanto la configuración esperada de la tabla en la base de datos. Los parámetros de mapeo dicen:</p>
+<p>De esta forma, unimos el uso que queremos tener en python con la configuración deseada para la tabla en la base de datos. Los parámetros de mapeo dicen:</p>
 <ul>
 <li><code>primary_key</code>: dice que el campo será la clave primaria de la tabla</li>
-<li><code>unique</code>: dice que el campo solo puede tener un valor único en toda la tabla. No podemos tener un <code>username</code> repetido en la base, por ejemplo.</li>
+<li><code>unique</code>: dice que el campo solo puede tener un valor único en toda la tabla. Por ejemplo, no podemos tener un <code>username</code> repetido en la base.</li>
 <li><code>server_default</code>: ejecuta una función en el momento en que el objeto sea instanciado.</li>
 </ul>
 <p>El campo <code>init</code> no tiene una relación directa con la base de datos, sino con la forma en que vamos a usar el objeto del modelo en el código. Dice que los atributos marcados con <code>init=false</code> no deben ser pasados en el momento en que <code>User</code> sea instanciado. Por ejemplo:</p>
@@ -1643,7 +1643,7 @@
 <p>Existen diversas opciones en esta función. En caso de que quieras ver más posibilidades de mapeo, aquí está la <a href="https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.mapped_column" target="_blank">referencia para más campos</a></p>
 </blockquote>
 <h2 id="testeando-las-tablas">Testeando las Tablas</h2>
-<p>Antes de proseguir, una buena práctica sería crear un test para validar si toda la estructura de la base de datos funciona. Crearemos un archivo para validar eso: <code>test_db.py</code>.</p>
+<p>Antes de proseguir, una buena práctica es crear un test para validar si toda la estructura de la base de datos funciona. Crearemos un archivo para probar eso: <code>test_db.py</code>.</p>
 <p>A partir de aquí, puedes proseguir con la estructuración del contenido de ese archivo para definir los tests necesarios para validar tu modelo de usuario y su interacción con la base de datos.</p>
 <h3 id="antes-de-escribir-los-tests">Antes de Escribir los Tests</h3>
 <p>A esta altura, si estuviéramos buscando sólo cobertura, podríamos simplemente testear utilizando el modelo, y eso sería suficiente. Sin embargo, queremos verificar si toda nuestra interacción con la base de datos ocurrirá con éxito. Esto incluye saber si los tipos de datos en la tabla fueron mapeados correctamente, si es posible interactuar con la base de datos, si el ORM está estructurado adecuadamente con la clase base. Necesitamos garantizar que todo este esquema funcione:</p>
@@ -1661,7 +1661,7 @@
 <p>En este diagrama, vemos la relación completa entre la aplicación Python y la base de datos. La conexión se establece a través del SQLAlchemy ORM, que proporciona una Session para interactuar con los Modelos. Estos modelos son mapeados a las tablas en la base de datos, mientras la Engine se conecta con la base de datos y depende de Metadata para mantener las informaciones de las tablas.</p>
 <p>Por lo tanto, crearemos una fixture para poder usar todo este esquema siempre que sea necesario.</p>
 <h3 id="creando-una-fixture-para-interacciones-con-la-base-de-datos">Creando una Fixture para interacciones con la Base de Datos</h3>
-<p>Para testear la base, tenemos que hacer diversos pasos, y eso puede tornar nuestro test bastante grande. Una fixture puede ayudar a aislar toda esta configuración de la base de datos fuera del test. Así, evitamos repetir el mismo código en todos los tests y todavía garantizamos que cada test tenga su propia versión limpia de la base de datos.</p>
+<p>Para testear la base, tenemos que hacer diversos pasos, y eso puede tornar el código de nuestro test bastante grande. Una fixture puede ayudar a aislar toda esta configuración de la base de datos fuera del test. De esta forma, evitaremos repetir el mismo código en todos los tests y además garantizaremos que cada test tenga su propia versión limpia de la base de datos.</p>
 <p>Crearemos una fixture para la conexión con la base de datos llamada <code>session</code>:</p>
 <div class="language-python highlight"><span class="filename">tests/conftest.py</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
@@ -1688,8 +1688,8 @@
 </span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>    <span class="n">table_registry</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">drop_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span><span class="c1">#(5)!</span>
 </span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>    <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span><span class="c1">#(6)!</span>
 </span></code></pre></div>
-<p>Aquí, estamos utilizando SQLite como la base de datos en memoria para los tests. Esta es una práctica común en tests unitarios, pues la utilización de una base de datos en memoria es más rápida que una base de datos persistida en disco. Con SQLite en memoria, podemos crear y destruir bases de datos fácilmente, lo que es útil para aislar los tests y garantizar que los datos de un test no afecten a otros tests. Además, no necesitamos preocuparnos con la limpieza de los datos después de la ejecución de los tests, ya que la base de datos en memoria es descartada cuando el programa es finalizado.</p>
-<p>¿Qué hace cada línea de la fixture?</p>
+<p>Aquí, estamos utilizando SQLite como la base de datos en memoria para los tests. Esta es una práctica común en tests unitarios, pues la utilización de una base de datos en memoria es más rápida que una base de datos persistente en disco. Con SQLite en memoria, podemos crear y destruir bases de datos fácilmente, lo que es útil para aislar los tests y garantizar que los datos de un test no afecten a otros tests. Además, no necesitamos preocuparnos por la limpieza de los datos después de la ejecución de los tests, ya que la base de datos en memoria es descartada cuando el programa de test es finalizado.</p>
+<p>¿Qué hace cada línea del fixture?</p>
 <ol>
 <li>
 <p><code>create_engine('sqlite:///:memory:')</code>: crea un mecanismo de base de datos SQLite en memoria usando SQLAlchemy. Este mecanismo será usado para crear una sesión de base de datos para nuestros tests.</p>
@@ -1710,7 +1710,7 @@
 <p><code>engine.dispose()</code>: cierra todas las conexiones abiertas asociadas al <code>engine</code>, liberando los recursos del sistema. Esto garantiza que el mecanismo de base de datos sea completamente finalizado después del test, evitando fugas de conexión y otros problemas relacionados a la persistencia de estado entre tests.</p>
 </li>
 </ol>
-<p>Resumiendo, esta fixture está configurando y limpiando una base de datos de test para cada test que la solicita, asegurando que cada test sea aislado y tenga su propio entorno limpio para trabajar. Esto es una buena práctica en tests de unidad, ya que queremos que cada test sea independiente y no afecte a los demás.</p>
+<p>Resumiendo, este fixture está creando, configurando, limpiando y eliminando una base de datos de test en memoria para cada test que lo solicite, asegurando que cada test sea aislado y tenga su propio entorno limpio para trabajar. Esto es una buena práctica en tests de unidad, ya que queremos que cada test sea independiente y no afecte a los demás.</p>
 <h3 id="creando-un-test-para-nuestra-tabla">Creando un Test para Nuestra Tabla</h3>
 <p>Ahora, en el archivo <code>test_db.py</code>, escribiremos un test para la creación de un usuario. Este test agrega un nuevo usuario a la base de datos, hace commit de los cambios, y después verifica si el usuario fue debidamente creado consultándolo por el nombre de usuario. Si el usuario fue creado correctamente, el test pasa. Caso contrario, el test falla, indicando que hay algo errado con nuestra función de creación de usuario.</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_db.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
