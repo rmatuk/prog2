@@ -1925,7 +1925,9 @@
 </span></code></pre></div>
 <h2 id="instalando-alembic-y-creando-la-primera-migracion">Instalando Alembic y Creando la Primera Migración</h2>
 <p>Antes de avanzar, es importante entender qué son las migraciones de base de datos y por qué son útiles. Las migraciones son una manera de hacer alteraciones o actualizaciones en la base de datos, como agregar una tabla o una columna a una tabla, o alterar el tipo de datos de una columna. Son extremadamente útiles, pues nos permiten mantener el control de todas las alteraciones hechas en el esquema de la base de datos a lo largo del tiempo. También nos permiten revertir a una versión anterior del esquema de la base de datos, si es necesario.</p>
-<p>Ahora, comenzaremos instalando Alembic, que es una herramienta de migración de base de datos para SQLAlchemy. Usaremos Poetry para agregar Alembic a nuestro proyecto:</p>
+<p>Ahora, comenzaremos instalando Alembic, que es una herramienta de migración de base de datos para SQLAlchemy. Alembic = Git para tu base de datos: Te permite versionar y gestionar cambios en el esquema de manera similar a como Git gestiona cambios en el código. Esto es esencial para proyectos en producción: Sin Alembic (o una herramienta similar), gestionar cambios en la base de datos sería caótico y propenso a errores.
+Aunque tiene una curva de aprendizaje inicial, una vez configurado, es sencillo de integrar en cualquier proyecto con SQLAlchemy.</p>
+<p>Usaremos Poetry para agregar Alembic a nuestro proyecto:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>alembic
 </span></code></pre></div>
 <p>Después de la instalación de Alembic, necesitamos iniciarlo en nuestro proyecto. El comando de inicialización creará un directorio <code>migrations</code> y un archivo de configuración <code>alembic.ini</code>:</p>
