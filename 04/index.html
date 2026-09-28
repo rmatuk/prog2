@@ -1818,8 +1818,8 @@
 <li>Todos los parámetros después de <code>*</code> deben ser llamados de forma nombrada, para quedar explícitos en la función. O sea <code>mock_db_time(model=User)</code>. Los parámetros no pueden ser llamados de forma posicional <code>_mock_db_time(User)</code>, eso acarreará un error.</li>
 <li>Función para alterar el método <code>created_at</code> del objeto de target.</li>
 <li><code>event.listen</code> agrega un evento en relación a un <code>model</code> que será pasado a la función. Este evento es el <code>before_insert</code>, ejecutará una función (hook) antes de insertar el registro en la base de datos. El hook es la función <code>fake_time_hook</code>.</li>
-<li>Retorna el datetime en la apertura del gestión de contexto.</li>
-<li>Después del final del gestión de contexto el hook de los eventos es removido.</li>
+<li>Retorna el datetime en la apertura del gestor de contexto.</li>
+<li>Después del final del gestor de contexto el hook de los eventos es removido.</li>
 </ol>
 <p>La idea detrás de esta función es ser un gestor de contexto (para ser llamado en un bloque <code class="language-python highlight"><span class="k">with</span></code>). Toda vez que un registro de <code>model</code> sea insertado en la base de datos, si tiene el campo <code>created_at</code>, por defecto, el campo será registrado con su fecha pre-fijada '01/01/2024'. Facilitando así el mantenimiento de los tests que necesitan de la comparación de fecha, pues será determinística.</p>
 <h4 id="transformando-el-evento-en-un-fixture">Transformando el evento en un fixture</h4>
@@ -1920,7 +1920,7 @@
 <div class="language-shell highlight"><span class="filename">.env</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">"sqlite:///database.db"</span>
 </span></code></pre></div>
 <p>Con esto, cuando la clase <code>Settings</code> sea instanciada, cargará automáticamente las configuraciones del archivo <code>.env</code>.</p>
-<p>Finalmente, agrega el archivo de base de datos, <code>database.db</code>, al <code>.gitignore</code> para garantizar que no sea incluido en el control de versión. Agregar informaciones sensibles o archivos binarios al control de versión es generalmente considerado una práctica mala.</p>
+<p>Finalmente, agrega el archivo de base de datos, <code>database.db</code>, al <code>.gitignore</code> para garantizar que no sea incluido en el control de versiones. Agregar informaciones sensibles o archivos binarios al control de versión es generalmente considerado una mala práctica.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'database.db'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.gitignore
 </span></code></pre></div>
 <h2 id="instalando-alembic-y-creando-la-primera-migracion">Instalando Alembic y Creando la Primera Migración</h2>
