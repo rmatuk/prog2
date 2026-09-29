@@ -8,13 +8,11 @@
       
       
       
-        <link rel="canonical" href="https://rmatuk.github.io/prog2/ejercicios_resueltos/aula_01/">
+        <link rel="canonical" href="https://rmatuk.github.io/prog2/ejercicios_resueltos/aula_06/">
       
       
-        <link rel="prev" href="../../06/">
+        <link rel="prev" href="../aula_05/">
       
-      
-        <link rel="next" href="../aula_02/">
       
       
         
@@ -25,7 +23,7 @@
     
     
       
-        <title>Ejercicios de la sección 01 - Programación 2 (LCD) - UNSAM</title>
+        <title>Ejercicios de la sección 06 - Programación 2 (LCD) - UNSAM</title>
       
     
     
@@ -114,7 +112,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ejercicios-de-la-seccion-01" class="md-skip">
+        <a href="#ejercicios-de-la-seccion-06" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -149,7 +147,7 @@
 		<div class="md-header__topic" data-md-component="header-topic">
 		    <span class="md-ellipsis">
 			
-			Ejercicios de la sección 01
+			Ejercicios de la sección 06
 			
 		    </span>
 		</div>
@@ -579,37 +577,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Ejercicios de la sección 01
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../aula_01/" class="md-nav__link">
         
   
   
@@ -625,54 +596,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ejercicio-01" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ejercicio 01
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Ejercicio 01">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#solucion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Solución
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -794,10 +717,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../aula_06/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -813,6 +745,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -845,42 +778,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ejercicio-01" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ejercicio 01
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Ejercicio 01">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#solucion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Solución
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -899,36 +796,44 @@
   
 
 
-<h1 id="ejercicios-de-la-seccion-01">Ejercicios de la sección 01</h1>
+<h1 id="ejercicios-de-la-seccion-06">Ejercicios de la sección 06</h1>
+<h1 id="autenticacion-y-autorizacion-con-jwt"><strong>Autenticación y Autorización con JWT</strong></h1>
 <h2 id="ejercicio-01">Ejercicio 01</h2>
-<p>Agrega el <code>typos</code> para analizar gramática en inglés para ser ejecutado antes de la etapa de lint, transformándola en una secuencia que corra el <code>typos</code> y el <code>ruff check</code> en la tabla <code>[tool.poe.tasks]</code> de tu archivo <code>pyproject.toml</code>.</p>
+<p>Haz un test para cubrir el escenario que lanza la exception <code>credentials_exception</code> en la autenticación en caso de que el <code>email</code> no sea enviado vía JWT. Al mirar la cobertura de <code>security.py</code> notarás que este contexto no está cubierto.</p>
 <h3 id="solucion">Solución</h3>
-<p>El objetivo aquí es automatizar la verificación ortográfica para que corra siempre de forma automática antes del <code>ruff check</code>. Para hacer eso, vamos a transformar nuestro comando <code>lint</code> en una secuencia en Poe.</p>
-<p>Abre tu archivo <code>pyproject.toml</code> y navega hasta la tabla <code>[tool.poe.tasks]</code>.</p>
-<p>Como el <code>lint</code> antes era solo una string simple (<code>lint = { cmd = "ruff check" }</code>), necesitamos alterarlo para usar la propiedad <code>.sequence</code>, pasando una lista con el <code>typos</code> primero y el <code>ruff check</code> justo a continuación.</p>
-<p>Tu bloque de tareas debe quedar exactamente así:</p>
-<div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[tool.poe.tasks]</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="hll"><span class="n">lint</span><span class="p">.</span><span class="n">sequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-</span></span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="hll"><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">cmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"typos"</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="c1"># (1)!</span>
-</span></span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="hll"><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">cmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"ruff check"</span><span class="w"> </span><span class="p">},</span>
-</span></span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="hll"><span class="p">]</span>
-</span></span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">format</span><span class="p">.</span><span class="n">sequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">cmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"ruff check --fix"</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">cmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"ruff format"</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">]</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">serve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"fastapi dev fast_zero/app.py"</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">test</span><span class="p">.</span><span class="n">sequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span><span class="s2">"lint"</span><span class="p">,</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">cmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"pytest -s -x -vv $POE_EXTRA_ARGS"</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">cmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"coverage html --show-contexts"</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">]</span>
+<p>Para ejecutar el bloque de código debes hacer una llamada a cualquier endpoint que dependa del token (currentUser) y enviar un token que no contenga una dirección de e-mail (sub):</p>
+<div class="language-python highlight"><span class="filename">tests/test_app.py</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_get_current_user_not_found__exercicio</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'no-email'</span><span class="p">:</span> <span class="s1">'test'</span><span class="p">}</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">token</span> <span class="o">=</span> <span class="n">create_access_token</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="s1">'/users/1'</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">'Authorization'</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'Bearer </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s1">'</span><span class="p">},</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">UNAUTHORIZED</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'detail'</span><span class="p">:</span> <span class="s1">'Could not validate credentials'</span><span class="p">}</span>
 </span></code></pre></div>
-<ol>
-<li>El comando <code>typos</code> fue agregado como el primer paso de la secuencia. Ahora, siempre que corras el lint, verificará la ortografía antes de pasar a las reglas del ruff.</li>
-</ol>
-<p>Para garantizar que está funcionando, ejecuta el linter en tu terminal:</p>
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>poetry<span class="w"> </span>lint
+<h2 id="ejercicio-02">Ejercicio 02</h2>
+<p>Haz un test para cubrir el escenario que lanza la exception <code>credentials_exception</code> en la autenticación en caso de que el email sea enviado, pero no exista un <code>User</code> correspondiente registrado en la base de datos. Al mirar la cobertura de <code>security.py</code> notarás que este contexto no está cubierto.</p>
+<h3 id="solucion_1">Solución</h3>
+<p>Para ejecutar el bloque de código debes hacer una llamada a cualquier endpoint que dependa del token (currentUser) y enviar un token que contenga una dirección de email (sub) que no esté registrado en la base de datos:</p>
+<div class="language-python highlight"><span class="filename">tests/test_app.py</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_get_current_user_does_not_exists__exercicio</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'sub'</span><span class="p">:</span> <span class="s1">'test@test'</span><span class="p">}</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">token</span> <span class="o">=</span> <span class="n">create_access_token</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="s1">'/users/1'</span><span class="p">,</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">'Authorization'</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'Bearer </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s1">'</span><span class="p">},</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">UNAUTHORIZED</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'detail'</span><span class="p">:</span> <span class="s1">'Could not validate credentials'</span><span class="p">}</span>
 </span></code></pre></div>
+<h2 id="ejercicio-03">Ejercicio 03</h2>
+<p>Revisa los tests creados hasta la clase 5 y ve si todavía tienen sentido (tests involucrando <code class="language-python highlight"><span class="mi">409</span></code>)</p>
+<h3 id="solucion_2">Solución</h3>
+<p>Los tests para los endpoints de PUT y DELETE, que verifican usuarios no existentes en la base de datos no tienen más sentido. Ya que para modificar o eliminar un user, tiene que ser validado por el token. Estos tests pueden ser eliminados.</p>
 
 
 
