@@ -1720,7 +1720,7 @@
 </span></code></pre></div>
 <p>Semejante a lo que hicimos antes, estamos inyectando la sesión de SQLAlchemy en nuestro endpoint y utilizándola para buscar el usuario a ser actualizado. Si el usuario no es encontrado, retornamos un error 404.</p>
 <p>Las líneas destacadas muestran que estamos atribuyendo nuevos valores a los atributos <code>username</code>, <code>password</code> y <code>email</code>. Esta operación, seguida de un commit, altera los valores existentes en la base. Es como si la atribución nueva, fuera una actualización del dato de la tabla.</p>
-<p>Antes de partir para el próximo paso, al ejecutar nuestro linter, él apuntará un error informando que importamos <code>UserDB</code> pero, nunca lo usamos.</p>
+<p>Antes de partir para el próximo paso, al ejecutar nuestro linter, él mostrará un error informando que importamos <code>UserDB</code> pero nunca lo usamos.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>poetry<span class="w"> </span>lint
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>fast_zero/app.py:9:40:<span class="w"> </span>F401<span class="w"> </span><span class="o">[</span>*<span class="o">]</span><span class="w"> </span><span class="sb">`</span>fast_zero.schemas.UserDB<span class="sb">`</span><span class="w"> </span>imported<span class="w"> </span>but<span class="w"> </span>unused
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Found<span class="w"> </span><span class="m">1</span><span class="w"> </span>error.
@@ -1789,7 +1789,7 @@
 </span></code></pre></div></td></tr></table></div>
 </details>
 <h3 id="agregando-el-test-del-put">Agregando el test del PUT</h3>
-<p>También necesitamos alterar el test para el endpoint de PUT, para que exista un usuario en la base para ser alterado:</p>
+<p>También necesitamos modificar el test para el endpoint de PUT, para que exista un usuario en la base para ser modificado:</p>
 <div class="language-python highlight"><span class="filename">tests/test_app.py</span><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">test_update_user</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span> <span class="c1">#(1)!</span>
 </span></span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>        <span class="s1">'/users/1'</span><span class="p">,</span>
@@ -1810,10 +1810,10 @@
 <li>Agregaremos el fixture <code>user</code> que ya efectúa la creación de un registro en la base de datos.</li>
 </ol>
 <h3 id="el-caso-del-conflicto">El caso del conflicto</h3>
-<p>Aunque parezca que está todo cierto y el test esté siendo ejecutado con éxito. Existe, sin embargo, un caso que no fue pensado en este update. Algunos datos en nuestro modelo (<code>username</code> y <code>email</code>) están marcados como <code>unique</code> en la base de datos. Lo que puede ocasionar un error en potencial, caso alguien altere esos valores para un valor ya existente.</p>
-<p>Por ejemplo, imagina que dos personas se cadastraron en nuestra aplicación. Una con <code class="language-py highlight"><span class="p">{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'faustino'</span><span class="p">}</span></code> y otra con <code class="language-py highlight"><span class="p">{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'dunossauro'</span><span class="p">}</span></code>. Hasta ese momento, no tendríamos ningún problema.</p>
+<p>Aunque parezca que está todo correcto y que el test está siendo ejecutado con éxito, existe un caso que no fue considerado en el test del update. Algunos datos en nuestro modelo (<code>username</code> y <code>email</code>) están marcados como <code>unique</code> en la base de datos. Esto puede ocasionar un error en potencial, en el caso de que alguien modifique esos valores para un valor ya existente.</p>
+<p>Por ejemplo, imagina que dos personas se registraron en nuestra aplicación. Una con <code class="language-py highlight"><span class="p">{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'faustino'</span><span class="p">}</span></code> y otra con <code class="language-py highlight"><span class="p">{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'dunossauro'</span><span class="p">}</span></code>. Hasta ese momento, no tendríamos ningún problema.</p>
 <p>¿Pero qué sucedería si "faustino" hiciera un update y quisiera llamarse "dunossauro"?</p>
-<p>Vamos a iniciar la escritura de un escenario de tests que contemple eso para quedar más claro:</p>
+<p>Vamos a iniciar la escritura de un escenario de tests que contemple eso para que quede más claro:</p>
 <div class="language-python highlight"><span class="filename">tests/test_app.py</span><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">test_update_integrity_error</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
 </span></span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>    <span class="c1"># Creando un registro para "fausto"</span>
 </span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>    <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span> <span class="c1">#(1)!</span>
@@ -1825,7 +1825,7 @@
 </span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>        <span class="p">},</span>
 </span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>    <span class="p">)</span>
 </span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>
-</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>    <span class="c1"># Alterando el user.username del fixture para fausto</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>    <span class="c1"># Modificando el user.username del fixture para fausto</span>
 </span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>    <span class="n">response_update</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span> <span class="c1">#(2)!</span>
 </span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>        <span class="sa">f</span><span class="s1">'/users/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
 </span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>        <span class="n">json</span><span class="o">=</span><span class="p">{</span>
@@ -1837,9 +1837,9 @@
 </span></code></pre></div>
 <ol>
 <li>Creando un user con el <code>username</code> siendo "fausto"</li>
-<li>Alterando el user existente en la base para usar el mismo username de "fausto"</li>
+<li>Modificando el user existente en la base para usar el mismo username de "fausto"</li>
 </ol>
-<p>Aunque sin escribir ningún <code class="language-py highlight"><span class="k">assert</span></code> en este test, si ejecutamos los tests, fallará:</p>
+<p>Aún sin escribir ningún <code class="language-py highlight"><span class="k">assert</span></code> en este test, si ejecutamos los tests, fallará:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
 </span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
 </span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="c1"># ...</span>
@@ -1860,7 +1860,7 @@
 </span></code></pre></div>
 <p>El error fue iniciado por sqlalchemy. Como podemos constatar en el mensaje de error: <code class="language-python highlight"><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span> <span class="p">(</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">)</span> <span class="n">UNIQUE</span> <span class="n">constraint</span> <span class="n">failed</span><span class="p">:</span> <span class="n">users</span><span class="o">.</span><span class="n">username</span><span class="o">.</span></code></p>
 <p>Traduciendo de forma literal, dijo que tenemos un problema de integridad: <code>falla en la restricción UNIQUE: users.username</code>. Esto sucede, pues tenemos la restricción UNIQUE en el campo <code>username</code> de la tabla <code>users</code>. Cuando agregamos el mismo nombre a un registro que ya existía, causamos un error de integridad.</p>
-<p>Una forma de evitar el error es contando con la posibilidad de que suceda. Para eso, podríamos crear un flujo esperando esa excepción en el endpoint. Algo como:</p>
+<p>Una forma de evitar el error es considerando la posibilidad de que suceda. Para eso, podríamos crear un flujo esperando esa excepción en el endpoint. Algo como:</p>
 <div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.exc</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntegrityError</span>
 </span></span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
 </span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="c1"># ...</span>
@@ -1895,7 +1895,7 @@
 <li>Este error será levantado en el caso de que la instrucción de <code>session.commit()</code> no consiga efectuar la persistencia.</li>
 <li>Conflicto es el status code para <code class="language-python highlight"><span class="mi">409</span></code>, cuando existe un conflicto en la solicitud en relación al estado pretendido por la solicitud.</li>
 </ol>
-<p>Ahora tenemos una validación para que los conflictos sucedan por cuenta de los campos marcados como <code>unique</code>. Toda vez que eso suceda, la API retornará el código <code class="language-python highlight"><span class="mi">409</span></code> con el json <code class="language-python highlight"><span class="p">{</span><span class="s1">'detail'</span><span class="p">:</span> <span class="s1">'Username or Email already exists'</span><span class="p">}</span></code>.</p>
+<p>Ahora tenemos una validación para los conflictos que sucedan por motivo de los campos marcados como <code>unique</code>. Toda vez que eso suceda, la API retornará el código <code class="language-python highlight"><span class="mi">409</span></code> con el json <code class="language-python highlight"><span class="p">{</span><span class="s1">'detail'</span><span class="p">:</span> <span class="s1">'Username or Email already exists'</span><span class="p">}</span></code>.</p>
 <p>Sabiendo eso, podemos retornar al test y agregar las instrucciones de <code class="language-python highlight"><span class="k">assert</span></code> para garantizar esas condiciones:</p>
 <div class="language-python highlight"><span class="filename">tests/test_app.py</span><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_update_integrity_error</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
 </span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>    <span class="c1"># ...</span>
