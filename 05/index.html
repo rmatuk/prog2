@@ -631,10 +631,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#creando-una-fixture-para-user" class="md-nav__link">
+  <a href="#creando-un-fixture-para-user" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Creando una fixture para User
+        Creando un fixture para User
       
     </span>
   </a>
@@ -1126,10 +1126,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#creando-una-fixture-para-user" class="md-nav__link">
+  <a href="#creando-un-fixture-para-user" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Creando una fixture para User
+        Creando un fixture para User
       
     </span>
   </a>
@@ -1334,9 +1334,9 @@
 <hr />
 <p>Después de haber establecido nuestros modelos y migraciones en la clase anterior, es hora de dar un paso significativo: la integración de la base de datos real con nuestra aplicación FastAPI. Dejaremos atrás la base de datos simulada que utilizamos hasta ahora y nos dedicaremos a la implementación de una base de datos real y plenamente operacional. Además, adaptaremos la estructura de nuestros tests para que sean compatibles con la base de datos, incluyendo la creación de nuevas fixtures.</p>
 <h2 id="integrando-sqlalchemy-a-nuestra-aplicacion-fastapi">Integrando SQLAlchemy a Nuestra Aplicación FastAPI</h2>
-<p>Para aquellos que no están familiarizados, SQLAlchemy es una biblioteca Python que facilita la interacción con una base de datos SQL. Lo hace ofreciendo una forma de trabajar con bases de datos que aprovecha la facilidad y el poder de Python, al mismo tiempo que mantiene la eficiencia y la flexibilidad de las bases de datos SQL.</p>
+<p>SQLAlchemy es una biblioteca Python que facilita la interacción con una base de datos SQL. Lo hace ofreciendo una forma de trabajar con bases de datos que aprovecha la facilidad y el poder de Python, al mismo tiempo que mantiene la eficiencia y la flexibilidad de las bases de datos SQL.</p>
 <p>Una pieza clave de SQLAlchemy es el concepto de una "sesión". Si eres nuevo en el mundo de las bases de datos, puedes pensar en la sesión como un carrito de compras virtual: conforme navegas por el sitio (o, en este caso, conforme tu código ejecuta), puedes agregar o remover ítems de ese carrito. Sin embargo, ningún cambio es realmente hecho hasta que decides finalizar la compra. En el contexto de SQLAlchemy, "finalizar la compra" es equivalente a hacer el commit de tus alteraciones.</p>
-<p>La sesión en SQLAlchemy es tan poderosa que, en verdad, incorpora tres patrones de arquitectura importantes.</p>
+<p>La sesión en SQLAlchemy es tan poderosa que, en verdad, incorpora tres patrones de arquitectura importantes:</p>
 <ol>
 <li>
 <p><strong>Mapa de Identidad</strong>: Imagina que estás comprando frutas en una tienda online. Cada fruta que agregas a tu carrito recibe un código de barras único, para que la tienda sepa exactamente qué fruta quieres. El Mapa de Identidad en SQLAlchemy es ese sistema de código de barras: garantiza que cada objeto en la sesión sea único y fácilmente identificable.</p>
@@ -1373,11 +1373,11 @@
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a>        <span class="k">yield</span> <span class="n">session</span>
 </span></code></pre></div></td></tr></table></div>
 <ol>
-<li>Cuando los tests sean ejecutados, esta línea nunca será cubierta. Pues los tests substituirán este bloque por una fixture en tiempo de ejecución <a href="#testeando-el-endpoint-post-users-con-pytest-y-fixtures" target="_blank">aquí</a>. Una forma de escapar de eso y explicar al coverage que este bloque no deberá ser considerado en la cobertura es agregar el comentario <code># pragma: no cover</code>. Esto hará que ignore este bloque en el conteo.</li>
+<li>Cuando los tests sean ejecutados, esta línea nunca será cubierta, ya que los tests substituirán este bloque por un fixture en tiempo de ejecución <a href="#testeando-el-endpoint-post-users-con-pytest-y-fixtures" target="_blank">aquí</a>. Una forma de escapar de eso y explicar al coverage que este bloque no deberá ser considerado en la cobertura es agregar el comentario <code># pragma: no cover</code>. Esto hará que ignore este bloque en el conteo.</li>
 </ol>
 <h2 id="gestionando-dependencias-con-fastapi">Gestionando Dependencias con FastAPI</h2>
 <p>Así como la sesión SQLAlchemy, que implementa varios patrones arquitecturales importantes, FastAPI también usa un concepto de patrón arquitectural llamado "Inyección de Dependencia".</p>
-<p>En el mundo del desarrollo de software, una "dependencia" es un componente que un módulo de software necesita para realizar su función. Imagina un módulo como una fábrica y las dependencias como las partes o materias-primas que la fábrica necesita para producir sus productos. En vez de que la fábrica tenga que buscar esas piezas por cuenta propia (lo que sería ineficiente), ellas son entregadas a la fábrica, listas para ser usadas. Este es el concepto de Inyección de Dependencia.</p>
+<p>En el mundo del desarrollo de software, una "dependencia" es un componente que un módulo de software necesita para realizar su función. Imagina un módulo como una fábrica y las dependencias como las partes o materias primas que la fábrica necesita para producir sus productos. En vez de que la fábrica tenga que buscar o fabricar esas piezas por cuenta propia, ellas son entregadas a la fábrica, listas para ser usadas. Este es el concepto de Inyección de Dependencia.</p>
 <p>La Inyección de Dependencia permite que mantengamos un bajo nivel de acoplamiento entre diferentes módulos de un sistema. Las dependencias entre los módulos no son definidas en el código, sino por la configuración de una infraestructura de software (container) responsable de "inyectar" en cada componente sus dependencias declaradas.</p>
 <p>En términos prácticos, lo que esto significa es que, en vez de que cada parte de nuestro código tenga que crear sus propias instancias de clases o servicios de los que depende (lo que puede llevar a duplicación de código y tornar los tests más difíciles), esas instancias son creadas una vez y después inyectadas donde son necesarias.</p>
 <p>FastAPI proporciona la función <code>Depends</code> para ayudar a declarar y gestionar esas dependencias. Es una manera declarativa de decirle a FastAPI: "Antes de ejecutar esta función, ejecuta primero esa otra función y pásame el resultado". Esto es especialmente útil cuando tenemos operaciones que necesitan ser realizadas antes de cada request, como abrir una sesión de base de datos.</p>
@@ -1428,10 +1428,10 @@
 </span></code></pre></div>
 <ol>
 <li><code class="language-python highlight"><span class="n">session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_session</span><span class="p">)</span></code> dice que la función <code>get_session</code> será ejecutada antes de la ejecución de la función y el valor retornado por <code>get_session</code> será atribuido al parámetro <code>session</code>.</li>
-<li>Hace una búsqueda por <code>User</code> donde (<code>where</code>) el username es igual al que vino en el request, o (<code>|</code>) el email es igual al que vino en el request. La búsqueda tiene el objetivo de encontrar un registro que tenga o el email o el username cadastrado. Como ellos son únicos en la base de datos, necesitamos validar para ver si no están ya en la base de datos.</li>
+<li>Hace una búsqueda por <code>User</code> donde (<code>where</code>) el username es igual al que vino en el request, o (<code>|</code>) el email es igual al que vino en el request. La búsqueda tiene el objetivo de encontrar un registro que tenga o el email o el username registrado. Como ellos deben ser únicos en la base de datos, necesitamos validar para ver si no están ya en la base de datos.</li>
 <li>Lanzamos una excepción, si el username o si es el email ya existen.</li>
 </ol>
-<p>Analizaremos este código cuidadosamente, ya que diversas e importantes cosas están sucediendo aquí:</p>
+<p>Analicemos este código cuidadosamente, ya que diversas e importantes cosas están sucediendo aquí:</p>
 <ul>
 <li><strong>La definición de la función</strong>: la función <code>create_user</code> recibe un objeto del tipo <code>UserSchema</code> y una sesión SQLAlchemy, que es inyectada automáticamente por FastAPI usando el <code>Depends</code>. La función <code>Depends</code> ejecuta la función <code>get_session</code> y el valor retornado por el <code class="language-python highlight"><span class="k">yield</span></code> es atribuido al parámetro <code>session</code>:
       <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">UserPublic</span><span class="p">)</span>
@@ -1477,7 +1477,7 @@
 <p>Tras todo esto, tenemos una integración entre el método POST de la API y una inserción en la base de datos.</p>
 <h3 id="testeando-el-endpoint-post-users-con-pytest-y-fixtures">Testeando el Endpoint POST /users con Pytest y Fixtures</h3>
 <p>Ahora que nuestra ruta de POST está funcionando con la base de datos real, necesitamos actualizar nuestros tests para reflejar ese cambio. Como estamos usando la inyección de dependencias, necesitamos también usar esa funcionalidad en nuestros tests para poder inyectar la sesión de base de datos de test.</p>
-<p>Alteraremos nuestra fixture <code>client</code> para substituir la función <code>get_session</code> que estamos inyectando en el endpoint por la sesión de la base en memoria que ya habíamos definido para base de datos.</p>
+<p>Alteraremos nuestro fixture <code>client</code> para substituir la función <code>get_session</code> que estamos inyectando en el endpoint por la sesión de la base en memoria que ya habíamos definido para base de datos.</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/conftest.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -1523,9 +1523,9 @@
 </span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22"></a><span class="c1"># ...</span>
 </span></code></pre></div></td></tr></table></div>
 <ol>
-<li>Creamos una función para retornar nuestra fixture de <a href="../04/#creando-una-fixture-para-interacciones-con-la-base-de-datos" target="_blank"><code>session</code></a> definida anteriormente.</li>
-<li>Substituimos la función <code>get_session</code> que usamos para la aplicación real, por nuestra función que retorna la fixture de tests.</li>
-<li>Limpia la sobrescritura que hicimos en el app para usar la fixture de <code>session</code>.</li>
+<li>Creamos una función para retornar nuestro fixture de <a href="../04/#creando-una-fixture-para-interacciones-con-la-base-de-datos" target="_blank"><code>session</code></a> definido anteriormente.</li>
+<li>Substituimos la función <code>get_session</code> que usamos para la aplicación real, por nuestra función que retorna el fixture de tests.</li>
+<li>Limpia la sobrescritura que hicimos en el app para usar el fixture de <code>session</code>.</li>
 </ol>
 <p>Con esto, cuando FastAPI intente inyectar la sesión en nuestros endpoints, inyectará la sesión de test que definimos, en vez de la sesión real. Y como estamos usando una base de datos en memoria para los tests, nuestros tests no van a interferir en los datos reales de nuestra aplicación.</p>
 <div class="language-python highlight"><span class="filename">tests/test_app.py</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_create_user</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
@@ -1544,7 +1544,7 @@
 </span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        <span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 </span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>    <span class="p">}</span>
 </span></code></pre></div>
-<p>Ahora que tenemos nuestra fixture configurada, actualizaremos nuestro test <code>test_create_user</code> para usar el nuevo cliente de test y verificar que el usuario está siendo realmente creado en la base de datos.</p>
+<p>Ahora que tenemos nuestro fixture configurado, actualizaremos nuestro test <code>test_create_user</code> para usar el nuevo cliente de test y verificar que el usuario está siendo realmente creado en la base de datos.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># ...</span>
@@ -1554,17 +1554,17 @@
 </span></code></pre></div>
 <p>Nuestro test todavía no consigue ser ejecutado, pero existe un motivo para eso.</p>
 <h4 id="threads-y-conexiones">Threads y conexiones</h4>
-<p>En el entorno de tests de FastAPI, la aplicación y los tests pueden correr en threads diferentes. Esto puede llevar a un error con SQLite, pues los objetos SQLite creados en una thread solo pueden ser usados en la misma thread.</p>
-<p>Para contornar eso, agregaremos los siguientes parámetros en la creación de la <code>engine</code>:</p>
+<p>En el entorno de tests de FastAPI, la aplicación y los tests pueden correr en threads diferentes. Esto puede llevar a un error con SQLite, pues los objetos SQLite creados en un thread sólo pueden ser usados en el misma thread.</p>
+<p>Para soslayar esto, agregaremos los siguientes parámetros en la creación del <code>engine</code>:</p>
 <ol>
 <li>
-<p><code>connect_args={'check_same_thread': False}</code>: esta configuración desactiva la verificación de que el objeto SQLite está siendo usado en la misma thread en que fue creado. Esto permite que la conexión sea compartida entre threads diferentes sin llevar a errores.</p>
+<p><code>connect_args={'check_same_thread': False}</code>: esta configuración desactiva la verificación de que el objeto SQLite está siendo usado en el mismo thread en que fue creado. Esto permite que la conexión sea compartida entre threads diferentes sin llevar a errores.</p>
 </li>
 <li>
-<p><code>poolclass=StaticPool</code>: este parámetro hace que la engine use un pool de conexiones estático, o sea, reutilice la misma conexión para todas las solicitudes. Esto garantiza que las dos threads usen el mismo canal de comunicación, evitando errores relacionados al uso de diferentes conexiones en threads diferentes.</p>
+<p><code>poolclass=StaticPool</code>: este parámetro hace que la engine use un pool de conexiones estático, o sea, reutilice la misma conexión para todas las solicitudes. Esto garantiza que los dos threads usen el mismo canal de comunicación, evitando errores relacionados al uso de diferentes conexiones en threads diferentes.</p>
 </li>
 </ol>
-<p>Así, nuestra fixture debe quedar de esta forma:</p>
+<p>Así, nuestro fixture debe quedar de esta forma:</p>
 <div class="language-python highlight"><span class="filename">tests/conftest.py</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.pool</span><span class="w"> </span><span class="kn">import</span> <span class="n">StaticPool</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># ...</span>
@@ -1597,7 +1597,7 @@
 </span></code></pre></div>
 <p>En los próximos pasos, vamos a realizar estas modificaciones para garantizar que toda nuestra aplicación esté usando la base de datos real.</p>
 <h2 id="modificando-el-endpoint-get-users">Modificando el Endpoint GET /users</h2>
-<p>Ahora que tenemos nuestra base de datos configurada y funcionando, es el momento de actualizar nuestro endpoint de GET para interactuar con la base de datos real. En vez de trabajar con una lista ficticia de usuarios, queremos buscar los usuarios directamente de nuestra base de datos, permitiendo una interacción dinámica y real con los datos.</p>
+<p>Ahora que tenemos nuestra base de datos configurada y funcionando, es el momento de actualizar nuestro endpoint de GET para interactuar con la base de datos real. En vez de trabajar con una lista ficticia de usuarios, queremos buscar los usuarios directamente en nuestra base de datos, permitiendo una interacción dinámica y real con los datos.</p>
 <div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">UserList</span><span class="p">)</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_users</span><span class="p">(</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="hll">    <span class="n">skip</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_session</span><span class="p">)</span>
@@ -1614,7 +1614,7 @@
 <p><img alt="Captura de pantalla del endpoint de get /users exhibiendo los campos limit y offset" class="center shadow" src="../assets/05/parametros_limit_e_offset_no_swagger.png" width="600" /></p>
 <p>Esto hace que las llamadas para el endpoint puedan ser realizadas de esta forma: <code>http://localhost:8000/users/?skip=0&amp;limit=100</code>. Pasando <code>skip=0</code> o <code>limit=100</code>. Estos valores pueden cambiar la cantidad y los registros que serán retornados por la base de datos. Por defecto serán retornados <code>100</code> registros iniciando en el <code>0</code>.</p>
 <blockquote>
-<p>Recomiendo que insertes diversos valores en la base de datos y testees la variación de los parámetros. Puede ser bastante divertido.</p>
+<p>Insertá distintos valores en la base de datos y testeá la variación de los parámetros. </p>
 </blockquote>
 <p>Estas adiciones tornan nuestro endpoint más flexible y optimizado para lidiar con diferentes escenarios de uso.</p>
 <h3 id="testeando-el-endpoint-get-users">Testeando el Endpoint GET /users</h3>
@@ -1633,9 +1633,9 @@
 </span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>tests/test_app.py::test_read_users<span class="w"> </span>PASSED
 </span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>tests/test_app.py::test_update_user<span class="w"> </span>FAILED
 </span></code></pre></div>
-<p>Sin embargo, es claro, queremos también testear el caso en que existen usuarios en la base. Para eso, crearemos una nueva fixture que crea un usuario en nuestra base de datos de test.</p>
-<h3 id="creando-una-fixture-para-user">Creando una fixture para User</h3>
-<p>Para crear esta fixture, aprovecharemos nuestra fixture de sesión de SQLAlchemy, y crearemos un nuevo usuario a partir de ella:</p>
+<p>Sin embargo, es claro que queremos también testear el caso en que ya existen usuarios en la base. Para eso, crearemos un nuevo fixture que crea un usuario en nuestra base de datos de test.</p>
+<h3 id="creando-un-fixture-para-user">Creando un fixture para User</h3>
+<p>Para crear este fixture, aprovecharemos nuestro fixture de sesión de SQLAlchemy, y crearemos un nuevo usuario a partir de ese:</p>
 <div class="language-python highlight"><span class="filename">tests/conftest.py</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fast_zero.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">table_registry</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># ...</span>
@@ -1649,7 +1649,7 @@
 </span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>
 </span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>    <span class="k">return</span> <span class="n">user</span>
 </span></code></pre></div>
-<p>Con esta fixture, siempre que necesitemos de un usuario en nuestros tests, podemos simplemente pasar <code>user</code> como un argumento para nuestros tests, y Pytest se encargará de crear un nuevo usuario para nosotros.</p>
+<p>Con este fixture, siempre que necesitemos de un usuario en nuestros tests, podemos simplemente pasar <code>user</code> como un argumento para nuestros tests, y Pytest se encargará de crear un nuevo usuario para nosotros.</p>
 <p>Ahora podemos crear un nuevo test para verificar si nuestro endpoint está retornando el usuario correcto cuando existe un usuario en la base:</p>
 <div class="language-python highlight"><span class="filename">tests/test_app.py</span><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fast_zero.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserPublic</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
@@ -1670,7 +1670,7 @@
 </span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>tests/test_app.py::test_read_users<span class="w"> </span>PASSED
 </span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>tests/test_app.py::test_read_users_with_users<span class="w"> </span>FAILED
 </span></code></pre></div>
-<p>Sin embargo, aunque nuestro código parezca correcto, podemos encontrar un problema: Pydantic no consigue convertir directamente nuestro modelo SQLAlchemy a un modelo Pydantic. Resolveremos eso ahora.</p>
+<p>Sin embargo, aunque nuestro código parezca correcto, podemos encontrar un problema: Pydantic no consigue convertir directamente nuestro modelo SQLAlchemy a un modelo Pydantic. Resolveremos esto ahora.</p>
 <h3 id="integrando-el-schema-al-model">Integrando el Schema al Model</h3>
 <p>La integración directa del ORM con nuestro esquema Pydantic no es inmediata y exige algunas modificaciones. Pydantic, por defecto, no sabe cómo lidiar con los modelos de SQLAlchemy, lo que nos lleva al error observado en los tests.</p>
 <p>La solución para ese problema es hacer una alteración en el esquema <code>UserPublic</code> que utilizamos, para que pueda reconocer y trabajar con los modelos de SQLAlchemy. Esto permite la conversión directa de objetos de SQLAlchemy en esquemas Pydantic.</p>
@@ -1685,7 +1685,7 @@
 </span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span>
 </span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="hll">    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">from_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></span></code></pre></div>
-<p>De esta forma la conversión entre modelos y schemas puede suceder. Vamos a ejecutar los tests para validar:</p>
+<p>De esta forma la conversión entre modelos y schemas se hace correctamente. Vamos a ejecutar los tests para validar:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1"># ...</span>
@@ -1807,7 +1807,7 @@
 </span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>    <span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>Agregaremos la fixture <code>user</code> que ya efectúa la creación de un registro en la base de datos.</li>
+<li>Agregaremos el fixture <code>user</code> que ya efectúa la creación de un registro en la base de datos.</li>
 </ol>
 <h3 id="el-caso-del-conflicto">El caso del conflicto</h3>
 <p>Aunque parezca que está todo cierto y el test esté siendo ejecutado con éxito. Existe, sin embargo, un caso que no fue pensado en este update. Algunos datos en nuestro modelo (<code>username</code> y <code>email</code>) están marcados como <code>unique</code> en la base de datos. Lo que puede ocasionar un error en potencial, caso alguien altere esos valores para un valor ya existente.</p>
@@ -1825,7 +1825,7 @@
 </span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>        <span class="p">},</span>
 </span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>    <span class="p">)</span>
 </span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>
-</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>    <span class="c1"># Alterando el user.username de la fixture para fausto</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>    <span class="c1"># Alterando el user.username del fixture para fausto</span>
 </span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>    <span class="n">response_update</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span> <span class="c1">#(2)!</span>
 </span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>        <span class="sa">f</span><span class="s1">'/users/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
 </span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>        <span class="n">json</span><span class="o">=</span><span class="p">{</span>
@@ -1972,9 +1972,9 @@
 <p><img alt="descripción" class="center shadow" src="../assets/05/coverage_mostrando_casos_nao_testados_de_erro_com_branch_popup.png" width="600" /></p>
 <p>En este caso, si traducida el mensaje de forma literal: "línea 64 no saltó para línea 65 porque la condición en la línea 64 nunca fue verdadera".</p>
 <hr />
-<p>Además, no debemos olvidar de remover la implementación de la base de datos falsa <code>database = []</code> que usamos inicialmente y remover también las definiciones de <code>TestClient</code> en <code>test_app.py</code>, pues todo está usando las fixtures ahora!</p>
+<p>Además, no debemos olvidar de remover la implementación de la base de datos falsa <code>database = []</code> que usamos inicialmente y remover también las definiciones de <code>TestClient</code> en <code>test_app.py</code>, pues todo está usando los fixtures ahora!</p>
 <h2 id="randomizacionaislamiento-de-tests">Randomización/Aislamiento de tests</h2>
-<p>Ahora que tenemos toda esta estructura construida vía fixture <code>session</code>, garantizando que la base de datos siempre está limpia entre los tests, es un buen momento para retomar la conversación sobre los aislamientos de los tests que comenzamos en la <a href="../03/#aislamiento-de-los-tests">clase 03</a>, el real motivo de haber construido esta fixture de esta forma.</p>
+<p>Ahora que tenemos toda esta estructura construida vía fixture <code>session</code>, garantizando que la base de datos siempre está limpia entre los tests, es un buen momento para retomar la conversación sobre los aislamientos de los tests que comenzamos en la <a href="../03/#aislamiento-de-los-tests">clase 03</a>, el real motivo de haber construido este fixture de esta forma.</p>
 <p>Es esperado ahora que los tests pasen independientemente de la orden, pero necesitamos garantizar eso. Vamos allá:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>poetry<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--random-order
 </span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
@@ -2027,7 +2027,7 @@
 <p><a class="md-button" href="https://github.com/rmatuk/prog2/tree/main/codigo_aulas/05">Código <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M360.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m64.6 136.1c-12.5 12.5-12.5 32.8 0 45.3l73.4 73.4-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0zm-274.7 0c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l73.3-73.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span></a></p>
 <h2 id="conclusion">Conclusión</h2>
 <p>¡Felicitaciones por llegar al final de esta clase! Diste un paso significativo en el desarrollo de nuestra aplicación, substituyendo la implementación de la base de datos falsa por la integración con una base de datos real usando SQLAlchemy. También vimos cómo ajustar nuestros tests para considerar esta nueva realidad.</p>
-<p>En esta clase, abordamos cómo modificar los endpoints para interactuar con la base de datos real y cómo utilizar la inyección de dependencias de FastAPI para gestionar nuestras sesiones de SQLAlchemy. También discutimos la importancia de los tests para garantizar que nuestros endpoints están funcionando correctamente, y cómo las fixtures de Pytest pueden auxiliarnos en la preparación del entorno para estos tests.</p>
+<p>En esta clase, abordamos cómo modificar los endpoints para interactuar con la base de datos real y cómo utilizar la inyección de dependencias de FastAPI para gestionar nuestras sesiones de SQLAlchemy. También discutimos la importancia de los tests para garantizar que nuestros endpoints están funcionando correctamente, y cómo los fixtures de Pytest pueden auxiliarnos en la preparación del entorno para estos tests.</p>
 <p>Además, nos deparamos con situaciones donde Pydantic y SQLAlchemy no interactúan perfectamente bien, y cómo solucionar esos casos.</p>
 <p>Al final de esta clase, debes estar confortable en integrar una base de datos real a una aplicación FastAPI, saber cómo escribir tests robustos que lleven en consideración la interacción con la base de datos, y estar ciente de posibles desafíos al trabajar con Pydantic y SQLAlchemy juntos.</p>
 
