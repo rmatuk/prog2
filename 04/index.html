@@ -1925,8 +1925,7 @@
 </span></code></pre></div>
 <h2 id="instalando-alembic-y-creando-la-primera-migracion">Instalando Alembic y Creando la Primera Migración</h2>
 <p>Antes de avanzar, es importante entender qué son las migraciones de base de datos y por qué son útiles. Las migraciones son una manera de hacer alteraciones o actualizaciones en la base de datos, como agregar una tabla o una columna a una tabla, o alterar el tipo de datos de una columna. Son extremadamente útiles, pues nos permiten mantener el control de todas las alteraciones hechas en el esquema de la base de datos a lo largo del tiempo. También nos permiten revertir a una versión anterior del esquema de la base de datos, si es necesario.</p>
-<p>Ahora, comenzaremos instalando Alembic, que es una herramienta de migración de base de datos para SQLAlchemy. Alembic = Git para tu base de datos: Te permite versionar y gestionar cambios en el esquema de manera similar a como Git gestiona cambios en el código. Esto es esencial para proyectos en producción: Sin Alembic (o una herramienta similar), gestionar cambios en la base de datos sería caótico y propenso a errores.
-Aunque tiene una curva de aprendizaje inicial, una vez configurado, es sencillo de integrar en cualquier proyecto con SQLAlchemy.</p>
+<p>Ahora, comenzaremos instalando Alembic, que es una herramienta de migración de base de datos para SQLAlchemy. Alembic = Git para tu base de datos: te permite versionar y gestionar cambios en el esquema de manera similar a como Git gestiona cambios en el código. Esto es esencial para proyectos en producción, ya que sin Alembic (o una herramienta similar), gestionar cambios en la base de datos sería caótico y propenso a errores. Aunque Alembic tiene una curva de aprendizaje inicial, una vez configurado, es sencillo de integrar en cualquier proyecto con SQLAlchemy.</p>
 <p>Usaremos Poetry para agregar Alembic a nuestro proyecto:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>alembic
 </span></code></pre></div>
@@ -1962,7 +1961,7 @@ Aunque tiene una curva de aprendizaje inicial, una vez configurado, es sencillo 
 <p>Con Alembic debidamente instalado e iniciado, ahora es el momento de generar nuestra primera migración. Pero, antes de eso, necesitamos garantizar que Alembic consiga acceder a nuestras configuraciones y modelos correctamente. Para eso, haremos algunas alteraciones en el archivo <code>migrations/env.py</code>.</p>
 <p>En este archivo, necesitamos:</p>
 <ol>
-<li>Importar las <code>Settings</code> de nuestro archivo <code>settings.py</code> y el <code>table_registry</code> de nuestros modelos.</li>
+<li>Importar los <code>Settings</code> de nuestro archivo <code>settings.py</code> y el <code>table_registry</code> de nuestros modelos.</li>
 <li>Configurar la URL de SQLAlchemy para ser la misma que definimos en <code>Settings</code>.</li>
 <li>Verificar la existencia del archivo de configuración de Alembic y, si está presente, leerlo.</li>
 <li>Definir los metadatos de destino como <code>table_registry.metadata</code>, que es lo que Alembic utilizará para generar automáticamente las migraciones.</li>
@@ -2092,13 +2091,13 @@ Aunque tiene una curva de aprendizaje inicial, una vez configurado, es sencillo 
 <div class="language-shell highlight"><span class="filename">Windows</span><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>winget<span class="w"> </span>install<span class="w"> </span>--id<span class="w"> </span>SQLite.SQLite
 </span></code></pre></div>
 </details>
-<p>Cuando ejecutamos ese comando, el console de sqlite será inicializado. Y dentro de él podemos ejecutar algunos comandos. Como hacer consultas, ver las tablas creadas, agregar datos, etc.</p>
+<p>Cuando ejecutamos ese comando, la consola de sqlite será inicializado. Y dentro de él podemos ejecutar comandos. Como hacer consultas, ver las tablas creadas, agregar datos, etc.</p>
 <p>Tras llamar a SQLite en terminal, veremos algo así:
 <div class="language-sql no-copy highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">SQLite</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="mi">3</span><span class="p">.</span><span class="mi">45</span><span class="p">.</span><span class="mi">1</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">30</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">20</span>
 </span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">Enter</span><span class="w"> </span><span class="ss">".help"</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">usage</span><span class="w"> </span><span class="n">hints</span><span class="p">.</span>
 </span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="n">sqlite</span><span class="o">&gt;</span>
 </span></code></pre></div></p>
-<p>Aquí puedes digitar comandos, de la misma forma en que hacemos en el terminal interactivo de python. El comando <code>.schema</code> nos muestra todas las tablas creadas en la base de datos:</p>
+<p>Aquí puedes digitar comandos, de la misma forma en que hacemos en la terminal interactiva de python. El comando <code>.schema</code> nos muestra todas las tablas creadas en la base de datos:</p>
 <div class="language-sql no-copy highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span><span class="k">schema</span>
 </span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">alembic_version</span><span class="w"> </span><span class="p">(</span>
 </span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="n">version_num</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
@@ -2113,7 +2112,7 @@ Aunque tiene una curva de aprendizaje inicial, una vez configurado, es sencillo 
 <p>Para salir del console de sqlite tenemos que digitar el comando <code>.quit</code>:</p>
 <div class="language-sql no-copy highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span><span class="n">quit</span>
 </span></code></pre></div>
-<p>Ahora que tenemos el terminal de vuelta, podemos aplicar las migraciones.</p>
+<p>Ahora que tenemos la terminal de vuelta, podemos aplicar las migraciones.</p>
 <h4 id="aplicando-la-migracion">Aplicando la migración</h4>
 <p>Para aplicar las migraciones, usamos el comando <code>upgrade</code> del CLI de Alembic. El argumento <code>head</code> indica que queremos aplicar todas las migraciones que todavía no fueron aplicadas:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>poetry<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>upgrade<span class="w"> </span>head
@@ -2127,7 +2126,7 @@ Aunque tiene una curva de aprendizaje inicial, una vez configurado, es sencillo 
 <p>Ahora, si examinamos nuestra base de datos nuevamente:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>sqlite3<span class="w"> </span>database.db
 </span></code></pre></div>
-<p>Podemos verificar si la tabla <code>users</code> fue creada en el schema de la base:</p>
+<p>Podemos verificar que la tabla <code>users</code> fue creada en el schema de la base:</p>
 <div class="language-sql no-copy highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span><span class="k">schema</span>
 </span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">alembic_version</span><span class="w"> </span><span class="p">(</span>
 </span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">    </span><span class="n">version_num</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
@@ -2149,7 +2148,7 @@ Aunque tiene una curva de aprendizaje inicial, una vez configurado, es sencillo 
 </span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="hll"><span class="n">e018397cecf4</span>
 </span></span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="n">sqlite</span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span><span class="n">quit</span>
 </span></code></pre></div>
-<p>Con esto, finalizamos la creación de la base de datos. Recuerda que todos estos cambios que hicimos solo existen localmente en tu entorno de trabajo hasta ahora. Para ser compartidos con otras personas, necesitamos hacer commit de estos cambios en nuestro sistema de control de versión.</p>
+<p>Con esto, finalizamos la creación de la base de datos. Recuerda que todos estos cambios que hicimos solo existen localmente en tu entorno de trabajo hasta ahora. Para ser compartidos con otras personas, necesitamos hacer commit de estos cambios en nuestro sistema de control de versiones.</p>
 <h2 id="commit">Commit</h2>
 <p>Primero, verificaremos el status de nuestro repositorio para ver los cambios que hicimos:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>git<span class="w"> </span>status
