@@ -1987,14 +1987,14 @@
 </span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>tests/test_app.py::test_create_user<span class="w"> </span>PASSED
 </span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>tests/test_db.py::test_create_user<span class="w"> </span>PASSED
 </span></code></pre></div>
-<p>Esto muestra que los tests están aislados unos de los otros, aunque puedas querer ejecutarlos más una vez, solo para tener certeza (claro que no es necesario, pero es divertido).</p>
+<p>Esto muestra que los tests están aislados unos de los otros, aunque puedas querer ejecutarlos más de una vez, sólo para tener certeza.</p>
 <h3 id="configurando-la-randomizacion">Configurando la randomización</h3>
-<p>Si queremos que los tests corran en orden randómica todas las veces, podríamos agregar eso en la configuración en <code>pyproject.toml</code>. Así como acabamos de hacer con la configuración de cobertura:</p>
+<p>Si queremos que los tests corran en orden aleatoria todas las veces, podríamos agregar eso en la configuración en <code>pyproject.toml</code>. Así como acabamos de hacer con la configuración de cobertura:</p>
 <div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="k">[tool.pytest]</span>
 </span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="n">pythonpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">'.'</span><span class="p">]</span>
 </span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="n">addopts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">'-p'</span><span class="p">,</span><span class="w"> </span><span class="s1">'no:warnings'</span><span class="p">,</span><span class="w"> </span><span class="s1">'--cov=fast_zero'</span><span class="p">,</span><span class="w"> </span><span class="s1">'--cov-context=test'</span><span class="p">,</span><span class="w"> </span><span class="s1">'--cov-branch'</span><span class="p">,</span><span class="w"> </span><span class="s1">'--random-order'</span><span class="p">]</span>
 </span></code></pre></div>
-<p>Así, toda vez que pytest sea llamado, por el <code>poe</code> o solamente vía <code>pytest</code>, los tests serán randomizados:</p>
+<p>Así, toda vez que pytest sea llamado, por el <code>poe</code> o solamente vía <code>pytest</code>, los tests serán ejecutados en orden aleatorio:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
 </span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>
 </span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="o">==========</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">==========</span>
@@ -2005,20 +2005,20 @@
 <ol>
 <li>Seed generado por esta ejecución.</li>
 </ol>
-<p>Una cosa importante de notar en la randomización es que un nuevo valor de <code>seed</code> es siempre presentado cuando el test es ejecutado. Esto puede ayudarnos a correr la misma orden en el futuro. Caso exista alguna interferencia generada por la randomización. Es una capa más de prevención.</p>
+<p>Una cosa importante de notar en la randomización es que un nuevo valor de <code>seed</code> es siempre presentado cuando el test es ejecutado. Esto puede ayudarnos a correr el misma orden en el futuro, en el caso de que exista alguna interferencia generada por la randomización. Es una capa más de prevención.</p>
 <hr />
-<p>De esta forma, es posible confirmar que la orden de los tests no importa, pues están de hecho aislados. La ejecución de cada test es independiente una de la otra.</p>
+<p>De esta forma, es posible confirmar que el orden de los tests no importa, pues están de hecho aislados. La ejecución de cada test es independiente una de la otra.</p>
 <h2 id="commit">Commit</h2>
-<p>Ahora que terminamos la actualización de nuestros endpoints, haremos el commit de nuestras alteraciones. El proceso es el siguiente:</p>
+<p>Ahora que terminamos la actualización de nuestros endpoints, haremos el commit de nuestras modificaciones. El proceso es el siguiente:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
 </span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"feat(api): actualiza endpoints para usar base de datos real"</span>
 </span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>git<span class="w"> </span>push
 </span></code></pre></div>
-<p>Con eso, terminamos la actualización de nuestros endpoints para usar nuestra base de datos real.</p>
+<p>Con esto, terminamos la actualización de nuestros endpoints para usar nuestra base de datos real.</p>
 <h2 id="ejercicios">Ejercicios</h2>
 <ol>
-<li>Escribir un test para el endpoint de POST (create_user) que contemple el escenario donde el username ya fue registrado. Validando el error <code class="language-python highlight"><span class="mi">409</span></code>;</li>
-<li>Escribir un test para el endpoint de POST (create_user) que contemple el escenario donde el e-mail ya fue registrado. Validando el error <code class="language-python highlight"><span class="mi">409</span></code>;</li>
+<li>Escribir un test para el endpoint de POST (create_user) que contemple el escenario donde el username ya fue registrado, mostrando el error <code class="language-python highlight"><span class="mi">409</span></code>;</li>
+<li>Escribir un test para el endpoint de POST (create_user) que contemple el escenario donde el e-mail ya fue registrado, mostrando el error <code class="language-python highlight"><span class="mi">409</span></code>;</li>
 <li>Actualizar los tests creados en los ejercicios 1 y 2 de la <a href="../03/#ejercicios" target="_blank">clase 03</a> para soportar la base de datos;</li>
 <li>Implementar la base de datos para el endpoint de listado por id, creado en el ejercicio 3 de la <a href="../03/#ejercicios" target="_blank">clase 03</a>.</li>
 </ol>
@@ -2029,7 +2029,7 @@
 <p>¡Felicitaciones por llegar al final de esta clase! Diste un paso significativo en el desarrollo de nuestra aplicación, substituyendo la implementación de la base de datos falsa por la integración con una base de datos real usando SQLAlchemy. También vimos cómo ajustar nuestros tests para considerar esta nueva realidad.</p>
 <p>En esta clase, abordamos cómo modificar los endpoints para interactuar con la base de datos real y cómo utilizar la inyección de dependencias de FastAPI para gestionar nuestras sesiones de SQLAlchemy. También discutimos la importancia de los tests para garantizar que nuestros endpoints están funcionando correctamente, y cómo los fixtures de Pytest pueden auxiliarnos en la preparación del entorno para estos tests.</p>
 <p>Además, nos deparamos con situaciones donde Pydantic y SQLAlchemy no interactúan perfectamente bien, y cómo solucionar esos casos.</p>
-<p>Al final de esta clase, debes estar confortable en integrar una base de datos real a una aplicación FastAPI, saber cómo escribir tests robustos que lleven en consideración la interacción con la base de datos, y estar ciente de posibles desafíos al trabajar con Pydantic y SQLAlchemy juntos.</p>
+<p>Al final de esta clase, debes estar confortable en integrar una base de datos real a una aplicación FastAPI, saber cómo escribir tests robustos que lleven en consideración la interacción con la base de datos, y estar preparado para posibles desafíos al trabajar con Pydantic y SQLAlchemy juntos.</p>
 
 
 
