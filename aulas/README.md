@@ -10,7 +10,7 @@ El proyecto de la materia consiste en el desarrollo desde cero de una Web API. T
 1. [Configurando el ambiente de desarrollo](01.md)
 2. [Introducción al desarrollo WEB](02.md)
 3. [Estructurando el proyecto y creando rutas CRUD](03.md)
-4. [Configurando la base de dados y gerenciando migraciones con Alembic](04.md)
+4. [Configurando la base de dados y gestionando  migraciones con Alembic](04.md)
 5. [Integrando la base de datos a la API](05.md)
 
 ## 📖 Licencia

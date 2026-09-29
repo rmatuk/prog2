@@ -1941,8 +1941,8 @@
 </span></code></pre></div>
 <h4 id="no-te-repitas-dry">No te repitas (DRY)</h4>
 <p>Debes haber notado que la línea <code>client = TestClient(app)</code> está repetida en la primera línea de los dos tests que hicimos. Repetir código puede hacer que la gestión de tests sea más compleja a medida que crece, y es aquí donde el principio de “No te repitas” (<a href="https://es.wikipedia.org/wiki/No_te_repitas" target="_blank">DRY</a>) entra en juego. DRY incentiva la reducción de la repetición, creando un código más limpio y mantenible.</p>
-<p>Para solucionar esa repetición, podemos usar una funcionalidad de pytest llamada Fixture. Una fixture es como una función que prepara datos o estado necesarios para el test. Puede pensarse como una forma de no repetir la fase de Arrange de un test, simplificando la llamada y no repitiendo código.</p>
-<p>En este caso, crearemos una fixture que retorna nuestro <code>client</code>. Para hacer eso, necesitamos crear el archivo <code>tests/conftest.py</code>. El archivo <code>conftest.py</code> es un archivo especial reconocido por pytest que permite definir fixtures que pueden ser reutilizadas en diferentes módulos de test en un proyecto. Es una forma de centralizar recursos comunes de test.</p>
+<p>Para solucionar esa repetición, podemos usar una funcionalidad de pytest llamada Fixture. Un fixture es como una función que prepara datos o estado necesarios para el test. Puede pensarse como una forma de no repetir la fase de Arrange de un test, simplificando la llamada y no repitiendo código.</p>
+<p>En este caso, crearemos un fixture que retorna nuestro <code>client</code>. Para hacer eso, necesitamos crear el archivo <code>tests/conftest.py</code>. <strong>El archivo <code>conftest.py</code> es un archivo especial reconocido por pytest que permite definir fixtures que pueden ser reutilizados en diferentes módulos de test en un proyecto.</strong> Es una forma de centralizar recursos comunes de test.</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/conftest.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
 <span class="normal"><a href="#__codelineno-19-2">2</a></span>
 <span class="normal"><a href="#__codelineno-19-3">3</a></span>
@@ -1961,7 +1961,7 @@
 </span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">client</span><span class="p">():</span>
 </span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a>    <span class="k">return</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
-<p>Ahora, en lugar de repetir la creación del <code>client</code> en cada test, podemos simplemente pasar la fixture como un argumento en nuestros tests:</p>
+<p>Ahora, en lugar de repetir la creación del <code>client</code> en cada test, podemos simplemente pasar el fixture como un argumento en nuestros tests:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
