@@ -831,7 +831,7 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'detail'</span><span class="p">:</span> <span class="s1">'Could not validate credentials'</span><span class="p">}</span>
 </span></code></pre></div>
 <h2 id="ejercicio-03">Ejercicio 03</h2>
-<p>Revisa los tests creados hasta la clase 5 y ve si todavía tienen sentido (tests involucrando <code class="language-python highlight"><span class="mi">409</span></code>)</p>
+<p>Revisa los tests creados hasta la clase 5 para ver si todavía tienen sentido (tests involucrando <code class="language-python highlight"><span class="mi">409</span></code>)</p>
 <h3 id="solucion_2">Solución</h3>
 <p>Los tests para los endpoints de PUT y DELETE, que verifican usuarios no existentes en la base de datos no tienen más sentido. Ya que para modificar o eliminar un user, tiene que ser validado por el token. Estos tests pueden ser eliminados.</p>
 

@@ -2054,7 +2054,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 </span></code></pre></div></td></tr></table></div>
 <p>Con esta nueva dependencia, FastAPI automáticamente garantizará que un token de autenticación válido sea proporcionado antes de permitir el acceso a estos endpoints. Si el token no es válido, o si el usuario intenta modificar o eliminar un usuario diferente, se retornará un error.</p>
 <h3 id="actualizando-los-tests">Actualizando los Tests</h3>
-<p>Los tests necesitan ser actualizados para reflejar estos cambios. Primero, necesitamos crear una nueva fixture que genere un token para un usuario de test.</p>
+<p>Los tests necesitan ser actualizados para reflejar estos cambios. Primero, necesitamos crear un nuevo fixture que genere un token para un usuario de test.</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/conftest.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-57">57</a></span>
 <span class="normal"><a href="#__codelineno-30-58">58</a></span>
 <span class="normal"><a href="#__codelineno-30-59">59</a></span>
@@ -2173,10 +2173,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <p>Haz un test para cubrir el escenario que lanza la exception <code>credentials_exception</code> en la autenticación en caso de que el <code>email</code> no sea enviado vía JWT. Al mirar la cobertura de <code>security.py</code> notarás que este contexto no está cubierto.</p>
 </li>
 <li>
-<p>Haz un test para cubrir el escenario que lanza la exception <code>credentials_exception</code> en la autenticación en caso de que el email sea enviado, pero no exista un <code>User</code> correspondiente cadastrado en la base de datos. Al mirar la cobertura de <code>security.py</code> notarás que este contexto no está cubierto.</p>
+<p>Haz un test para cubrir el escenario que lanza la exception <code>credentials_exception</code> en la autenticación en caso de que el email sea enviado, pero no exista un <code>User</code> correspondiente registrado en la base de datos. Al mirar la cobertura de <code>security.py</code> notarás que este contexto no está cubierto.</p>
 </li>
 <li>
-<p>Revisa los tests creados hasta la clase 5 y ve si todavía tienen sentido (tests involucrando <code class="language-python highlight"><span class="mi">409</span></code>)</p>
+<p>Revisa los tests creados hasta la clase 5 para ver si todavía tienen sentido (tests involucrando <code class="language-python highlight"><span class="mi">409</span></code>)</p>
 </li>
 </ol>
 <p><a class="md-button" href="../ejercicios_resueltos/aula_06/">Ejercicios resueltos <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 7V5h2V4a2 2 0 0 1 2-2h6v7l2.5-1.5L18 9V2h1c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm4 4H5v2h2zm0-4V5H5v2zm0 12v-2H5v2z"/></svg></span></a></p>
