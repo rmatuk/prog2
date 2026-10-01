@@ -1615,20 +1615,20 @@
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="n">email</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="n">created_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span>
 </span></code></pre></div></td></tr></table></div>
-<p>Aquí, <code>Mapped</code> se refiere a un atributo Python que está asociado (o mapeado) a una columna específica en una tabla de base de datos. Por ejemplo, <code class="language-python highlight"><span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span></code> indica que este atributo es un entero que será mapeado a una columna correspondiente en una tabla de base de datos. De la misma forma, <code class="language-python highlight"><span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code> se refiere a un atributo de string que será mapeado a una columna de string correspondiente en la tabla. Este enfoque permite a SQLAlchemy realizar la conversión entre los tipos de datos de Python y los tipos de datos de la base de datos, además de ofrecer una interfaz Pythónica para la interacción entre ellos.</p>
+<p>Aquí, <code>Mapped</code> se refiere a un atributo Python que está asociado (o mapeado) a una columna específica en una tabla de base de datos. Por ejemplo, <code class="language-python highlight"><span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span></code> indica que este atributo es un entero que será mapeado a una columna de enteros en una tabla de base de datos. De la misma forma, <code class="language-python highlight"><span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code> se refiere a un atributo de string que será mapeado a una columna de string correspondiente en la tabla. Este enfoque permite a SQLAlchemy realizar la conversión entre los tipos de datos de Python y los tipos de datos de la base de datos, además de ofrecer una interfaz Pythónica para la interacción entre ellos.</p>
 <p>En especial, debemos prestar atención al campo <code>__tablename__</code>. Se refiere al nombre que la tabla tendrá en la base de datos. Como generalmente un objeto en python representa solamente una entidad, usaremos <code class="language-python highlight"><span class="s1">'users'</span></code> en plural para representar la tabla.</p>
 <h3 id="el-uso-del-modelo">El uso del modelo</h3>
 <p>Si queremos usar este objeto, se comporta como una dataclass tradicional. Pudiendo ser instanciado de la forma tradicional:</p>
 <div class="language-python highlight"><span class="filename">Código de ejemplo</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">eduardo</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">username</span><span class="o">=</span><span class="s1">'dunossauro'</span><span class="p">,</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">password</span><span class="o">=</span><span class="s1">'senha123'</span><span class="p">,</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">email</span><span class="o">=</span><span class="s1">'duno@ssauro.com'</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">username</span><span class="o">=</span><span class="s1">'dinosaurio'</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">password</span><span class="o">=</span><span class="s1">'clavesecreta123'</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">email</span><span class="o">=</span><span class="s1">'dino@saurio.com'</span><span class="p">,</span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">)</span>
 </span></code></pre></div>
-<p>Por defecto, todos los atributos necesitan ser especificados. Lo que puede no ser muy interesante, pues algunos datos deben ser rellenados por la base de datos. Como el identificador de la fila en la base o la hora en que el registro fue creado.</p>
-<p>Para salvar eso, necesitaremos agregar más informaciones al modelo.</p>
+<p>Por defecto, todos los atributos necesitan ser especificados. Esto puede ser contraproducente, pues algunos datos deben ser rellenados por la base de datos, como el identificador de la fila en la base o la hora en que el registro fue creado.</p>
+<p>Para salvar eso, necesitaremos agregar más información al modelo.</p>
 <h3 id="configuraciones-de-columnas">Configuraciones de columnas</h3>
 <p>Cuando definimos tablas en la base de datos, las columnas pueden presentar propiedades específicas. Por ejemplo:</p>
 <ul>
@@ -1679,7 +1679,7 @@
 </span></span></code></pre></div></td></tr></table></div>
 <ol>
 <li><code class="language-python highlight"><span class="n">init</span><span class="o">=</span><span class="kc">False</span></code> dice que, cuando el objeto sea instanciado, ese parámetro no debe ser pasado. <code class="language-python highlight"><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span></code> dice que el campo <code>id</code> es la clave primaria de esa tabla.</li>
-<li><code>unique=True</code> dice que ese campo no debe repetirse en la tabla. Por ejemplo, si tuviéramos un username "dunossauro", no podemos tener otro con el mismo valor.</li>
+<li><code>unique=True</code> dice que ese campo no debe repetirse en la tabla. Por ejemplo, si tuviéramos un username "dinosaurio", no podemos tener otro username con el mismo valor.</li>
 <li><code>server_default=func.now()</code> dice que, cuando la clase sea instanciada, el resultado de <code>func.now()</code> será el valor atribuido a ese atributo. En este caso, la fecha y hora en que fue instanciado.</li>
 </ol>
 <p>De esta forma, unimos el uso que queremos tener en python con la configuración deseada para la tabla en la base de datos. Los parámetros de mapeo dicen:</p>
@@ -1690,20 +1690,20 @@
 </ul>
 <p>El campo <code>init</code> no tiene una relación directa con la base de datos, sino con la forma en que vamos a usar el objeto del modelo en el código. Dice que los atributos marcados con <code>init=false</code> no deben ser pasados en el momento en que <code>User</code> sea instanciado. Por ejemplo:</p>
 <div class="language-python highlight"><span class="filename">Código de ejemplo</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">eduardo</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">username</span><span class="o">=</span><span class="s1">'dunossauro'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">'senha123'</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">'duno@ssauro.com'</span><span class="p">,</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">username</span><span class="o">=</span><span class="s1">'dinosaurio'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">'clavesecreta123'</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">'dino@saurio.com'</span><span class="p">,</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">)</span>
 </span></code></pre></div>
-<p>Por no pasar esos parámetros a <code>User</code>, SQLAlchemy se encargará de atribuir los valores a ellos de forma automática. El campo <code>created_at</code> será rellenado por el resultado de la función pasada en <code>server_default</code>. El campo <code>id</code>, por contar con <code>primary_key=True</code>, será autorellenado con el id correspondiente cuando sea almacenado en la base de datos.</p>
+<p>Por no pasar esos parámetros a <code>User</code>, SQLAlchemy se encargará de atribuirles valores de forma automática. El campo <code>created_at</code> será rellenado por el resultado de la función pasada en <code>server_default</code>. El campo <code>id</code>, por contar con <code>primary_key=True</code>, será autorellenado con el id correspondiente cuando sea almacenado en la base de datos.</p>
 <blockquote>
 <p>Existen diversas opciones en esta función. En caso de que quieras ver más posibilidades de mapeo, aquí está la <a href="https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.mapped_column" target="_blank">referencia para más campos</a></p>
 </blockquote>
 <h2 id="testeando-las-tablas">Testeando las Tablas</h2>
-<p>Antes de proseguir, una buena práctica es crear un test para validar si toda la estructura de la base de datos funciona. Crearemos un archivo para probar eso: <code>test_db.py</code>.</p>
+<p>Antes de proseguir, una buena práctica es crear un test para verificar que toda la estructura de la base de datos funcione. Crearemos un archivo para probar eso: <code>test_db.py</code>.</p>
 <p>A partir de aquí, puedes proseguir con la estructuración del contenido de ese archivo para definir los tests necesarios para validar tu modelo de usuario y su interacción con la base de datos.</p>
 <h3 id="antes-de-escribir-los-tests">Antes de Escribir los Tests</h3>
-<p>A esta altura, si estuviéramos buscando sólo cobertura, podríamos simplemente testear utilizando el modelo, y eso sería suficiente. Sin embargo, queremos verificar si toda nuestra interacción con la base de datos ocurrirá con éxito. Esto incluye saber si los tipos de datos en la tabla fueron mapeados correctamente, si es posible interactuar con la base de datos, si el ORM está estructurado adecuadamente con la clase base. Necesitamos garantizar que todo este esquema funcione:</p>
+<p>Si estuviéramos buscando sólo cobertura, podríamos simplemente testear utilizando el modelo, y eso sería suficiente. Sin embargo, queremos verificar si toda nuestra interacción con la base de datos ocurrirá con éxito. Esto incluye saber si los tipos de datos en la tabla fueron mapeados correctamente, si es posible interactuar con la base de datos, si el ORM está estructurado adecuadamente con la clase base. En suma, necesitamos garantizar que todo este esquema funcione correctamente:</p>
 <pre class="mermaid"><code>graph
-  A[Aplicativo Python] -- utiliza --&gt; B[SQLAlchemy ORM]
+  A[Aplicación Python] -- utiliza --&gt; B[SQLAlchemy ORM]
   B -- proporciona --&gt; D[Session]
   D -- eventos --&gt; D
   D -- interactúa con --&gt; C[Modelos]
@@ -1714,9 +1714,9 @@
   C -- se asocia a --&gt; H[Metadata]
   H -- mantiene informaciones de --&gt; G[Tablas en la Base de Datos]</code></pre>
 <p>En este diagrama, vemos la relación completa entre la aplicación Python y la base de datos. La conexión se establece a través del SQLAlchemy ORM, que proporciona una Session para interactuar con los Modelos. Estos modelos son mapeados a las tablas en la base de datos, mientras la Engine se conecta con la base de datos y depende de Metadata para mantener las informaciones de las tablas.</p>
-<p>Por lo tanto, crearemos un fixture para poder usar todo este esquema siempre que sea necesario.</p>
+<p>Crearemos un fixture para poder usar todo este esquema siempre que sea necesario.</p>
 <h3 id="creando-un-fixture-para-interacciones-con-la-base-de-datos">Creando un Fixture para interacciones con la Base de Datos</h3>
-<p>Para testear la base, tenemos que hacer diversos pasos, y eso puede tornar el código de nuestro test bastante grande. Un fixture puede ayudar a aislar toda esta configuración de la base de datos fuera del test. De esta forma, evitaremos repetir el mismo código en todos los tests y además garantizaremos que cada test tenga su propia versión limpia de la base de datos.</p>
+<p>Para testear la base, tenemos que hacer diversos pasos, y eso puede tornar bastante grande el código de nuestro test. Un fixture puede ayudar a aislar toda esta configuración de la base de datos fuera del test. De esta forma, evitaremos repetir el mismo código en todos los tests y además garantizaremos que cada test tenga su propia versión limpia de la base de datos.</p>
 <p>Crearemos un fixture para la conexión con la base de datos llamada <code>session</code>:</p>
 <div class="language-python highlight"><span class="filename">tests/conftest.py</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
@@ -1743,11 +1743,11 @@
 </span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>    <span class="n">table_registry</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">drop_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span><span class="c1">#(5)!</span>
 </span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>    <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span><span class="c1">#(6)!</span>
 </span></code></pre></div>
-<p>Aquí, estamos utilizando SQLite como la base de datos en memoria para los tests. Esta es una práctica común en tests unitarios, pues la utilización de una base de datos en memoria es más rápida que una base de datos persistente en disco. Con SQLite en memoria, podemos crear y destruir bases de datos fácilmente, lo que es útil para aislar los tests y garantizar que los datos de un test no afecten a otros tests. Además, no necesitamos preocuparnos por la limpieza de los datos después de la ejecución de los tests, ya que la base de datos en memoria es descartada cuando el programa de test es finalizado.</p>
+<p>Aquí, estamos utilizando SQLite como la base de datos en memoria para los tests. Esta es una práctica común en tests unitarios, pues la utilización de una base de datos en memoria es mucho más rápida que una base de datos persistente en disco. Con SQLite en memoria, podemos crear y destruir bases de datos fácilmente, lo que es útil para aislar los tests y garantizar que los datos de un test no afecten a otros tests. Además, no necesitamos preocuparnos por la limpieza de los datos después de la ejecución de los tests, ya que la base de datos en memoria es descartada cuando el programa de test finaliza.</p>
 <p>¿Qué hace cada línea del fixture?</p>
 <ol>
 <li>
-<p><code>create_engine('sqlite:///:memory:')</code>: crea un mecanismo de base de datos SQLite en memoria usando SQLAlchemy. Este mecanismo será usado para crear una sesión de base de datos para nuestros tests.</p>
+<p><code>create_engine('sqlite:///:memory:')</code>: crea un mecanismo de base de datos SQLite en memoria usando SQLAlchemy. Este mecanismo será usado para crear una sesión de base de datos en memoria para nuestros tests.</p>
 </li>
 <li>
 <p><code>table_registry.metadata.create_all(engine)</code>: crea todas las tablas en la base de datos de test antes de cada test que usa el fixture <code>session</code>.</p>
@@ -1795,13 +1795,13 @@
 </span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a>    <span class="k">assert</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s1">'alice'</span>
 </span></code></pre></div></td></tr></table></div>
 <ol>
-<li>El método <code>.add</code> de la sesión, agrega el registro a la sesión. El dato queda en un estado transiente. Todavía no fue agregado a la base de datos. Pero ya está reservado en la sesión. Es una aplicación del patrón de proyecto <a href="https://martinfowler.com/eaaCatalog/unitOfWork.html" target="_blank">Unidad de trabajo</a>.</li>
-<li>Cuando existen datos transientes en la sesión y queremos realizar efectivamente las acciones en la base de datos, usamos el método <code>.commit</code>.</li>
+<li>El método <code>.add</code> de la sesión, agrega el registro a la sesión. El dato queda en un estado transiente. Todavía no fue agregado a la base de datos, pero ya está reservado en la sesión. Es una aplicación del patrón de proyecto <a href="https://martinfowler.com/eaaCatalog/unitOfWork.html" target="_blank">Unidad de trabajo</a>.</li>
+<li>Cuando existen datos transientes en la sesión y queremos realizar las acciones para persistir los datos en la base de datos, usamos el método <code>.commit</code>.</li>
 <li>El método <code>.scalar</code> se usa para hacer búsquedas en la base (queries). Toma el primer resultado de la búsqueda y hace una operación de convertir el resultado que produjo la base de datos en un Objeto creado por SQLAlchemy. En este caso, si encuentra un resultado, lo convertirá en la clase <code>User</code>. La función <code>select</code> es una función de búsqueda de datos en la base. En este caso estamos buscando todos los <code>Users</code> donde (<code>where</code>) el nombre es igual a <code class="language-python highlight"><span class="s2">"alice"</span></code>.</li>
 </ol>
 <h3 id="ejecutando-el-test">Ejecutando el test</h3>
 <p>La ejecución de tests es una parte vital del desarrollo de cualquier aplicación. Los tests nos ayudan a identificar y corregir problemas antes de que se tornen más serios. También proporcionan la confianza de que nuestros cambios no rompieron ninguna funcionalidad existente. En nuestro caso, ejecutaremos los tests para validar nuestros modelos de usuario y garantizar que estén funcionando como se espera.</p>
-<p>Para ejecutar los tests, digita el siguiente comando:</p>
+<p>Para ejecutar los tests, escribí el siguiente comando:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
 </span></code></pre></div>
 <div class="language-console no-copy highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="gp"># </span>...
@@ -1824,9 +1824,9 @@
 </span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="go">TOTAL                      54      2    96%</span>
 </span></code></pre></div>
 <p>En este caso, podemos ver que todos nuestros tests pasaron con éxito. Esto significa que nuestra funcionalidad de creación de usuario está funcionando correctamente y que nuestro modelo de usuario está siendo correctamente persistido en la base de datos.</p>
-<p>Aunque todo se esté encajando bien, este test no es muy bueno, pues no hace la validación del objeto como un todo. Conseguimos garantizar que toda la estructura de la base de datos funciona, sin embargo, todavía no conseguimos garantizar que todos los valores están correctos.</p>
+<p>Aunque todo se esté encajando bien, este test aún no es muy bueno, pues no hace la validación del objeto como un todo, ya que hay campos en el modelo que no fueron testeados (por ejemplo, <code>created_at</code>). Es decir, conseguimos validar que toda la estructura de la base de datos funciona, pero todavía no conseguimos garantizar que todos los campos de los modelos funcionen correctamente.</p>
 <h2 id="eventos-del-orm">Eventos del ORM</h2>
-<p>Aunque nuestros tests hayan sido ejecutados correctamente, tenemos un problema si queremos validar el objeto como un todo, por existir algunos campos de la tabla que escapan del mecanismo de creación del objeto <code class="language-python highlight"><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>.</p>
+<p>Aunque nuestros tests hayan sido ejecutados exitosamente, tenemos un problema si queremos validar el objeto como un todo, por existir algunos campos de la tabla que escapan del mecanismo de creación del objeto <code class="language-python highlight"><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>.</p>
 <p>Uno de estos casos es el campo <code>created_at</code>. Cuando configuramos el modelo, dejamos que la base de datos defina su horario y fecha actual para rellenar ese campo. ¿Existirá una forma de alterar este comportamiento durante los tests? ¿Para poder validar cuándo el objeto fue creado? La respuesta es sí.</p>
 <p>SQLAlchemy tiene un sistema de eventos. Los eventos son bloques de código que pueden ser ejecutados en momentos específicos del ciclo de vida de los objetos del ORM. Podemos "escuchar" estos eventos y ejecutar funciones personalizadas (hooks) cuando ocurran.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">event</span>
