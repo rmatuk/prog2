@@ -1841,7 +1841,7 @@
 <li>Cualquier función que sea usada como un hook del evento de <code>before_insert</code> tiene que recibir los parámetros <code>mapper</code>, <code>connection</code> y <code>target</code>, aunque no los use.</li>
 <li>En este ejemplo el evento "escuchará" [<em>listen</em>] el modelo <code>User</code> y toda vez que el ORM vaya a insertar un registro de ese modelo en la base (<code>before_insert</code>) ejecutará la función <code>hook</code>.</li>
 </ol>
-<p>La idea detrás de los eventos es simplemente pasar algún modelo o la sesión para que el ORM observe todas las veces en que una determinada operación fue ejecutada y si tiene algún hook siendo "escuchado" para aquella operación. Hablando de forma clara, todas las veces que <code>User</code> sea insertado en la base, antes de eso la función <code>hook</code> será ejecutada.</p>
+<p>La idea detrás de los eventos es simplemente pasar algún modelo o la sesión para que el ORM observe todas las veces en que una determinada operación es ejecutada y si tiene algún hook siendo "escuchado" para aquella operación. Por ejemplo, todas las veces que <code>User</code> sea insertado en la base, antes de eso la función <code>hook</code> será ejecutada.</p>
 <blockquote>
 <p>Puedes buscar por otros eventos de mapeo en la <a href="https://docs.sqlalchemy.org/en/20/orm/events.html#mapper-events" target="_blank">Documentación de SQLAlchemy</a></p>
 </blockquote>
@@ -1870,7 +1870,7 @@
 </span></span></code></pre></div>
 <ol>
 <li>El decorador <code class="language-python highlight"><span class="nd">@contextmanager</span></code> crea un gestor de contexto para que la función <code>_mock_db_time</code> sea usada con un bloque <code class="language-python highlight"><span class="k">with</span></code>. </li>
-<li>Todos los parámetros después de <code>*</code> deben ser llamados de forma nombrada, para quedar explícitos en la función. O sea <code>mock_db_time(model=User)</code>. Los parámetros no pueden ser llamados de forma posicional <code>_mock_db_time(User)</code>, eso acarreará un error.</li>
+<li>Todos los parámetros después de <code>*</code> deben ser llamados de forma nombrada, para quedar explícitos en la función. O sea, por ejemplo, <code>mock_db_time(model=User)</code>. Los parámetros no pueden ser llamados de forma posicional <code>_mock_db_time(User)</code>, eso acarreará un error.</li>
 <li>Función para alterar el método <code>created_at</code> del objeto de target.</li>
 <li><code>event.listen</code> agrega un evento en relación a un <code>model</code> que será pasado a la función. Este evento es el <code>before_insert</code>, ejecutará una función (hook) antes de insertar el registro en la base de datos. El hook es la función <code>fake_time_hook</code>.</li>
 <li>Retorna el datetime en la apertura del gestor de contexto.</li>
@@ -1878,7 +1878,7 @@
 </ol>
 <p>La idea detrás de esta función es ser un gestor de contexto (para ser llamado en un bloque <code class="language-python highlight"><span class="k">with</span></code>). Toda vez que un registro de <code>model</code> sea insertado en la base de datos, si tiene el campo <code>created_at</code>, por defecto, el campo será registrado con su fecha pre-fijada '01/01/2024'. Facilitando así el mantenimiento de los tests que necesitan de la comparación de fecha, pues será determinística.</p>
 <h4 id="transformando-el-evento-en-un-fixture">Transformando el evento en un fixture</h4>
-<p>Ahora que tenemos la función gestora de contexto, para evitar el sistema de importación durante los tests, podemos crear un fixture para él. De forma bien simple, solamente retornando la función <code>_mock_db_time</code>:</p>
+<p>Ahora que tenemos la función gestora de contexto, para evitar el sistema de importación durante los tests, podemos crear un fixture para él. De forma bien sencilla, simplemente retornando la función <code>_mock_db_time</code>:</p>
 <div class="language-python highlight"><span class="filename">tests/conftest.py</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">mock_db_time</span><span class="p">():</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="k">return</span> <span class="n">_mock_db_time</span>
@@ -1969,7 +1969,7 @@
 <ol>
 <li><code>SettingsConfigDict</code>: es un objeto de pydantic-settings que carga las variables en un archivo de configuración. Por ejemplo, un <code>.env</code>.</li>
 <li>Aquí definimos el camino para el archivo de configuración y el encoding de él.</li>
-<li><code>DATABASE_URL</code>: Esta variable será rellenada con el valor encontrado con el mismo nombre en el archivo <code>.env</code>. El <code>Field(init=False)</code>, dice que este atributo no será pasado en el momento en que el objeto sea instanciado, pues será proporcionado por la variable de entorno.</li>
+<li><code>DATABASE_URL</code>: Esta variable será rellenada con el valor encontrado con el mismo nombre en el archivo <code>.env</code>. El <code>Field(init=False)</code> dice que este atributo no será pasado en el momento en que el objeto sea instanciado, pues será proporcionado por la variable de entorno.</li>
 </ol>
 <p>Ahora, definiremos el <code>DATABASE_URL</code> en nuestro archivo de entorno <code>.env</code>. Crea el archivo en la raíz del proyecto y agrega la siguiente línea:</p>
 <div class="language-shell highlight"><span class="filename">.env</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">"sqlite:///database.db"</span>
@@ -2146,7 +2146,7 @@
 <div class="language-shell highlight"><span class="filename">Windows</span><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>winget<span class="w"> </span>install<span class="w"> </span>--id<span class="w"> </span>SQLite.SQLite
 </span></code></pre></div>
 </details>
-<p>Cuando ejecutamos ese comando, la consola de sqlite será inicializado. Y dentro de él podemos ejecutar comandos. Como hacer consultas, ver las tablas creadas, agregar datos, etc.</p>
+<p>Cuando ejecutamos ese comando, la consola de sqlite será inicializado. Dentro de ella podemos ejecutar comandos, como hacer consultas, ver las tablas creadas, agregar datos, etc.</p>
 <p>Tras llamar a SQLite en terminal, veremos algo así:
 <div class="language-sql no-copy highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">SQLite</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="mi">3</span><span class="p">.</span><span class="mi">45</span><span class="p">.</span><span class="mi">1</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">30</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">20</span>
 </span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">Enter</span><span class="w"> </span><span class="ss">".help"</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">usage</span><span class="w"> </span><span class="n">hints</span><span class="p">.</span>
