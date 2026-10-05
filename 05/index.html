@@ -1582,7 +1582,7 @@
 <li>Substituimos la función <code>get_session</code> que usamos para la aplicación real, por nuestra función que retorna el fixture de tests.</li>
 <li>Limpia la sobrescritura que hicimos en el app para usar el fixture de <code>session</code>.</li>
 </ol>
-<p>Con esto, cuando FastAPI intente inyectar la sesión en nuestros endpoints, inyectará la sesión de test que definimos, en vez de la sesión real. Y como estamos usando una base de datos en memoria para los tests, nuestros tests no van a interferir en los datos reales de nuestra aplicación.</p>
+<p>Con esto, cuando FastAPI intente inyectar la sesión en nuestros endpoints, inyectará la sesión de test que definimos, en vez de la sesión real. Y como estamos usando una base de datos en memoria para los tests, nuestros tests no van a interferir con los datos reales de nuestra aplicación.</p>
 <div class="language-python highlight"><span class="filename">tests/test_app.py</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_create_user</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="s1">'/users'</span><span class="p">,</span>
@@ -1725,10 +1725,10 @@
 </span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>tests/test_app.py::test_read_users<span class="w"> </span>PASSED
 </span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>tests/test_app.py::test_read_users_with_users<span class="w"> </span>FAILED
 </span></code></pre></div>
-<p>Sin embargo, aunque nuestro código parezca correcto, podemos encontrar un problema: Pydantic no consigue convertir directamente nuestro modelo SQLAlchemy a un modelo Pydantic. Resolveremos esto ahora.</p>
+<p>Sin embargo, aunque nuestro código parezca correcto, hay un problema: Pydantic no consigue convertir directamente nuestro modelo SQLAlchemy a un modelo Pydantic. Resolveremos esto ahora.</p>
 <h3 id="integrando-el-schema-al-model">Integrando el Schema al Model</h3>
 <p>La integración directa del ORM con nuestro esquema Pydantic no es inmediata y exige algunas modificaciones. Pydantic, por defecto, no sabe cómo lidiar con los modelos de SQLAlchemy, lo que nos lleva al error observado en los tests.</p>
-<p>La solución para ese problema es hacer una alteración en el esquema <code>UserPublic</code> que utilizamos, para que pueda reconocer y trabajar con los modelos de SQLAlchemy. Esto permite la conversión directa de objetos de SQLAlchemy en esquemas Pydantic.</p>
+<p>La solución para ese problema es hacer una modificación en el esquema <code>UserPublic</code> que utilizamos, para que pueda reconocer y trabajar con los modelos de SQLAlchemy. Esto permite la conversión directa de objetos de SQLAlchemy en esquemas Pydantic.</p>
 <p>Para eso, agregaremos la línea <code>model_config = ConfigDict(from_attributes=True)</code> a nuestro esquema:</p>
 <div class="language-py highlight"><span class="filename">fast_zero/schemas.py</span><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ConfigDict</span><span class="p">,</span> <span class="n">EmailStr</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
