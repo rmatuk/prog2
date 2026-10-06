@@ -1430,7 +1430,7 @@
 <p>Un JWT consiste en tres partes:</p>
 <ol>
 <li>
-<p>Header: El encabezado del JWT consiste típicamente en dos componentes: el tipo de token, que es JWT en este caso, y el algoritmo de firma, como HMAC SHA256 o RSA. Esta información se codifica en Base64Url y forma la primera parte del JWT.</p>
+<p><strong>Header:</strong> El encabezado del JWT consiste típicamente en dos componentes: el tipo de token, que es JWT en este caso, y el algoritmo de firma, como HMAC SHA256 o RSA. Esta información se codifica en Base64Url y forma la primera parte del JWT.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">   </span><span class="nt">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HS256"</span><span class="p">,</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">   </span><span class="nt">"typ"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JWT"</span>
@@ -1438,7 +1438,7 @@
 </span></code></pre></div>
 </li>
 <li>
-<p>Payload: El payload de un JWT es donde se almacenan las reivindicaciones (en inglés <a href="#claims" target="_blank"><strong>claims</strong></a>). Las reivindicaciones son información que queremos transmitir y que son relevantes para la interacción entre el cliente y el servidor. Las reivindicaciones se codifican en Base64Url y forman la segunda parte del JWT.</p>
+<p><strong>Payload:</strong> El payload de un JWT es donde se almacenan las reivindicaciones (en inglés <a href="#claims" target="_blank"><strong>claims</strong></a>). Las reivindicaciones son información que queremos transmitir y que son relevantes para la interacción entre el cliente y el servidor. Las reivindicaciones se codifican en Base64Url y forman la segunda parte del JWT.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"teste@test.com"</span><span class="p">,</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1690258153</span>
@@ -1446,7 +1446,7 @@
 </span></code></pre></div>
 </li>
 <li>
-<p>Signature: La firma se utiliza para verificar que el remitente del JWT es quien afirma ser y para garantizar que el mensaje no fue modificado a lo largo del camino. Para crear la firma, necesitas codificar el encabezado, el payload, y un secreto utilizando el algoritmo especificado en el encabezado. La firma es la tercera parte del JWT. Una firma de JWT puede ser creada de la siguiente forma:</p>
+<p><strong>Signature:</strong> La firma se utiliza para verificar que el remitente del JWT es quien afirma ser y para garantizar que el mensaje no fue modificado a lo largo del camino. Para crear la firma, necesitas codificar el encabezado, el payload, y un secreto utilizando el algoritmo especificado en el encabezado. La firma es la tercera parte del JWT. Una firma de JWT puede ser creada de la siguiente forma:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>HMACSHA256(
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    base64UrlEncode(header) + "." +
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    base64UrlEncode(payload),
@@ -1469,7 +1469,7 @@
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1690258153</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Donde las claves de este ejemplo:</p>
+<p>Claims de este ejemplo:</p>
 <ul>
 <li><code>sub</code>: identifica el "asunto" (subject), básicamente una forma de identificar al cliente. Puede ser un id, un uuid, email, ...</li>
 <li><code>exp</code>: tiempo de expiración del token. El backend usará este dato para validar si el token todavía es válido o existe la necesidad de una actualización del token.</li>
