@@ -1774,8 +1774,8 @@
 </span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>    <span class="k">return</span> <span class="n">db_user</span>
 </span></code></pre></div>
 <p>Semejante a lo que hicimos antes, estamos inyectando la sesión de SQLAlchemy en nuestro endpoint y utilizándola para buscar el usuario a ser actualizado. Si el usuario no es encontrado, retornamos un error 404.</p>
-<p>Las líneas destacadas muestran que estamos atribuyendo nuevos valores a los atributos <code>username</code>, <code>password</code> y <code>email</code>. Esta operación, seguida de un commit, altera los valores existentes en la base. Es como si la atribución nueva, fuera una actualización del dato de la tabla.</p>
-<p>Antes de partir para el próximo paso, al ejecutar nuestro linter, él mostrará un error informando que importamos <code>UserDB</code> pero nunca lo usamos.</p>
+<p>Las líneas destacadas muestran que estamos atribuyendo nuevos valores a los atributos <code>username</code>, <code>password</code> y <code>email</code>. Esta operación, seguida de un commit, altera los valores existentes en la base. Es como si la atribución nueva fuera una actualización del dato de la tabla.</p>
+<p>Antes de partir para el próximo paso, al ejecutar nuestro linter, mostrará un error informando que importamos <code>UserDB</code> pero nunca lo usamos.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>poetry<span class="w"> </span>lint
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>fast_zero/app.py:9:40:<span class="w"> </span>F401<span class="w"> </span><span class="o">[</span>*<span class="o">]</span><span class="w"> </span><span class="sb">`</span>fast_zero.schemas.UserDB<span class="sb">`</span><span class="w"> </span>imported<span class="w"> </span>but<span class="w"> </span>unused
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Found<span class="w"> </span><span class="m">1</span><span class="w"> </span>error.
@@ -1797,7 +1797,7 @@
 <p>Esto ocurre porque la ruta PUT era la única que estaba utilizando UserDB, y ahora que modificamos esta ruta, podemos remover UserDB de nuestros imports y también excluir su definición en el archivo <code>fast_zero/schemas.py</code></p>
 <details class="note">
 <summary>Sobre el archivo <code>fast_zero/schemas.py</code></summary>
-<p>En caso de que quedes en duda sobre qué remover, tu archivo <code>fast_zero/schemas.py</code> debe estar parecido con esto, después de la remoción de <code>UserDB</code>:</p>
+<p>En caso de que te queden dudas sobre qué remover, tu archivo <code>fast_zero/schemas.py</code> debe ser parecido a esto, después de la remoción de <code>UserDB</code>:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">schemas.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -1862,10 +1862,10 @@
 </span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>    <span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>Agregaremos el fixture <code>user</code> que ya efectúa la creación de un registro en la base de datos.</li>
+<li>Agregaremos el fixture <code>user</code> que provee la creación de un registro en la base de datos.</li>
 </ol>
 <h3 id="el-caso-del-conflicto">El caso del conflicto</h3>
-<p>Aunque parezca que está todo correcto y que el test está siendo ejecutado con éxito, existe un caso que no fue considerado en el test del update. Algunos datos en nuestro modelo (<code>username</code> y <code>email</code>) están marcados como <code>unique</code> en la base de datos. Esto puede ocasionar un error en potencial, en el caso de que alguien modifique esos valores para un valor ya existente.</p>
+<p>Aunque parezca que todo está correcto y que el test está siendo ejecutado con éxito, existe un caso que no fue considerado en el test del update. Algunos datos en nuestro modelo (<code>username</code> y <code>email</code>) están marcados como <code>unique</code> en la base de datos. Esto puede ocasionar un error en potencial, en el caso de que alguien modifique esos valores para un valor ya existente.</p>
 <p>Por ejemplo, imagina que dos personas se registraron en nuestra aplicación. Una con <code class="language-py highlight"><span class="p">{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'faustino'</span><span class="p">}</span></code> y otra con <code class="language-py highlight"><span class="p">{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'dunossauro'</span><span class="p">}</span></code>. Hasta ese momento, no tendríamos ningún problema.</p>
 <p>¿Pero qué sucedería si "faustino" hiciera un update y quisiera llamarse "dunossauro"?</p>
 <p>Vamos a iniciar la escritura de un escenario de tests que contemple eso para que quede más claro:</p>
@@ -1914,7 +1914,7 @@
 </span><span id="__span-24-17"><a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<span class="w"> </span>stopping<span class="w"> </span>after<span class="w"> </span><span class="m">1</span><span class="w"> </span>failures<span class="w"> </span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 </span></code></pre></div>
 <p>El error fue iniciado por sqlalchemy. Como podemos constatar en el mensaje de error: <code class="language-python highlight"><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span> <span class="p">(</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">)</span> <span class="n">UNIQUE</span> <span class="n">constraint</span> <span class="n">failed</span><span class="p">:</span> <span class="n">users</span><span class="o">.</span><span class="n">username</span><span class="o">.</span></code></p>
-<p>Traduciendo de forma literal, dijo que tenemos un problema de integridad: <code>falla en la restricción UNIQUE: users.username</code>. Esto sucede, pues tenemos la restricción UNIQUE en el campo <code>username</code> de la tabla <code>users</code>. Cuando agregamos el mismo nombre a un registro que ya existía, causamos un error de integridad.</p>
+<p>Traduciendo de forma literal, dijo que tenemos un problema de integridad: <code>falla en la restricción UNIQUE: users.username</code>. Esto sucede porque tenemos la restricción UNIQUE en el campo <code>username</code> de la tabla <code>users</code>. Cuando agregamos el mismo nombre a un registro que ya existía causamos un error de integridad.</p>
 <p>Una forma de evitar el error es considerando la posibilidad de que suceda. Para eso, podríamos crear un flujo esperando esa excepción en el endpoint. Algo como:</p>
 <div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.exc</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntegrityError</span>
 </span></span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
@@ -1988,7 +1988,7 @@
 </span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'User deleted'</span><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>El método <code>delete</code> de la session agrega una operación de borrado en la sesión. Luego, el método <code>commit</code> es llamado para que la operación sea persistida en la base.</li>
+<li>El método <code>delete</code> de la session realiza una operación de borrado en la sesión. Luego, el método <code>commit</code> es llamado para que la operación sea persistida en la base.</li>
 </ol>
 <p>En este caso, estamos nuevamente usando la sesión de SQLAlchemy para encontrar el usuario a ser borrado y luego excluimos a ese usuario de la base de datos.</p>
 <h3 id="agregando-tests-para-delete">Agregando tests para DELETE</h3>
@@ -2082,7 +2082,7 @@
 <p><a class="md-button" href="https://github.com/rmatuk/prog2/tree/main/codigo_aulas/05">Código <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M360.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m64.6 136.1c-12.5 12.5-12.5 32.8 0 45.3l73.4 73.4-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0zm-274.7 0c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l73.3-73.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span></a></p>
 <h2 id="conclusion">Conclusión</h2>
 <p>¡Felicitaciones por llegar al final de esta clase! Diste un paso significativo en el desarrollo de nuestra aplicación, substituyendo la implementación de la base de datos falsa por la integración con una base de datos real usando SQLAlchemy. También vimos cómo ajustar nuestros tests para considerar esta nueva realidad.</p>
-<p>En esta clase, abordamos cómo modificar los endpoints para interactuar con la base de datos real y cómo utilizar la inyección de dependencias de FastAPI para gestionar nuestras sesiones de SQLAlchemy. También discutimos la importancia de los tests para garantizar que nuestros endpoints están funcionando correctamente, y cómo los fixtures de Pytest pueden auxiliarnos en la preparación del entorno para estos tests.</p>
+<p>En esta clase, abordamos cómo modificar los endpoints para interactuar con la base de datos real y cómo utilizar la inyección de dependencias de FastAPI para gestionar nuestras sesiones de SQLAlchemy. También discutimos la importancia de los tests para garantizar que nuestros endpoints estén funcionando correctamente, y cómo los fixtures de Pytest pueden auxiliarnos en la preparación del entorno para estos tests.</p>
 <p>Además, nos deparamos con situaciones donde Pydantic y SQLAlchemy no interactúan perfectamente bien, y cómo solucionar esos casos.</p>
 <p>Al final de esta clase, debes estar confortable en integrar una base de datos real a una aplicación FastAPI, saber cómo escribir tests robustos que tomen en consideración la interacción con la base de datos, y estar preparado para posibles desafíos al trabajar con Pydantic y SQLAlchemy juntos.</p>
 
