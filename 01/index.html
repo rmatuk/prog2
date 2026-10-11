@@ -1789,11 +1789,11 @@
 <p>Con esto, muchos editores consiguen detectar automáticamente el entorno virtual del proyecto, reduciendo la necesidad de configuraciones adicionales.</p>
 <h2 id="creando-un-proyecto">Creando un proyecto</h2>
 <p>Ahora que tenemos Poetry y la versión de Python que usaremos disponible, podemos iniciar la creación de nuestro proyecto. El primer paso es crear un nuevo proyecto utilizando Poetry, con el comando <code>poetry new</code>. A continuación, navegaremos hasta el directorio creado:</p>
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>poetry<span class="w"> </span>new<span class="w"> </span>--flat<span class="w"> </span>fast_zero<span class="w"> </span><span class="c1">#(1)!</span>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>poetry<span class="w"> </span>new<span class="w"> </span>--flat<span class="w"> </span>fast_zero<span class="w"> </span><span class="c1">#(1)!</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nb">cd</span><span class="w"> </span>fast_zero
 </span></code></pre></div>
 <ol>
-<li>Crea un paquete python llamado <code>fast_zero</code> en el formato <code>flat</code>. Por defecto, Poetry utiliza el formato <code>src</code>. Más informaciones sobre esto <a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/" target="_blank">aquí</a></li>
+<li>Crea un paquete python llamado <code>fast_zero</code> con el formato <code>flat</code>. Por defecto, Poetry utiliza el formato <code>src</code>. Más informaciones sobre esto <a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/" target="_blank">aquí</a></li>
 </ol>
 <p>Creará una estructura de archivos y carpetas como esta:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>.
@@ -1808,9 +1808,9 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Versión 3.14</label><label for="__tabbed_2_2">Versión 3.13</label><label for="__tabbed_2_3">Versión 3.12</label><label for="__tabbed_2_4">Versión 3.11</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><span class="filename">$ Ejecución en laterminal!</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.14
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.14
 </span></code></pre></div>
-<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.14</code> en nuestro proyecto. Para eso, alteramos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
+<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.14</code> en nuestro proyecto. Para ello, modificaremos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-15-10">10</a></span>
 <span class="normal"><a href="#__codelineno-15-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="k">[project]</span>
@@ -1822,9 +1822,9 @@
 </ol>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><span class="filename">$ Ejecución en laterminal!</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.13
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.13
 </span></code></pre></div>
-<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.13</code> en nuestro proyecto. Para eso, alteramos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
+<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.13</code> en nuestro proyecto. Para ello, modificaremos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-17-10">10</a></span>
 <span class="normal"><a href="#__codelineno-17-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="k">[project]</span>
@@ -1836,9 +1836,9 @@
 </ol>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><span class="filename">$ Ejecución en laterminal!</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.12
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.12
 </span></code></pre></div>
-<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.12</code> en nuestro proyecto. Para eso, alteramos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
+<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.12</code> en nuestro proyecto. Para ello, modificaremos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-19-10">10</a></span>
 <span class="normal"><a href="#__codelineno-19-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="k">[project]</span>
@@ -1850,9 +1850,9 @@
 </ol>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><span class="filename">$ Ejecución en laterminal!</span><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.11
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.11
 </span></code></pre></div>
-<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.11</code> en nuestro proyecto. Para eso, alteramos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
+<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.11</code> en nuestro proyecto. Para ello, modificaremos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-21-10">10</a></span>
 <span class="normal"><a href="#__codelineno-21-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="k">[project]</span>
@@ -1868,11 +1868,11 @@
 <p>De esta forma, garantizamos que Poetry usará la versión correcta de Python al crear el entorno virtual para nuestro proyecto.</p>
 <h3 id="instalando-fastapi">Instalando FastAPI</h3>
 <p>Con toda la base de nuestro proyecto lista, podemos finalmente instalar FastAPI:</p>
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>poetry<span class="w"> </span>install<span class="w"> </span><span class="c1">#(1)!</span>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>poetry<span class="w"> </span>install<span class="w"> </span><span class="c1">#(1)!</span>
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>poetry<span class="w"> </span>add<span class="w"> </span><span class="s1">'fastapi[standard]'</span><span class="w"> </span><span class="c1">#(2)!</span>
 </span></code></pre></div>
 <ol>
-<li>Crea el entorno virtual con la versión que seteamos en el <code>env use</code></li>
+<li>Crea el entorno virtual con la versión de Python que seteamos en el <code>env use</code></li>
 <li>Agrega FastAPI en nuestro proyecto y entorno virtual</li>
 </ol>
 <h3 id="primera-ejecucion-de-un-hello-world">Primera Ejecución de un "Hello, World!"</h3>
@@ -1882,10 +1882,9 @@
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'¡Hola Mundo!'</span><span class="p">}</span>
 </span></code></pre></div></td></tr></table></div>
 <p>Esta función en python básicamente retorna un diccionario con una clave llamada <code class="language-python highlight"><span class="s1">'message'</span></code> y un mensaje <code class="language-python highlight"><span class="s1">'¡Hola Mundo!'</span></code>. Si agregamos esta función en un nuevo archivo llamado <code>app.py</code> en el directorio <code>fast_zero</code>. Podemos hacer la llamada de ella por el terminal interactivo (<strong>REPL</strong>):</p>
-<div class="language-py highlight"><span class="filename">&gt;&gt;&gt; Terminal interactivo!</span><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">read_root</span><span class="p">()</span>
+<div class="language-py highlight"><span class="filename">&gt;&gt;&gt; Terminal interactivo</span><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">read_root</span><span class="p">()</span>
 </span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'¡Hola Mundo!'</span><span class="p">}</span>
 </span></code></pre></div>
-<p>De forma tradicional, como todas las funciones en python.</p>
 <details class="tip">
 <summary>Consejo: Cómo abrir el terminal interactivo (REPL)</summary>
 <p>Para abrir el terminal interactivo con tu código cargado, debes llamar a Python en la terminal usando <code>-i</code>:</p>
@@ -1912,9 +1911,9 @@
 </span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'¡Hola Mundo!'</span><span class="p">}</span> <span class="c1">#(5)!</span>
 </span></code></pre></div></td></tr></table></div>
 <ol>
-<li>Importando de la biblioteca fastapi el objeto FastAPI</li>
-<li>Iniciando una aplicación FastAPI</li>
-<li>Definiendo un endpoint con la dirección <code>/</code> accesible por el método HTTP <code>GET</code></li>
+<li>Importa de la biblioteca fastapi el objeto FastAPI</li>
+<li>Inicia una aplicación FastAPI</li>
+<li>Define un endpoint con la dirección <code>/</code> accesible por el método HTTP <code>GET</code></li>
 <li>Función que será ejecutada cuando la dirección <code>/</code> sea accedida por un cliente</li>
 <li>Los datos que serán retornados por la dirección, cuando el endpoint sea llamado</li>
 </ol>
@@ -1969,7 +1968,7 @@
 </span></span><span id="__span-29-41"><a id="__codelineno-29-41" name="__codelineno-29-41" href="#__codelineno-29-41"></a><span class="hll">INFO:<span class="w">     </span>Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>application<span class="w"> </span>startup.
 </span></span><span id="__span-29-42"><a id="__codelineno-29-42" name="__codelineno-29-42" href="#__codelineno-29-42"></a><span class="hll">INFO:<span class="w">     </span>Application<span class="w"> </span>startup<span class="w"> </span>complete.
 </span></span></code></pre></div>
-<p>El mensaje de respuesta del CLI: <code>serving: http://127.0.0.1:8000</code> tiene una información bastante importante.</p>
+<p>El mensaje de respuesta del CLI: <code>serving: http://127.0.0.1:8000</code> contiene una información importante:</p>
 <p><img alt="Figura representando la división para &quot;protocolo&quot; con &quot;http://&quot; , &quot;dirección&quot; con &quot;127.0.0.1&quot; y &quot;puerto&quot; con &quot;:8000&quot;" class="center" src="../assets/01/endereco_http_black.png#only-light" />
 <img alt="Figura representando la división para &quot;protocolo&quot; con &quot;http://&quot; , &quot;dirección&quot; con &quot;127.0.0.1&quot; y &quot;puerto&quot; con &quot;:8000&quot;" class="center" src="../assets/01/endereco_http_white.png#only-dark" /></p>
 <ol>
@@ -1978,14 +1977,15 @@
 <li>El puerto <code>:8000</code>, que es el puerto de nuestra máquina que está reservado para nuestra aplicación.</li>
 </ol>
 <p>Ahora, con el servidor inicializado, podemos usar un cliente para acceder a la dirección <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a>.</p>
-<p>El cliente más tradicional de la web es el navegador. Podemos escribir la dirección en la barra de navegación y si todo ocurrió correctamente, debes ver el mensaje "¡Hola Mundo!" en formato JSON.</p>
+<p>El cliente más tradicional de la web es el navegador. Podemos escribir la dirección en la barra de navegación y si todo ocurrió correctamente debes ver el mensaje "¡Hola Mundo!" en formato JSON.</p>
 <p><img alt="Captura de pantalla del browser accediendo a &quot;http://127.0.0.1&quot;" class="center shadow" src="../assets/01/hola_mundo.png" /></p>
 <blockquote>
 <p>Para detener la ejecución de fastapi en el shell, escribe <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span> y el mensaje <code>Shutting down</code> aparecerá, mostrando que el servidor fue finalizado.</p>
 </blockquote>
 <details class="example">
 <summary>Diferentes clientes para nuestra aplicación</summary>
-<p>Existen otros clientes HTTP que no son el browser. Hay aplicaciones de línea de comando como <a href="https://curl.se/" target="_blank">curl</a>:</p>
+<p>Existen otros clientes HTTP que no son el browser. </p>
+<p>Hay aplicaciones de línea de comando como <a href="https://curl.se/" target="_blank">curl</a>:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>curl<span class="w"> </span><span class="m">127</span>.0.0.1:8000
 </span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="o">{</span><span class="s2">"message"</span>:<span class="s2">"¡Hola Mundo!"</span><span class="o">}</span>
 </span></code></pre></div>
@@ -2001,9 +2001,9 @@
 </span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">    </span><span class="s2">"message"</span>:<span class="w"> </span><span class="s2">"¡Hola Mundo!"</span>
 </span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="o">}</span>
 </span></code></pre></div>
-<p>Existen incluso aplicaciones gráficas de código abierto pensadas para ser clientes HTTP para APIs. Como el <a href="https://hoppscotch.io/" target="_blank">hoppscotch</a>:</p>
+<p>Existen incluso aplicaciones gráficas de código abierto pensadas para ser clientes HTTP para APIs, como <a href="https://hoppscotch.io/" target="_blank">hoppscotch</a>:</p>
 <p><img alt="Captura de pantalla de hoppscotch" class="center shadow" src="../assets/01/cliente_grafico_para_apis_hoppscotch.png" /></p>
-<p>O como el <a href="https://www.usebruno.com/" target="_blank">Bruno</a>:
+<p>O como <a href="https://www.usebruno.com/" target="_blank">Bruno</a>:
 <img alt="Captura de pantalla de bruno" class="center shadow" src="../assets/01/cliente_grafico_para_apis_bruno.png" /></p>
 </details>
 <h3 id="uvicorn">Uvicorn</h3>
@@ -2029,18 +2029,19 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span></code></pre></div>
 </details>
 <h2 id="instalando-las-herramientas-de-desarrollo">Instalando las herramientas de desarrollo</h2>
-<p>Las elecciones de herramientas de desarrollo, de forma general, son elecciones bastante personales. No suelen ser consensuales ni siquiera en equipos de desarrollo. Dicho esto, instalaremos algunas herramientas que nos parecen que son útiles para el desarrollo del proyecto.</p>
+<p>Las elecciones de herramientas de desarrollo son elecciones bastante personales, y no suele haber consenso ni siquiera en equipos de desarrollo. Dicho esto, instalaremos algunas herramientas que nos parecen que son útiles para el desarrollo del proyecto.</p>
 <p>Las herramientas elegidas son:</p>
 <ul>
-<li><a href="https://poethepoet.natn.io/index.html" target="_blank">poethepoet</a>: herramienta usada para creación de comandos. Como ejecutar la aplicación, correr los tests, etc.</li>
+<li><a href="https://poethepoet.natn.io/index.html" target="_blank">poethepoet</a>: herramienta usada para a
+la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 <li><a href="https://docs.pytest.org/" target="_blank">pytest</a>: herramienta para tests</li>
 <li><a href="https://coverage.readthedocs.io/" target="_blank">coverage</a>: herramienta para medir la cobertura de tests</li>
 <li><a href="https://docs.astral.sh/ruff/" target="_blank">ruff</a>: Una herramienta que tiene dos funciones en nuestro código:<ol>
 <li>Un analizador estático de código (un <a href="https://en.wikipedia.org/wiki/Lint_(software)" target="_blank">linter</a>), para avisarnos si estamos infringiendo alguna <a href="https://docs.astral.sh/ruff/rules/" target="_blank">buena práctica de programación</a>;</li>
-<li>Un formateador de código. Para seguir un estilo único de código. Vamos a basarnos en <a href="https://peps.python.org/pep-0008/" target="_blank">PEP-8</a>.</li>
+<li>Un formateador de código, para seguir un estilo único de código. Vamos a basarnos en <a href="https://peps.python.org/pep-0008/" target="_blank">PEP-8</a>.</li>
 </ol>
 </li>
-<li><a href="https://github.com/crate-ci/typos" target="_blank">typos</a>: detector de errores tipográficos en inglés, lo cual es útil para los hablantes nativos de castellano</li>
+<li><a href="https://github.com/crate-ci/typos" target="_blank">typos</a>: detector de errores tipográficos en inglés, lo cual es útil para los que no son hablantes nativos de inglés</li>
 </ul>
 <h3 id="instalando-las-herramientas-de-desarrollo_1">Instalando las herramientas de desarrollo</h3>
 <p>Todas las herramientas de desarrollo se instalan como dependencias de desarrollo (grupo <code>dev</code>):</p>
