@@ -976,6 +976,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containerizando nuestra aplicación e introduciendo PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -985,10 +1012,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   
@@ -1006,8 +1033,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1640,42 +1667,41 @@
 <li>Introducción al entorno de desarrollo (terminal, herramientas, etc.)</li>
 <li>Instalación de FastAPI y sus dependencias</li>
 <li>Configuración de las herramientas de desarrollo</li>
-<li>Ejecución del primer "Hello, World!" con FastAPI con tests!</li>
+<li>Ejecución del primer "Hello, World!" de FastAPI con tests</li>
 </ul>
 <hr />
 <p>En esta sección, iniciaremos nuestro recorrido para la construcción de una API con FastAPI. Partiremos de lo básico, configurando nuestro entorno de desarrollo. Discutiremos desde la elección e instalación de la versión correcta de Python hasta la instalación y configuración de Poetry, un gestor de paquetes y dependencias para Python. Además, instalaremos y configuraremos una serie de herramientas de desarrollo útiles, como Ruff, pytest y poethepoet.</p>
 <p>Después de configurar nuestro entorno, crearemos nuestro primer programa "Hello, World!" con FastAPI. Esto nos permitirá verificar que todo esté funcionando correctamente. Y, finalmente, exploraremos una parte crucial del Desarrollo Orientado por Tests (TDD), escribiendo nuestro primer test con Pytest.</p>
 <h2 id="entorno-de-desarrollo">Entorno de Desarrollo</h2>
-<p>Necesitas algunas herramientas instaladas:</p>
+<p>Necesitaremos algunas herramientas instaladas:</p>
 <ol>
-<li>Un editor de texto a tu elección </li>
-<li>Una terminal a tu elección </li>
+<li>Algún editor de texto (a tu elección) </li>
+<li>Una terminal (a tu elección) </li>
 <li>Python, en una versión <a href="https://devguide.python.org/versions/">oficialmente soportada</a>.</li>
 <li><a href="https://git-scm.com/" target="_blank">Git</a>: Para gestionar versiones del proyecto.</li>
 <li><a href="https://www.docker.com/" target="_blank">Docker</a>: Para crear un container de la aplicación.</li>
-<li><strong>OPCIONAL (extremadamente recomendado)</strong>: El <a href="https://cli.github.com/" target="_blank">gh</a> para crear el repositorio y hacer cambios sin necesitar acceder a la página de Github</li>
+<li>OPCIONAL (recomendado): El <a href="https://cli.github.com/" target="_blank">GitHub Cli</a> para crear el repositorio y hacer cambios por terminal sin necesitar acceder a la página de Github</li>
 </ol>
 <h2 id="pipx">pipx</h2>
-<p>El <a href="https://pipx.pypa.io/latest/" target="_blank">pipx</a> es una herramienta usada para instalar y ejecutar herramientas Python globalmente en el sistema de forma segura. Diferente del <strong>pip</strong>, que instala herramientas sin un entorno virtual (por defecto) y puede "ensuciar" nuestro entorno, el <code>pipx</code> crea un entorno virtual y aísla cada herramienta dentro de él, facilitando la instalación de paquetes globales.</p>
-<p>Podemos usar el <strong>pipx</strong> para instalar herramientas globales y ejecutar algunas que se usarán solo una vez.</p>
-<p>Para instalar el pipx:</p>
+<p>La aplicación <a href="https://pipx.pypa.io/latest/" target="_blank">pipx</a> sirve para instalar y ejecutar herramientas Python globalmente en el sistema de forma segura. Diferente de <strong>pip</strong>, que instala herramientas sin un entorno virtual (por defecto) y puede "ensuciar" nuestro entorno, <code>pipx</code> crea un entorno virtual y aísla cada herramienta que instala dentro de él, facilitando la instalación de paquetes globales.</p>
+<p>Para instalar pipx:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>pipx
 </span></code></pre></div>
 <p>De esta forma, la única dependencia global que tendremos en nuestro sistema será el propio <code>pipx</code>.</p>
 <details class="warning" open="open">
-<summary>Existen otras formas de instalar el pipx</summary>
-<p>En caso de que tengas un gestor de paquetes en tu sistema operativo, es <strong>extremadamente</strong> recomendado que instales el <code>pipx</code> por él.</p>
+<summary>Otras formas de instalar pipx</summary>
+<p>En caso de que tengas un gestor de paquetes en tu sistema operativo, es <strong>extremadamente</strong> recomendado que instales <code>pipx</code> mediante el mismo.</p>
 <p>Las instrucciones de instalación para cada sistema están disponibles en la <a href="https://pipx.pypa.io/latest/how-to/install-pipx.html" target="_blank">documentación del proyecto</a>.</p>
 </details>
-<p>Para que nuestro sistema reconozca el camino de las herramientas instaladas vía <code>pipx</code> podemos ejecutar el comando:</p>
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pipx<span class="w"> </span>ensurepath<span class="w"> </span><span class="c1">#(1)!</span>
+<p>Para que nuestro sistema encuentre las herramientas instaladas vía <code>pipx</code> podemos ejecutar el comando:</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pipx<span class="w"> </span>ensurepath<span class="w"> </span><span class="c1">#(1)!</span>
 </span></code></pre></div>
 <ol>
-<li>Agrega el directorio de los entornos virtuales del <code>pipx</code> al <code>PATH</code> del sistema.</li>
+<li>Agrega el directorio de los entornos virtuales de <code>pipx</code> al <code>PATH</code> del sistema.</li>
 </ol>
-<p>Este comando agrega al <code>PATH</code> del sistema todos los binarios instalados por el <code>pipx</code> 🚨. Por lo tanto, recuerda reiniciar el shell después de ejecutarlo.</p>
+<p>Este comando agrega al <code>PATH</code> del sistema todos los binarios instalados por <code>pipx</code> 🚨. Para ello, debes reiniciar el shell después de ejecutarlo.</p>
 <h2 id="poetry">Poetry</h2>
-<p>El <a href="https://python-poetry.org/" target="_blank">Poetry</a> es un gestor de proyectos para Python. Puede ayudarnos en diversas etapas del ciclo de desarrollo, como la instalación de versiones específicas de Python, la creación y mantenimiento de proyectos (incluyendo la definición de estructuras de carpetas, la gestión de entornos virtuales y la instalación de bibliotecas), además de permitir la publicación de paquetes y mucho más.</p>
+<p><a href="https://python-poetry.org/" target="_blank">Poetry</a> es un gestor de proyectos para Python. Puede ayudarnos en diversas etapas del ciclo de desarrollo, como la instalación de versiones específicas de Python, la creación y mantenimiento de proyectos (incluyendo la definición de estructuras de carpetas, la gestión de entornos virtuales y la instalación de bibliotecas), además de permitir la publicación de paquetes y mucho más.</p>
 <p>En nuestro proyecto, será el componente central para agrupar y ejecutar todas las tareas relacionadas al proyecto.</p>
 <h3 id="instalacion-de-poetry">Instalación de Poetry</h3>
 <p>La instalación de Poetry puede hacerse de diversas maneras, pero para una instalación global y aislada en un entorno virtual, debe hacerse vía <code>pipx</code>:</p>
@@ -1693,16 +1719,16 @@
 <p><img alt="" class="center shadow" src="../assets/01/tips_blocos_de_codigo.png" /></p>
 </details>
 <h3 id="gestion-de-versiones-de-python">Gestión de versiones de Python</h3>
-<p>Después de la instalación de Poetry, podemos utilizarlo para gestionar e instalar versiones de Python que deseamos usar en un proyecto. Para este curso, la versión mínima de Python que debes tener es la <code class="language-python highlight"><span class="mf">3.11</span></code>, porque algunos recursos que utilizaremos fueron introducidos en esa versión.</p>
-<p>Puedes, sin embargo, instalar cualquier versión más nueva. Mi recomendación es <strong>siempre que sea posible</strong>, usa la versión más actualizada posible:</p>
+<p>Después de instalar Poetry, podemos utilizarlo para gestionar e instalar las versiones de Python que deseemos usar en el proyecto. Para este curso, la versión mínima de Python que debes tener es la <code class="language-python highlight"><span class="mf">3.11</span></code>, porque algunos recursos que utilizaremos fueron introducidos en esa versión.</p>
+<p>Puedes, sin embargo, instalar cualquier versión más nueva. La recomendación es, <strong>siempre que sea posible</strong>, usar la versión más actualizada posible:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Versión 3.14</label><label for="__tabbed_1_2">Versión 3.13</label><label for="__tabbed_1_3">Versión 3.12</label><label for="__tabbed_1_4">Versión 3.11</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Para utilizar una versión específica de Python en nuestro ambiente, debemos solicitar a Poetry que instale esa versión:
-<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal!</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.14<span class="w">  </span><span class="c1">#(1)!</span>
+<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.14<span class="w">  </span><span class="c1">#(1)!</span>
 </span></code></pre></div></p>
 <ol>
-<li>Instala la última release da versión 3.14 de python</li>
+<li>Instala la última release de la versión 3.14 de python</li>
 </ol>
 <p>Una respuesta similar a esta debe ser devuelta al ejecutar el comando:</p>
 <div class="language-bash highlight"><span class="filename">Respuesta del comando `poetry python install`</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Downloading<span class="w"> </span>and<span class="w"> </span>installing<span class="w"> </span><span class="m">3</span>.14.0<span class="w"> </span><span class="o">(</span>cpython<span class="o">)</span><span class="w"> </span>...<span class="w"> </span>Done<span class="w"> </span>
@@ -1711,10 +1737,10 @@
 </div>
 <div class="tabbed-block">
 <p>Para utilizar una versión específica de Python en nuestro ambiente, debemos solicitar a Poetry que instale esa versión:
-<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal!</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.13<span class="w">  </span><span class="c1">#(1)!</span>
+<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.13<span class="w">  </span><span class="c1">#(1)!</span>
 </span></code></pre></div></p>
 <ol>
-<li>Instala la última release da versión 3.13 de python</li>
+<li>Instala la última release de la versión 3.13 de python</li>
 </ol>
 <p>Una respuesta similar a esta debe ser devuelta al ejecutar el comando:</p>
 <div class="language-bash highlight"><span class="filename">Respuesta del comando `poetry python install`</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Downloading<span class="w"> </span>and<span class="w"> </span>installing<span class="w"> </span><span class="m">3</span>.13.2<span class="w"> </span><span class="o">(</span>cpython<span class="o">)</span><span class="w"> </span>...<span class="w"> </span>Done<span class="w"> </span>
@@ -1723,10 +1749,10 @@
 </div>
 <div class="tabbed-block">
 <p>Para utilizar una versión específica de Python en nuestro ambiente, debemos solicitar a Poetry que instale esa versión:
-<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal!</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.12<span class="w">  </span><span class="c1">#(1)!</span>
+<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.12<span class="w">  </span><span class="c1">#(1)!</span>
 </span></code></pre></div></p>
 <ol>
-<li>Instala la última release da versión 3.12 de python</li>
+<li>Instala la última release de la versión 3.12 de python</li>
 </ol>
 <p>Una respuesta similar a esta debe ser devuelta al ejecutar el comando:</p>
 <div class="language-bash highlight"><span class="filename">Respuesta del comando `poetry python install`</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Downloading<span class="w"> </span>and<span class="w"> </span>installing<span class="w"> </span><span class="m">3</span>.12.9<span class="w"> </span><span class="o">(</span>cpython<span class="o">)</span><span class="w"> </span>...<span class="w"> </span>Done<span class="w"> </span>
@@ -1735,10 +1761,10 @@
 </div>
 <div class="tabbed-block">
 <p>Para utilizar una versión específica de Python en nuestro ambiente, debemos solicitar a Poetry que instale esa versión:
-<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal!</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.11<span class="w">  </span><span class="c1">#(1)!</span>
+<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.11<span class="w">  </span><span class="c1">#(1)!</span>
 </span></code></pre></div></p>
 <ol>
-<li>Instala la última release da versión 3.11 de python</li>
+<li>Instala la última release de la versión 3.11 de python</li>
 </ol>
 <p>Una respuesta similar a esta debe ser devuelta al ejecutar el comando:</p>
 <div class="language-bash highlight"><span class="filename">Respuesta del comando `poetry python install`</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Downloading<span class="w"> </span>and<span class="w"> </span>installing<span class="w"> </span><span class="m">3</span>.11.11<span class="w"> </span><span class="o">(</span>cpython<span class="o">)</span><span class="w"> </span>...<span class="w"> </span>Done<span class="w"> </span>
@@ -1747,7 +1773,7 @@
 </div>
 </div>
 </div>
-<p>De esta forma, garantizamos que tenemos una versión compatible de Python instalada.</p>
+<p>De esta forma, garantizaremos que tenemos una versión compatible de Python instalada.</p>
 <h3 id="entorno-virtual-local-opcional">Entorno virtual local [opcional]</h3>
 <div class="admonition warning">
 <p class="admonition-title">¡Paso opcional!</p>
