@@ -2050,14 +2050,14 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 <h2 id="configurando-las-herramientas-de-desarrollo">Configurando las herramientas de desarrollo</h2>
 <p>Después de la instalación de las herramientas de desarrollo, necesitamos definir las configuraciones de cada una individualmente en el archivo <code>pyproject.toml</code>.</p>
 <h3 id="ruff">Ruff</h3>
-<p><a href="https://docs.astral.sh/ruff/" target="_blank">Ruff</a> es una herramienta moderna en python, escrita en rust, compatible<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">2</a></sup> con los proyectos de análisis estático escritos y mantenidos originalmente por la comunidad en el proyecto <a href="https://github.com/PyCQA/" target="_blank">PYCQA</a><sup id="fnref:4"><a class="footnote-ref" href="#fn:4">3</a></sup> y tiene dos funciones principales:</p>
+<p><a href="https://docs.astral.sh/ruff/" target="_blank">Ruff</a> es una herramienta moderna, escrita en rust, compatible<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">2</a></sup> con los proyectos de análisis estático escritos y mantenidos originalmente por la comunidad en el proyecto <a href="https://github.com/PyCQA/" target="_blank">PYCQA</a><sup id="fnref:4"><a class="footnote-ref" href="#fn:4">3</a></sup> y tiene dos funciones principales:</p>
 <ol>
-<li>Analizar el código de forma estática (Linter): Efectuar la verificación si estamos programando de acuerdo con buenas prácticas de python.</li>
+<li>Analizar el código de forma estática (Linter): Verificar si estamos programando de acuerdo con buenas prácticas de python.</li>
 <li>Formatear el código (Formatter): Efectuar la verificación del código para estandarizar un estilo de código predefinido.</li>
 </ol>
-<p>Para configurar el ruff armamos la configuración en 3 <a href="https://toml.io/es/v1.0.0#tabla" target="_blank">tablas</a> distintas en el archivo <code>pyproject.toml</code>. Una para las configuraciones globales, una para el linter y una para el formateador.</p>
+<p>Para configurar el ruff armamos la configuración en 3 <a href="https://toml.io/es/v1.0.0#tabla" target="_blank">tablas</a> distintas en el archivo <code>pyproject.toml</code>: una para las configuraciones globales, otra para el linter y otra para el formateador.</p>
 <p><strong>Configuración global</strong></p>
-<p>En la configuración global del Ruff queremos alterar solamente dos cosas. La longitud de línea a 79 caracteres (conforme sugerido en la <a href="https://peps.python.org/pep-0008/" target="_blank">PEP-8</a>) y, a continuación, informaremos que el directorio de migraciones de base de datos será ignorado en la verificación y en el formateo:</p>
+<p>En la configuración global de Ruff vamos a modificar solamente dos cosas. La longitud de línea a 79 caracteres (conforme sugerido en la <a href="https://peps.python.org/pep-0008/" target="_blank">PEP-8</a>) y, a continuación, informaremos que el directorio de migraciones de base de datos será ignorado en la verificación y en el formateo:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-22">22</a></span>
 <span class="normal"><a href="#__codelineno-36-23">23</a></span>
 <span class="normal"><a href="#__codelineno-36-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-36-22"><a id="__codelineno-36-22" name="__codelineno-36-22"></a><span class="k">[tool.ruff]</span>
@@ -2066,13 +2066,13 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 </span></code></pre></div></td></tr></table></div>
 <details class="example" open="open">
 <summary>Nota sobre "migrations"</summary>
-<p>En esta fase de configuración, excluiremos la carpeta <code>migrations</code>, esto puede no tener mucho sentido en este momento. Sin embargo, cuando iniciemos el trabajo con la base de datos, la herramienta <code>Alembic</code> hace generación de código automático. Por ser códigos generados automáticamente, no queremos alterar la configuración hecha por ella.</p>
+<p>En esta fase de configuración, excluiremos la carpeta <code>migrations</code>. Esto puede no tener mucho sentido en este momento. Sin embargo, cuando iniciemos el trabajo con la base de datos, la herramienta <code>Alembic</code> hace generación de código automático. Por ser códigos generados automáticamente, no queremos alterar la configuración hecha por ella.</p>
 </details>
 <p><strong>Linter</strong></p>
 <p>Durante el análisis estático del código, queremos buscar por cosas específicas. En Ruff, necesitamos decir exactamente qué debe analizar. Esto se hace por códigos. Usaremos estos:</p>
 <ul>
 <li><code>I</code> (<a href="https://pycqa.github.io/isort/" target="_blank">Isort</a>): Verificación de ordenamiento de imports en orden alfabético</li>
-<li><code>F</code> (<a href="https://github.com/PyCQA/pyflakes" target="_blank">Pyflakes</a>): Busca por algunos errores en relación a buenas prácticas de código</li>
+<li><code>F</code> (<a href="https://github.com/PyCQA/pyflakes" target="_blank">Pyflakes</a>): Busca algunos errores  relacionados a buenas prácticas de código</li>
 <li><code>E</code> (Errores <a href="https://pycodestyle.pycqa.org/en/latest/" target="_blank">pycodestyle</a>): Errores de estilo de código</li>
 <li><code>W</code> (Avisos <a href="https://pycodestyle.pycqa.org/en/latest/" target="_blank">pycodestyle</a>): Avisos de cosas no recomendadas en el estilo de código</li>
 <li><code>PL</code> (<a href="https://pylint.pycqa.org/en/latest/index.html" target="_blank">Pylint</a>): Como el <code>F</code>, también busca por errores en relación a buenas prácticas de código</li>
@@ -2085,10 +2085,10 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 </span><span id="__span-37-28"><a id="__codelineno-37-28" name="__codelineno-37-28"></a><span class="n">select</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">'I'</span><span class="p">,</span><span class="w"> </span><span class="s1">'F'</span><span class="p">,</span><span class="w"> </span><span class="s1">'E'</span><span class="p">,</span><span class="w"> </span><span class="s1">'W'</span><span class="p">,</span><span class="w"> </span><span class="s1">'PL'</span><span class="p">,</span><span class="w"> </span><span class="s1">'PT'</span><span class="p">]</span>
 </span></code></pre></div></td></tr></table></div>
 <blockquote>
-<p>Para más información sobre la configuración y sobre los códigos del ruff y de los proyectos del PyCQA, puedes chequear la <a href="https://docs.astral.sh/ruff/rules" target="_blank">documentación del ruff</a> o las documentaciones originales de los proyectos <a href="https://github.com/PyCQA" target="_blank">PyQCA</a>.</p>
+<p>Para más información sobre la configuración y sobre los códigos de ruff y de los proyectos del PyCQA, puedes chequear la <a href="https://docs.astral.sh/ruff/rules" target="_blank">documentación de ruff</a> o las documentaciones originales de los proyectos <a href="https://github.com/PyCQA" target="_blank">PyQCA</a>.</p>
 </blockquote>
 <p><strong>Formatter</strong></p>
-<p>El formateo del Ruff prácticamente no necesita ser alterado. Pues va a seguir las buenas prácticas y usar la configuración global de <code>79</code> caracteres por línea. La única alteración que haremos es el uso de comillas simples <code>'</code> en lugar de comillas dobles <code>"</code>:</p>
+<p>El formateo de Ruff prácticamente no necesita ser alterado, pues va a seguir las buenas prácticas y usar la configuración global de <code>79</code> caracteres por línea. La única alteración que haremos es el uso de comillas simples <code>'</code> en lugar de comillas dobles <code>"</code>:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-30">30</a></span>
 <span class="normal"><a href="#__codelineno-38-31">31</a></span>
 <span class="normal"><a href="#__codelineno-38-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-38-30"><a id="__codelineno-38-30" name="__codelineno-38-30"></a><span class="k">[tool.ruff.format]</span>
