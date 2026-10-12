@@ -123,7 +123,7 @@ def test_update_user(client, user):
 
 
 def test_update_integrity_error(client, user):
-    # Inserindo fausto
+    # Insertando un usuario con username fausto
     client.post(
         '/users',
         json={
@@ -133,7 +133,8 @@ def test_update_integrity_error(client, user):
         },
     )
 
-    # Alterando o user das fixture para fausto
+    # Modificando el username del user del fixture
+    # de bob a fausto
     response_update = client.put(
         f'/users/{user.id}',
         json={

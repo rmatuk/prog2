@@ -47,7 +47,7 @@ def test_get_current_user_does_not_exists__exercicio(client):
 
 ## Ejercicio 03
 
-Revisa los tests creados hasta la clase 5 y ve si todavía tienen sentido (tests involucrando `#!python 409`)
+Revisa los tests creados hasta la clase 5 para ver si todavía tienen sentido (tests involucrando `#!python 409`)
 
 ### Solución
 

@@ -13,6 +13,11 @@ El proyecto de la materia consiste en el desarrollo desde cero de una Web API. T
 4. [Configurando la base de dados y gestionando  migraciones con Alembic](04.md)
 5. [Integrando la base de datos a la API](05.md)
 6. [Autenticación y Autorización con JWT](06.md)
+7. [Containerizando nuestra aplicación e introduciendo PostgreSQL](11.md)
+
+## Equipo Docente
+- Rosana Matuk
+- Santiago Blas
 
 ## 📖 Licencia
 

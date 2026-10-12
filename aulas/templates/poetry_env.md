@@ -1,8 +1,8 @@
-    ```shell title="$ Ejecución en laterminal!"
+    ```shell title="$ Ejecución en la terminal"
     poetry env use {{short_version}}
     ```
 
-	En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión `{{short_version}}` en nuestro proyecto. Para eso, alteramos el archivo de configuración pyproject.toml en la raíz del proyecto:
+	En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión `{{short_version}}` en nuestro proyecto. Para ello, modificaremos el archivo de configuración pyproject.toml en la raíz del proyecto:
 
 	```toml title="pyproject.toml" linenums="9"
 	[project]

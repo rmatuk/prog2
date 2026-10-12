@@ -1,9 +1,9 @@
 	Para utilizar una versión específica de Python en nuestro ambiente, debemos solicitar a Poetry que instale esa versión:
-	```bash title="$ Ejecución en terminal!"
+	```bash title="$ Ejecución en terminal"
 	poetry python install {{short_version}}  #(1)!
 	```
 
-	1. Instala la última release da versión {{short_version}} de python
+	1. Instala la última release de la versión {{short_version}} de python
 	
 	Una respuesta similar a esta debe ser devuelta al ejecutar el comando:
 	

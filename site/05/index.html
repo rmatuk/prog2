@@ -16,7 +16,7 @@
         <link rel="prev" href="../04/">
       
       
-        <link rel="next" href="../ejercicios_resueltos/aula_01/">
+        <link rel="next" href="../06/">
       
       
         
@@ -642,10 +642,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#integrando-el-schema-al-model" class="md-nav__link">
+  <a href="#integrando-el-esquema-al-modelo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Integrando el Schema al Model
+        Integrando el Esquema al Modelo
       
     </span>
   </a>
@@ -821,6 +821,60 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autenticación y Autorización con JWT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containerizando nuestra aplicación e introduciendo PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -830,10 +884,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   
@@ -851,8 +905,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1002,6 +1056,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejercicios_resueltos/aula_06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios de la sección 06
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1137,10 +1219,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#integrando-el-schema-al-model" class="md-nav__link">
+  <a href="#integrando-el-esquema-al-modelo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Integrando el Schema al Model
+        Integrando el Esquema al Modelo
       
     </span>
   </a>
@@ -1335,7 +1417,7 @@
 <p>Después de haber establecido nuestros modelos y migraciones en la clase anterior, es hora de dar un paso significativo: la integración de la base de datos real con nuestra aplicación FastAPI. Dejaremos atrás la base de datos simulada que utilizamos hasta ahora y nos dedicaremos a la implementación de una base de datos real y plenamente operacional. Además, adaptaremos la estructura de nuestros tests para que sean compatibles con la base de datos, incluyendo la creación de nuevas fixtures.</p>
 <h2 id="integrando-sqlalchemy-a-nuestra-aplicacion-fastapi">Integrando SQLAlchemy a Nuestra Aplicación FastAPI</h2>
 <p>SQLAlchemy es una biblioteca Python que facilita la interacción con una base de datos SQL. Lo hace ofreciendo una forma de trabajar con bases de datos que aprovecha la facilidad y el poder de Python, al mismo tiempo que mantiene la eficiencia y la flexibilidad de las bases de datos SQL.</p>
-<p>Una pieza clave de SQLAlchemy es el concepto de una "sesión". Si eres nuevo en el mundo de las bases de datos, puedes pensar en la sesión como un carrito de compras virtual: conforme navegas por el sitio (o, en este caso, conforme tu código ejecuta), puedes agregar o remover ítems de ese carrito. Sin embargo, ningún cambio es realmente hecho hasta que decides finalizar la compra. En el contexto de SQLAlchemy, "finalizar la compra" es equivalente a hacer el commit de tus alteraciones.</p>
+<p>Una pieza clave de SQLAlchemy es el concepto de una "sesión". Si eres nuevo en el mundo de las bases de datos, puedes pensar en la sesión como un carrito de compras virtual: conforme navegas por el sitio (o, en este caso, conforme tu código ejecuta), puedes agregar o remover ítems de ese carrito. Sin embargo, ningún cambio es realmente hecho hasta que decides finalizar la compra. En el contexto de SQLAlchemy, "finalizar la compra" es equivalente a hacer el commit de tus modificaciones.</p>
 <p>La sesión en SQLAlchemy es tan poderosa que, en verdad, incorpora tres patrones de arquitectura importantes:</p>
 <ol>
 <li>
@@ -1345,11 +1427,11 @@
 <p><strong>Repositorio</strong>: La sesión también actúa como un repositorio. Esto significa que es como un portero: controla todas las comunicaciones entre tu código Python y la base de datos. Todos los comandos que deseas enviar a la base de datos deben pasar por la sesión.</p>
 </li>
 <li>
-<p><strong>Unidad de Trabajo</strong>: Finalmente, la sesión actúa como una unidad de trabajo. Esto significa que mantiene el control de todas las alteraciones que quieres hacer en la base de datos. Si agregas una fruta a tu carrito y después cambias de idea y la remueves, la sesión recordará ambas acciones. Entonces, cuando finalmente decidas finalizar la compra, enviará todas tus alteraciones a la base de datos de una sola vez.</p>
+<p><strong>Unidad de Trabajo</strong>: La sesión actúa también como una unidad de trabajo. Esto significa que mantiene el control de todas las modificaciones que quieres hacer en la base de datos. Si agregas una fruta a tu carrito y después cambias de idea y la remueves, la sesión recordará ambas acciones. Cuando decidas finalizar la compra, enviará todas tus modificaciones a la base de datos de una sola vez.</p>
 </li>
 </ol>
 <p>Entender estos conceptos es importante, pues nos ayuda a entender mejor cómo funciona SQLAlchemy y cómo podemos usarlo de forma más eficaz. Ahora que tenemos una idea de lo que es una sesión, configuraremos una para nuestro proyecto.</p>
-<p>Para eso, crearemos la función <code>get_session</code> y también definiremos <code>Session</code> en el archivo <code>database.py</code>:</p>
+<p>Para ello, crearemos la función <code>get_session</code> y también definiremos <code>Session</code> en el archivo <code>database.py</code>:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/database.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -1379,11 +1461,11 @@
 <p>Así como la sesión SQLAlchemy, que implementa varios patrones arquitecturales importantes, FastAPI también usa un concepto de patrón arquitectural llamado "Inyección de Dependencia".</p>
 <p>En el mundo del desarrollo de software, una "dependencia" es un componente que un módulo de software necesita para realizar su función. Imagina un módulo como una fábrica y las dependencias como las partes o materias primas que la fábrica necesita para producir sus productos. En vez de que la fábrica tenga que buscar o fabricar esas piezas por cuenta propia, ellas son entregadas a la fábrica, listas para ser usadas. Este es el concepto de Inyección de Dependencia.</p>
 <p>La Inyección de Dependencia permite que mantengamos un bajo nivel de acoplamiento entre diferentes módulos de un sistema. Las dependencias entre los módulos no son definidas en el código, sino por la configuración de una infraestructura de software (container) responsable de "inyectar" en cada componente sus dependencias declaradas.</p>
-<p>En términos prácticos, lo que esto significa es que, en vez de que cada parte de nuestro código tenga que crear sus propias instancias de clases o servicios de los que depende (lo que puede llevar a duplicación de código y tornar los tests más difíciles), esas instancias son creadas una vez y después inyectadas donde son necesarias.</p>
+<p>En términos prácticos, lo que esto significa es que, en vez de que cada parte de nuestro código tenga que crear sus propias instancias de clases o servicios de los que depende (lo que puede llevar a duplicación de código y tornar los tests más difíciles), esas instancias son creadas una vez y después inyectadas donde sean necesarias.</p>
 <p>FastAPI proporciona la función <code>Depends</code> para ayudar a declarar y gestionar esas dependencias. Es una manera declarativa de decirle a FastAPI: "Antes de ejecutar esta función, ejecuta primero esa otra función y pásame el resultado". Esto es especialmente útil cuando tenemos operaciones que necesitan ser realizadas antes de cada request, como abrir una sesión de base de datos.</p>
 <h2 id="modificando-el-endpoint-post-users">Modificando el Endpoint POST /users</h2>
 <p>Ahora que tenemos nuestra sesión de base de datos gestionada por medio de FastAPI y de la inyección de dependencias, actualizaremos nuestros endpoints para poder aprovechar eso. Comenzaremos con la ruta de POST para la creación de usuarios. En vez de usar la base de datos falsa que creamos inicialmente, ahora haremos la inserción real de los usuarios en nuestra base de datos.</p>
-<p>Para eso, vamos a modificar nuestro endpoint de la siguiente manera:</p>
+<p>Para ello, vamos a modificar nuestro endpoint de la siguiente manera:</p>
 <div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPStatus</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Depends</span><span class="p">,</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span>
@@ -1428,7 +1510,7 @@
 </span></code></pre></div>
 <ol>
 <li><code class="language-python highlight"><span class="n">session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_session</span><span class="p">)</span></code> dice que la función <code>get_session</code> será ejecutada antes de la ejecución de la función y el valor retornado por <code>get_session</code> será atribuido al parámetro <code>session</code>.</li>
-<li>Hace una búsqueda por <code>User</code> donde (<code>where</code>) el username es igual al que vino en el request, o (<code>|</code>) el email es igual al que vino en el request. La búsqueda tiene el objetivo de encontrar un registro que tenga o el email o el username registrado. Como ellos deben ser únicos en la base de datos, necesitamos validar para ver si no están ya en la base de datos.</li>
+<li>Hace una búsqueda por <code>User</code> donde (<code>where</code>) el username es igual al que vino en el request, o (<code>|</code>) el email es igual al que vino en el request. La búsqueda tiene el objetivo de encontrar un registro que tenga o el email o el username ya registrados. Como ellos deben ser únicos en la base de datos, necesitamos verificar que no estén ya en la base de datos.</li>
 <li>Lanzamos una excepción, si el username o si es el email ya existen.</li>
 </ol>
 <p>Analicemos este código cuidadosamente, ya que diversas e importantes cosas están sucediendo aquí:</p>
@@ -1437,14 +1519,14 @@
       <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/users/'</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">CREATED</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">UserPublic</span><span class="p">)</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">UserSchema</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_session</span><span class="p">)):</span>
 </span></code></pre></div></li>
-<li><strong>Búsqueda en la base de datos</strong>: el primer paso de la solicitud es la verificación de los campos que definimos como <code>unique</code> en el <a href="../04/#configuraciones-de-columnas" target="_blank">modelo Users</a>. Entonces, haremos una búsqueda por los dos campos que definimos como únicos: <code>email</code> y <code>username</code>. Para ver si alguno de ellos ya fue registrado en la base anteriormente:
+<li><strong>Búsqueda en la base de datos</strong>: el primer paso de la solicitud es la verificación de los campos que definimos como <code>unique</code> en el <a href="../04/#configuraciones-de-columnas" target="_blank">modelo Users</a>. Esto es, haremos una búsqueda por los dos campos que definimos como únicos: <code>email</code> y <code>username</code>, para ver si alguno de ellos ya fue registrado en la base anteriormente:
       <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">db_user</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">scalar</span><span class="p">(</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">select</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="p">)</span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">)</span>
 </span></code></pre></div></li>
-<li><strong>Validación existencial de registro</strong>: la función <code>scalar</code> puede retornar un objeto o <code class="language-python highlight"><span class="kc">None</span></code>. Entonces hacemos una validación para ver si el registro fue encontrado. Caso sea encontrado hacemos dos validaciones. Si el <code>username</code> o el <code>email</code> ya existe en la base, levanta un <code class="language-python highlight"><span class="k">raise</span></code>. Un error es retornado para avisar que o el campo <code>email</code>, o el campo <code>username</code> ya constan en la base de datos.
+<li><strong>Validación existencial de registro</strong>: la función <code>scalar</code> puede retornar un objeto o <code class="language-python highlight"><span class="kc">None</span></code>. Entonces hacemos una validación para ver si el registro fue encontrado. Caso sea encontrado hacemos dos validaciones. Si el <code>username</code> o el <code>email</code> ya existe en la base, levanta un <code class="language-python highlight"><span class="k">raise</span></code>: un error es retornado para avisar que o el campo <code>email</code>, o el campo <code>username</code> ya constan en la base de datos.
       <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">if</span> <span class="n">db_user</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">if</span> <span class="n">db_user</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">:</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
@@ -1476,8 +1558,8 @@
 </ul>
 <p>Tras todo esto, tenemos una integración entre el método POST de la API y una inserción en la base de datos.</p>
 <h3 id="testeando-el-endpoint-post-users-con-pytest-y-fixtures">Testeando el Endpoint POST /users con Pytest y Fixtures</h3>
-<p>Ahora que nuestra ruta de POST está funcionando con la base de datos real, necesitamos actualizar nuestros tests para reflejar ese cambio. Como estamos usando la inyección de dependencias, necesitamos también usar esa funcionalidad en nuestros tests para poder inyectar la sesión de base de datos de test.</p>
-<p>Alteraremos nuestro fixture <code>client</code> para substituir la función <code>get_session</code> que estamos inyectando en el endpoint por la sesión de la base en memoria que ya habíamos definido para base de datos.</p>
+<p>Ahora que nuestra ruta de POST está funcionando con una base de datos real, necesitamos actualizar nuestros tests para reflejar ese cambio. Como estamos usando la inyección de dependencias, necesitamos también usar esa funcionalidad en nuestros tests para poder inyectar la sesión de base de datos de test.</p>
+<p>Modificaremos nuestro fixture <code>client</code> para substituir la función <code>get_session</code> que estamos inyectando en el endpoint por la sesión de la base en memoria que ya habíamos definido para base de datos.</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/conftest.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -1523,11 +1605,11 @@
 </span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22"></a><span class="c1"># ...</span>
 </span></code></pre></div></td></tr></table></div>
 <ol>
-<li>Creamos una función para retornar nuestro fixture de <a href="../04/#creando-una-fixture-para-interacciones-con-la-base-de-datos" target="_blank"><code>session</code></a> definido anteriormente.</li>
+<li>Creamos una función para retornar nuestro fixture de <a href="../04/#creando-un-fixture-para-interacciones-con-la-base-de-datos" target="_blank"><code>session</code></a> definido anteriormente.</li>
 <li>Substituimos la función <code>get_session</code> que usamos para la aplicación real, por nuestra función que retorna el fixture de tests.</li>
 <li>Limpia la sobrescritura que hicimos en el app para usar el fixture de <code>session</code>.</li>
 </ol>
-<p>Con esto, cuando FastAPI intente inyectar la sesión en nuestros endpoints, inyectará la sesión de test que definimos, en vez de la sesión real. Y como estamos usando una base de datos en memoria para los tests, nuestros tests no van a interferir en los datos reales de nuestra aplicación.</p>
+<p>Con esto, cuando FastAPI intente inyectar la sesión en nuestros endpoints, inyectará la sesión de test que definimos, en vez de la sesión real. Y como estamos usando una base de datos en memoria para los tests, nuestros tests no van a interferir con los datos reales de nuestra aplicación.</p>
 <div class="language-python highlight"><span class="filename">tests/test_app.py</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_create_user</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="s1">'/users'</span><span class="p">,</span>
@@ -1552,7 +1634,7 @@
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>tests/test_app.py::test_root_deve_retornar_ok_e_ola_mundo<span class="w"> </span>PASSED
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>tests/test_app.py::test_create_user<span class="w"> </span>FAILED
 </span></code></pre></div>
-<p>Nuestro test todavía no consigue ser ejecutado, pero existe un motivo para eso.</p>
+<p>Nuestro test todavía no consigue ser ejecutado exitosamente, pero existe un motivo para eso.</p>
 <h4 id="threads-y-conexiones">Threads y conexiones</h4>
 <p>En el entorno de tests de FastAPI, la aplicación y los tests pueden correr en threads diferentes. Esto puede llevar a un error con SQLite, pues los objetos SQLite creados en un thread sólo pueden ser usados en el misma thread.</p>
 <p>Para soslayar esto, agregaremos los siguientes parámetros en la creación del <code>engine</code>:</p>
@@ -1605,14 +1687,14 @@
 </span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="n">skip</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">limit</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'users'</span><span class="p">:</span> <span class="n">users</span><span class="p">}</span>
 </span></code></pre></div>
-<p>En este código, agregamos algunas funcionalidades esenciales para la búsqueda de datos. Los parámetros <code>offset</code> y <code>limit</code> son utilizados para paginar los resultados, lo que es especialmente útil cuando se tiene un gran volumen de datos. </p>
+<p>En este código, agregamos algunas funcionalidades esenciales para la búsqueda de datos. Los parámetros <code>skip</code> y <code>limit</code> son utilizados para paginar los resultados, lo que es especialmente útil cuando se tiene un gran volumen de datos. </p>
 <ul>
-<li><code>offset</code> permite saltar un número específico de registros antes de comenzar a buscar, lo que es útil para implementar la navegación por páginas.</li>
+<li><code>skip</code> permite saltar un número específico de registros antes de comenzar a buscar, lo que es útil para implementar la navegación por páginas.</li>
 <li><code>limit</code> define el número máximo de registros a ser retornados, permitiendo que controles la cantidad de datos enviados en cada respuesta.</li>
 </ul>
-<p>Los parámetros siendo pasados en la función, como <code>skip</code> y <code>limit</code>, se tornan parámetros de <a href="https://en.wikipedia.org/wiki/Query_string" target="_blank">query</a>. Si miramos en el swagger. Podemos ver que esto ahora es parametrizable durante la llamada:</p>
+<p>Los parámetros <code>skip</code> y <code>limit</code> pasados en la función se transforman en parámetros de la <a href="https://en.wikipedia.org/wiki/Query_string" target="_blank">query</a>. Si miramos en el swagger podemos ver que éste es ahora parametrizable durante la llamada:</p>
 <p><img alt="Captura de pantalla del endpoint de get /users exhibiendo los campos limit y offset" class="center shadow" src="../assets/05/parametros_limit_e_offset_no_swagger.png" width="600" /></p>
-<p>Esto hace que las llamadas para el endpoint puedan ser realizadas de esta forma: <code>http://localhost:8000/users/?skip=0&amp;limit=100</code>. Pasando <code>skip=0</code> o <code>limit=100</code>. Estos valores pueden cambiar la cantidad y los registros que serán retornados por la base de datos. Por defecto serán retornados <code>100</code> registros iniciando en el <code>0</code>.</p>
+<p>Por ejemplo, pasando <code>skip=0</code> y <code>limit=100</code>, la llamadas para el endpoint es realizadas de esta forma: <code>http://localhost:8000/users/?skip=0&amp;limit=100</code>. Estos parámetros pueden cambiar la cantidad y los registros que serán retornados por la base de datos. Por defecto serán retornados <code>100</code> registros iniciando en el <code>0</code>.</p>
 <blockquote>
 <p>Insertá distintos valores en la base de datos y testeá la variación de los parámetros. </p>
 </blockquote>
@@ -1670,10 +1752,10 @@
 </span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>tests/test_app.py::test_read_users<span class="w"> </span>PASSED
 </span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>tests/test_app.py::test_read_users_with_users<span class="w"> </span>FAILED
 </span></code></pre></div>
-<p>Sin embargo, aunque nuestro código parezca correcto, podemos encontrar un problema: Pydantic no consigue convertir directamente nuestro modelo SQLAlchemy a un modelo Pydantic. Resolveremos esto ahora.</p>
-<h3 id="integrando-el-schema-al-model">Integrando el Schema al Model</h3>
+<p>Sin embargo, aunque nuestro código parezca correcto, hay un problema: Pydantic no consigue convertir directamente nuestro modelo SQLAlchemy a un esquema Pydantic. Resolveremos esto ahora.</p>
+<h3 id="integrando-el-esquema-al-modelo">Integrando el Esquema al Modelo</h3>
 <p>La integración directa del ORM con nuestro esquema Pydantic no es inmediata y exige algunas modificaciones. Pydantic, por defecto, no sabe cómo lidiar con los modelos de SQLAlchemy, lo que nos lleva al error observado en los tests.</p>
-<p>La solución para ese problema es hacer una alteración en el esquema <code>UserPublic</code> que utilizamos, para que pueda reconocer y trabajar con los modelos de SQLAlchemy. Esto permite la conversión directa de objetos de SQLAlchemy en esquemas Pydantic.</p>
+<p>La solución para ese problema es hacer una modificación en el esquema <code>UserPublic</code> que utilizamos, para que pueda reconocer y trabajar con los modelos de SQLAlchemy. Esto permite la conversión directa de objetos de SQLAlchemy en esquemas Pydantic.</p>
 <p>Para eso, agregaremos la línea <code>model_config = ConfigDict(from_attributes=True)</code> a nuestro esquema:</p>
 <div class="language-py highlight"><span class="filename">fast_zero/schemas.py</span><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ConfigDict</span><span class="p">,</span> <span class="n">EmailStr</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
@@ -1685,7 +1767,7 @@
 </span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span>
 </span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="hll">    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">from_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></span></code></pre></div>
-<p>De esta forma la conversión entre modelos y schemas se hace correctamente. Vamos a ejecutar los tests para validar:</p>
+<p>De esta forma, la conversión entre modelos SQLAlchemy y esquemas Pydantic se hace correctamente. Vamos a ejecutar los tests para validar:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1"># ...</span>
@@ -1719,8 +1801,8 @@
 </span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>    <span class="k">return</span> <span class="n">db_user</span>
 </span></code></pre></div>
 <p>Semejante a lo que hicimos antes, estamos inyectando la sesión de SQLAlchemy en nuestro endpoint y utilizándola para buscar el usuario a ser actualizado. Si el usuario no es encontrado, retornamos un error 404.</p>
-<p>Las líneas destacadas muestran que estamos atribuyendo nuevos valores a los atributos <code>username</code>, <code>password</code> y <code>email</code>. Esta operación, seguida de un commit, altera los valores existentes en la base. Es como si la atribución nueva, fuera una actualización del dato de la tabla.</p>
-<p>Antes de partir para el próximo paso, al ejecutar nuestro linter, él mostrará un error informando que importamos <code>UserDB</code> pero nunca lo usamos.</p>
+<p>Las líneas destacadas muestran que estamos atribuyendo nuevos valores a los atributos <code>username</code>, <code>password</code> y <code>email</code>. Esta operación, seguida de un commit, altera los valores existentes en la base. Es como si la atribución nueva fuera una actualización del dato de la tabla.</p>
+<p>Antes de partir para el próximo paso, al ejecutar nuestro linter, mostrará un error informando que importamos <code>UserDB</code> pero nunca lo usamos.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>poetry<span class="w"> </span>lint
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>fast_zero/app.py:9:40:<span class="w"> </span>F401<span class="w"> </span><span class="o">[</span>*<span class="o">]</span><span class="w"> </span><span class="sb">`</span>fast_zero.schemas.UserDB<span class="sb">`</span><span class="w"> </span>imported<span class="w"> </span>but<span class="w"> </span>unused
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Found<span class="w"> </span><span class="m">1</span><span class="w"> </span>error.
@@ -1742,7 +1824,7 @@
 <p>Esto ocurre porque la ruta PUT era la única que estaba utilizando UserDB, y ahora que modificamos esta ruta, podemos remover UserDB de nuestros imports y también excluir su definición en el archivo <code>fast_zero/schemas.py</code></p>
 <details class="note">
 <summary>Sobre el archivo <code>fast_zero/schemas.py</code></summary>
-<p>En caso de que quedes en duda sobre qué remover, tu archivo <code>fast_zero/schemas.py</code> debe estar parecido con esto, después de la remoción de <code>UserDB</code>:</p>
+<p>En caso de que te queden dudas sobre qué remover, tu archivo <code>fast_zero/schemas.py</code> debe ser parecido a esto, después de la remoción de <code>UserDB</code>:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">schemas.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -1807,10 +1889,10 @@
 </span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>    <span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>Agregaremos el fixture <code>user</code> que ya efectúa la creación de un registro en la base de datos.</li>
+<li>Agregaremos el fixture <code>user</code> que provee la creación de un registro en la base de datos.</li>
 </ol>
 <h3 id="el-caso-del-conflicto">El caso del conflicto</h3>
-<p>Aunque parezca que está todo correcto y que el test está siendo ejecutado con éxito, existe un caso que no fue considerado en el test del update. Algunos datos en nuestro modelo (<code>username</code> y <code>email</code>) están marcados como <code>unique</code> en la base de datos. Esto puede ocasionar un error en potencial, en el caso de que alguien modifique esos valores para un valor ya existente.</p>
+<p>Aunque parezca que todo está correcto y que el test está siendo ejecutado con éxito, existe un caso que no fue considerado en el test del update. Algunos datos en nuestro modelo (<code>username</code> y <code>email</code>) están marcados como <code>unique</code> en la base de datos. Esto puede ocasionar un error en potencial, en el caso de que alguien modifique esos valores para un valor ya existente.</p>
 <p>Por ejemplo, imagina que dos personas se registraron en nuestra aplicación. Una con <code class="language-py highlight"><span class="p">{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'faustino'</span><span class="p">}</span></code> y otra con <code class="language-py highlight"><span class="p">{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'dunossauro'</span><span class="p">}</span></code>. Hasta ese momento, no tendríamos ningún problema.</p>
 <p>¿Pero qué sucedería si "faustino" hiciera un update y quisiera llamarse "dunossauro"?</p>
 <p>Vamos a iniciar la escritura de un escenario de tests que contemple eso para que quede más claro:</p>
@@ -1859,7 +1941,7 @@
 </span><span id="__span-24-17"><a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<span class="w"> </span>stopping<span class="w"> </span>after<span class="w"> </span><span class="m">1</span><span class="w"> </span>failures<span class="w"> </span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 </span></code></pre></div>
 <p>El error fue iniciado por sqlalchemy. Como podemos constatar en el mensaje de error: <code class="language-python highlight"><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span> <span class="p">(</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">)</span> <span class="n">UNIQUE</span> <span class="n">constraint</span> <span class="n">failed</span><span class="p">:</span> <span class="n">users</span><span class="o">.</span><span class="n">username</span><span class="o">.</span></code></p>
-<p>Traduciendo de forma literal, dijo que tenemos un problema de integridad: <code>falla en la restricción UNIQUE: users.username</code>. Esto sucede, pues tenemos la restricción UNIQUE en el campo <code>username</code> de la tabla <code>users</code>. Cuando agregamos el mismo nombre a un registro que ya existía, causamos un error de integridad.</p>
+<p>Traduciendo de forma literal, dijo que tenemos un problema de integridad: <code>falla en la restricción UNIQUE: users.username</code>. Esto sucede porque tenemos la restricción UNIQUE en el campo <code>username</code> de la tabla <code>users</code>. Cuando agregamos el mismo nombre a un registro que ya existía causamos un error de integridad.</p>
 <p>Una forma de evitar el error es considerando la posibilidad de que suceda. Para eso, podríamos crear un flujo esperando esa excepción en el endpoint. Algo como:</p>
 <div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.exc</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntegrityError</span>
 </span></span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
@@ -1933,7 +2015,7 @@
 </span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'User deleted'</span><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>El método <code>delete</code> de la session agrega una operación de borrado en la sesión. Luego, el método <code>commit</code> es llamado para que la operación sea persistida en la base.</li>
+<li>El método <code>delete</code> de la session realiza una operación de borrado en la sesión. Luego, el método <code>commit</code> es llamado para que la operación sea persistida en la base.</li>
 </ol>
 <p>En este caso, estamos nuevamente usando la sesión de SQLAlchemy para encontrar el usuario a ser borrado y luego excluimos a ese usuario de la base de datos.</p>
 <h3 id="agregando-tests-para-delete">Agregando tests para DELETE</h3>
@@ -2027,7 +2109,7 @@
 <p><a class="md-button" href="https://github.com/rmatuk/prog2/tree/main/codigo_aulas/05">Código <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M360.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m64.6 136.1c-12.5 12.5-12.5 32.8 0 45.3l73.4 73.4-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0zm-274.7 0c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l73.3-73.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span></a></p>
 <h2 id="conclusion">Conclusión</h2>
 <p>¡Felicitaciones por llegar al final de esta clase! Diste un paso significativo en el desarrollo de nuestra aplicación, substituyendo la implementación de la base de datos falsa por la integración con una base de datos real usando SQLAlchemy. También vimos cómo ajustar nuestros tests para considerar esta nueva realidad.</p>
-<p>En esta clase, abordamos cómo modificar los endpoints para interactuar con la base de datos real y cómo utilizar la inyección de dependencias de FastAPI para gestionar nuestras sesiones de SQLAlchemy. También discutimos la importancia de los tests para garantizar que nuestros endpoints están funcionando correctamente, y cómo los fixtures de Pytest pueden auxiliarnos en la preparación del entorno para estos tests.</p>
+<p>En esta clase, abordamos cómo modificar los endpoints para interactuar con la base de datos real y cómo utilizar la inyección de dependencias de FastAPI para gestionar nuestras sesiones de SQLAlchemy. También discutimos la importancia de los tests para garantizar que nuestros endpoints estén funcionando correctamente, y cómo los fixtures de Pytest pueden auxiliarnos en la preparación del entorno para estos tests.</p>
 <p>Además, nos deparamos con situaciones donde Pydantic y SQLAlchemy no interactúan perfectamente bien, y cómo solucionar esos casos.</p>
 <p>Al final de esta clase, debes estar confortable en integrar una base de datos real a una aplicación FastAPI, saber cómo escribir tests robustos que tomen en consideración la interacción con la base de datos, y estar preparado para posibles desafíos al trabajar con Pydantic y SQLAlchemy juntos.</p>
 

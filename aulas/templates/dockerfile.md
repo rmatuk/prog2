@@ -9,11 +9,11 @@
 	CMD uvicorn --host 0.0.0.0 fast_zero.app:app
 	```
 
-	Aqui está o que cada linha faz:
+	Aquí está lo que hace cada línea:
 
-	1. `FROM python:{{short_version}}-slim`: define a imagem base para nosso contêiner. Estamos usando a versão slim da imagem do Python {{short_version}}, que tem tudo que precisamos para rodar nossa aplicação.
-	2. `WORKDIR app/`: define o diretório em que executaremos os comandos a seguir.
-	3. `COPY . .`: copia todos os arquivos do diretório atual para o contêiner.
-	4. `RUN pip install .`: instala as dependências do nosso projeto. Somente as de `project.dependencies`, sem os grupos de opcionais.
-	5. `EXPOSE 8000`: informa ao Docker que o contêiner escutará na porta 8000.
-	6. `CMD uvicorn --host 0.0.0.0 fast_zero.app:app`: define o comando que será executado quando o contêiner for iniciado.
+	1. `FROM python:{{short_version}}-slim`: define la imagen base para nuestro contenedor. Estamos usando la versión slim de la imagen de Python {{short_version}}, que tiene todo lo que necesitamos para ejecutar nuestra aplicación.
+	2. `WORKDIR app/`: define el directorio en el que ejecutaremos los comandos a continuación.
+	3. `COPY . .`: copia todos los archivos del directorio actual al contenedor.
+	4. `RUN pip install .`: instala las dependencias de nuestro proyecto. Solo las de `project.dependencies`, sin los grupos de opcionales.
+	5. `EXPOSE 8000`: informa a Docker que el contenedor escuchará en el puerto 8000.
+	6. `CMD uvicorn --host 0.0.0.0 fast_zero.app:app`: define el comando que será ejecutado cuando el contenedor sea iniciado.

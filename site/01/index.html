@@ -949,6 +949,60 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autenticación y Autorización con JWT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containerizando nuestra aplicación e introduciendo PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -958,10 +1012,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   
@@ -979,8 +1033,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1117,6 +1171,34 @@
     
   
     Ejercicios de la sección 05
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejercicios_resueltos/aula_06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios de la sección 06
   
 
     
@@ -1585,42 +1667,41 @@
 <li>Introducción al entorno de desarrollo (terminal, herramientas, etc.)</li>
 <li>Instalación de FastAPI y sus dependencias</li>
 <li>Configuración de las herramientas de desarrollo</li>
-<li>Ejecución del primer "Hello, World!" con FastAPI con tests!</li>
+<li>Ejecución del primer "Hello, World!" de FastAPI con tests</li>
 </ul>
 <hr />
 <p>En esta sección, iniciaremos nuestro recorrido para la construcción de una API con FastAPI. Partiremos de lo básico, configurando nuestro entorno de desarrollo. Discutiremos desde la elección e instalación de la versión correcta de Python hasta la instalación y configuración de Poetry, un gestor de paquetes y dependencias para Python. Además, instalaremos y configuraremos una serie de herramientas de desarrollo útiles, como Ruff, pytest y poethepoet.</p>
 <p>Después de configurar nuestro entorno, crearemos nuestro primer programa "Hello, World!" con FastAPI. Esto nos permitirá verificar que todo esté funcionando correctamente. Y, finalmente, exploraremos una parte crucial del Desarrollo Orientado por Tests (TDD), escribiendo nuestro primer test con Pytest.</p>
 <h2 id="entorno-de-desarrollo">Entorno de Desarrollo</h2>
-<p>Necesitas algunas herramientas instaladas:</p>
+<p>Necesitaremos algunas herramientas instaladas:</p>
 <ol>
-<li>Un editor de texto a tu elección </li>
-<li>Una terminal a tu elección </li>
+<li>Algún editor de texto (a tu elección) </li>
+<li>Una terminal (a tu elección) </li>
 <li>Python, en una versión <a href="https://devguide.python.org/versions/">oficialmente soportada</a>.</li>
 <li><a href="https://git-scm.com/" target="_blank">Git</a>: Para gestionar versiones del proyecto.</li>
 <li><a href="https://www.docker.com/" target="_blank">Docker</a>: Para crear un container de la aplicación.</li>
-<li><strong>OPCIONAL (extremadamente recomendado)</strong>: El <a href="https://cli.github.com/" target="_blank">gh</a> para crear el repositorio y hacer cambios sin necesitar acceder a la página de Github</li>
+<li>OPCIONAL (recomendado): El <a href="https://cli.github.com/" target="_blank">GitHub Cli</a> para crear el repositorio y hacer cambios por terminal sin necesitar acceder a la página de Github</li>
 </ol>
 <h2 id="pipx">pipx</h2>
-<p>El <a href="https://pipx.pypa.io/latest/" target="_blank">pipx</a> es una herramienta usada para instalar y ejecutar herramientas Python globalmente en el sistema de forma segura. Diferente del <strong>pip</strong>, que instala herramientas sin un entorno virtual (por defecto) y puede "ensuciar" nuestro entorno, el <code>pipx</code> crea un entorno virtual y aísla cada herramienta dentro de él, facilitando la instalación de paquetes globales.</p>
-<p>Podemos usar el <strong>pipx</strong> para instalar herramientas globales y ejecutar algunas que se usarán solo una vez.</p>
-<p>Para instalar el pipx:</p>
+<p>La aplicación <a href="https://pipx.pypa.io/latest/" target="_blank">pipx</a> sirve para instalar y ejecutar herramientas Python globalmente en el sistema de forma segura. Diferente de <strong>pip</strong>, que instala herramientas sin un entorno virtual (por defecto) y puede "ensuciar" nuestro entorno, <code>pipx</code> crea un entorno virtual y aísla cada herramienta que instala dentro de él, facilitando la instalación de paquetes globales.</p>
+<p>Para instalar pipx:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>pipx
 </span></code></pre></div>
 <p>De esta forma, la única dependencia global que tendremos en nuestro sistema será el propio <code>pipx</code>.</p>
 <details class="warning" open="open">
-<summary>Existen otras formas de instalar el pipx</summary>
-<p>En caso de que tengas un gestor de paquetes en tu sistema operativo, es <strong>extremadamente</strong> recomendado que instales el <code>pipx</code> por él.</p>
+<summary>Otras formas de instalar pipx</summary>
+<p>En caso de que tengas un gestor de paquetes en tu sistema operativo, es <strong>extremadamente</strong> recomendado que instales <code>pipx</code> mediante el mismo.</p>
 <p>Las instrucciones de instalación para cada sistema están disponibles en la <a href="https://pipx.pypa.io/latest/how-to/install-pipx.html" target="_blank">documentación del proyecto</a>.</p>
 </details>
-<p>Para que nuestro sistema reconozca el camino de las herramientas instaladas vía <code>pipx</code> podemos ejecutar el comando:</p>
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pipx<span class="w"> </span>ensurepath<span class="w"> </span><span class="c1">#(1)!</span>
+<p>Para que nuestro sistema encuentre las herramientas instaladas vía <code>pipx</code> podemos ejecutar el comando:</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pipx<span class="w"> </span>ensurepath<span class="w"> </span><span class="c1">#(1)!</span>
 </span></code></pre></div>
 <ol>
-<li>Agrega el directorio de los entornos virtuales del <code>pipx</code> al <code>PATH</code> del sistema.</li>
+<li>Agrega el directorio de los entornos virtuales de <code>pipx</code> al <code>PATH</code> del sistema.</li>
 </ol>
-<p>Este comando agrega al <code>PATH</code> del sistema todos los binarios instalados por el <code>pipx</code> 🚨. Por lo tanto, recuerda reiniciar el shell después de ejecutarlo.</p>
+<p>Este comando agrega al <code>PATH</code> del sistema todos los binarios instalados por <code>pipx</code> 🚨. Para ello, debes reiniciar el shell después de ejecutarlo.</p>
 <h2 id="poetry">Poetry</h2>
-<p>El <a href="https://python-poetry.org/" target="_blank">Poetry</a> es un gestor de proyectos para Python. Puede ayudarnos en diversas etapas del ciclo de desarrollo, como la instalación de versiones específicas de Python, la creación y mantenimiento de proyectos (incluyendo la definición de estructuras de carpetas, la gestión de entornos virtuales y la instalación de bibliotecas), además de permitir la publicación de paquetes y mucho más.</p>
+<p><a href="https://python-poetry.org/" target="_blank">Poetry</a> es un gestor de proyectos para Python. Puede ayudarnos en diversas etapas del ciclo de desarrollo, como la instalación de versiones específicas de Python, la creación y mantenimiento de proyectos (incluyendo la definición de estructuras de carpetas, la gestión de entornos virtuales y la instalación de bibliotecas), además de permitir la publicación de paquetes y mucho más.</p>
 <p>En nuestro proyecto, será el componente central para agrupar y ejecutar todas las tareas relacionadas al proyecto.</p>
 <h3 id="instalacion-de-poetry">Instalación de Poetry</h3>
 <p>La instalación de Poetry puede hacerse de diversas maneras, pero para una instalación global y aislada en un entorno virtual, debe hacerse vía <code>pipx</code>:</p>
@@ -1638,16 +1719,16 @@
 <p><img alt="" class="center shadow" src="../assets/01/tips_blocos_de_codigo.png" /></p>
 </details>
 <h3 id="gestion-de-versiones-de-python">Gestión de versiones de Python</h3>
-<p>Después de la instalación de Poetry, podemos utilizarlo para gestionar e instalar versiones de Python que deseamos usar en un proyecto. Para este curso, la versión mínima de Python que debes tener es la <code class="language-python highlight"><span class="mf">3.11</span></code>, porque algunos recursos que utilizaremos fueron introducidos en esa versión.</p>
-<p>Puedes, sin embargo, instalar cualquier versión más nueva. Mi recomendación es <strong>siempre que sea posible</strong>, usa la versión más actualizada posible:</p>
+<p>Después de instalar Poetry, podemos utilizarlo para gestionar e instalar las versiones de Python que deseemos usar en el proyecto. Para este curso, la versión mínima de Python que debes tener es la <code class="language-python highlight"><span class="mf">3.11</span></code>, porque algunos recursos que utilizaremos fueron introducidos en esa versión.</p>
+<p>Puedes, sin embargo, instalar cualquier versión más nueva. La recomendación es, <strong>siempre que sea posible</strong>, usar la versión más actualizada posible:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Versión 3.14</label><label for="__tabbed_1_2">Versión 3.13</label><label for="__tabbed_1_3">Versión 3.12</label><label for="__tabbed_1_4">Versión 3.11</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Para utilizar una versión específica de Python en nuestro ambiente, debemos solicitar a Poetry que instale esa versión:
-<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal!</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.14<span class="w">  </span><span class="c1">#(1)!</span>
+<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.14<span class="w">  </span><span class="c1">#(1)!</span>
 </span></code></pre></div></p>
 <ol>
-<li>Instala la última release da versión 3.14 de python</li>
+<li>Instala la última release de la versión 3.14 de python</li>
 </ol>
 <p>Una respuesta similar a esta debe ser devuelta al ejecutar el comando:</p>
 <div class="language-bash highlight"><span class="filename">Respuesta del comando `poetry python install`</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Downloading<span class="w"> </span>and<span class="w"> </span>installing<span class="w"> </span><span class="m">3</span>.14.0<span class="w"> </span><span class="o">(</span>cpython<span class="o">)</span><span class="w"> </span>...<span class="w"> </span>Done<span class="w"> </span>
@@ -1656,10 +1737,10 @@
 </div>
 <div class="tabbed-block">
 <p>Para utilizar una versión específica de Python en nuestro ambiente, debemos solicitar a Poetry que instale esa versión:
-<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal!</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.13<span class="w">  </span><span class="c1">#(1)!</span>
+<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.13<span class="w">  </span><span class="c1">#(1)!</span>
 </span></code></pre></div></p>
 <ol>
-<li>Instala la última release da versión 3.13 de python</li>
+<li>Instala la última release de la versión 3.13 de python</li>
 </ol>
 <p>Una respuesta similar a esta debe ser devuelta al ejecutar el comando:</p>
 <div class="language-bash highlight"><span class="filename">Respuesta del comando `poetry python install`</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Downloading<span class="w"> </span>and<span class="w"> </span>installing<span class="w"> </span><span class="m">3</span>.13.2<span class="w"> </span><span class="o">(</span>cpython<span class="o">)</span><span class="w"> </span>...<span class="w"> </span>Done<span class="w"> </span>
@@ -1668,10 +1749,10 @@
 </div>
 <div class="tabbed-block">
 <p>Para utilizar una versión específica de Python en nuestro ambiente, debemos solicitar a Poetry que instale esa versión:
-<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal!</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.12<span class="w">  </span><span class="c1">#(1)!</span>
+<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.12<span class="w">  </span><span class="c1">#(1)!</span>
 </span></code></pre></div></p>
 <ol>
-<li>Instala la última release da versión 3.12 de python</li>
+<li>Instala la última release de la versión 3.12 de python</li>
 </ol>
 <p>Una respuesta similar a esta debe ser devuelta al ejecutar el comando:</p>
 <div class="language-bash highlight"><span class="filename">Respuesta del comando `poetry python install`</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Downloading<span class="w"> </span>and<span class="w"> </span>installing<span class="w"> </span><span class="m">3</span>.12.9<span class="w"> </span><span class="o">(</span>cpython<span class="o">)</span><span class="w"> </span>...<span class="w"> </span>Done<span class="w"> </span>
@@ -1680,10 +1761,10 @@
 </div>
 <div class="tabbed-block">
 <p>Para utilizar una versión específica de Python en nuestro ambiente, debemos solicitar a Poetry que instale esa versión:
-<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal!</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.11<span class="w">  </span><span class="c1">#(1)!</span>
+<div class="language-bash highlight"><span class="filename">$ Ejecución en terminal</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>poetry<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.11<span class="w">  </span><span class="c1">#(1)!</span>
 </span></code></pre></div></p>
 <ol>
-<li>Instala la última release da versión 3.11 de python</li>
+<li>Instala la última release de la versión 3.11 de python</li>
 </ol>
 <p>Una respuesta similar a esta debe ser devuelta al ejecutar el comando:</p>
 <div class="language-bash highlight"><span class="filename">Respuesta del comando `poetry python install`</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Downloading<span class="w"> </span>and<span class="w"> </span>installing<span class="w"> </span><span class="m">3</span>.11.11<span class="w"> </span><span class="o">(</span>cpython<span class="o">)</span><span class="w"> </span>...<span class="w"> </span>Done<span class="w"> </span>
@@ -1692,7 +1773,7 @@
 </div>
 </div>
 </div>
-<p>De esta forma, garantizamos que tenemos una versión compatible de Python instalada.</p>
+<p>De esta forma, garantizaremos que tenemos una versión compatible de Python instalada.</p>
 <h3 id="entorno-virtual-local-opcional">Entorno virtual local [opcional]</h3>
 <div class="admonition warning">
 <p class="admonition-title">¡Paso opcional!</p>
@@ -1708,11 +1789,11 @@
 <p>Con esto, muchos editores consiguen detectar automáticamente el entorno virtual del proyecto, reduciendo la necesidad de configuraciones adicionales.</p>
 <h2 id="creando-un-proyecto">Creando un proyecto</h2>
 <p>Ahora que tenemos Poetry y la versión de Python que usaremos disponible, podemos iniciar la creación de nuestro proyecto. El primer paso es crear un nuevo proyecto utilizando Poetry, con el comando <code>poetry new</code>. A continuación, navegaremos hasta el directorio creado:</p>
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>poetry<span class="w"> </span>new<span class="w"> </span>--flat<span class="w"> </span>fast_zero<span class="w"> </span><span class="c1">#(1)!</span>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>poetry<span class="w"> </span>new<span class="w"> </span>--flat<span class="w"> </span>fast_zero<span class="w"> </span><span class="c1">#(1)!</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nb">cd</span><span class="w"> </span>fast_zero
 </span></code></pre></div>
 <ol>
-<li>Crea un paquete python llamado <code>fast_zero</code> en el formato <code>flat</code>. Por defecto, Poetry utiliza el formato <code>src</code>. Más informaciones sobre esto <a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/" target="_blank">aquí</a></li>
+<li>Crea un paquete python llamado <code>fast_zero</code> con el formato <code>flat</code>. Por defecto, Poetry utiliza el formato <code>src</code>. Más informaciones sobre esto <a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/" target="_blank">aquí</a></li>
 </ol>
 <p>Creará una estructura de archivos y carpetas como esta:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>.
@@ -1727,9 +1808,9 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Versión 3.14</label><label for="__tabbed_2_2">Versión 3.13</label><label for="__tabbed_2_3">Versión 3.12</label><label for="__tabbed_2_4">Versión 3.11</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><span class="filename">$ Ejecución en laterminal!</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.14
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.14
 </span></code></pre></div>
-<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.14</code> en nuestro proyecto. Para eso, alteramos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
+<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.14</code> en nuestro proyecto. Para ello, modificaremos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-15-10">10</a></span>
 <span class="normal"><a href="#__codelineno-15-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="k">[project]</span>
@@ -1741,9 +1822,9 @@
 </ol>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><span class="filename">$ Ejecución en laterminal!</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.13
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.13
 </span></code></pre></div>
-<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.13</code> en nuestro proyecto. Para eso, alteramos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
+<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.13</code> en nuestro proyecto. Para ello, modificaremos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-17-10">10</a></span>
 <span class="normal"><a href="#__codelineno-17-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="k">[project]</span>
@@ -1755,9 +1836,9 @@
 </ol>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><span class="filename">$ Ejecución en laterminal!</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.12
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.12
 </span></code></pre></div>
-<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.12</code> en nuestro proyecto. Para eso, alteramos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
+<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.12</code> en nuestro proyecto. Para ello, modificaremos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-19-10">10</a></span>
 <span class="normal"><a href="#__codelineno-19-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="k">[project]</span>
@@ -1769,9 +1850,9 @@
 </ol>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><span class="filename">$ Ejecución en laterminal!</span><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.11
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.11
 </span></code></pre></div>
-<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.11</code> en nuestro proyecto. Para eso, alteramos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
+<p>En conjunto con esta instrucción, debemos también especificar a Poetry que usaremos exactamente la versión <code>3.11</code> en nuestro proyecto. Para ello, modificaremos el archivo de configuración pyproject.toml en la raíz del proyecto:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-21-10">10</a></span>
 <span class="normal"><a href="#__codelineno-21-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="k">[project]</span>
@@ -1787,24 +1868,23 @@
 <p>De esta forma, garantizamos que Poetry usará la versión correcta de Python al crear el entorno virtual para nuestro proyecto.</p>
 <h3 id="instalando-fastapi">Instalando FastAPI</h3>
 <p>Con toda la base de nuestro proyecto lista, podemos finalmente instalar FastAPI:</p>
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>poetry<span class="w"> </span>install<span class="w"> </span><span class="c1">#(1)!</span>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>poetry<span class="w"> </span>install<span class="w"> </span><span class="c1">#(1)!</span>
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>poetry<span class="w"> </span>add<span class="w"> </span><span class="s1">'fastapi[standard]'</span><span class="w"> </span><span class="c1">#(2)!</span>
 </span></code></pre></div>
 <ol>
-<li>Crea el entorno virtual con la versión que seteamos en el <code>env use</code></li>
+<li>Crea el entorno virtual con la versión de Python que seteamos en el <code>env use</code></li>
 <li>Agrega FastAPI en nuestro proyecto y entorno virtual</li>
 </ol>
 <h3 id="primera-ejecucion-de-un-hello-world">Primera Ejecución de un "Hello, World!"</h3>
 <p>Una cosa bastante interesante sobre FastAPI es que es un framework web basado en funciones. De la misma forma en que creamos funciones tradicionalmente en python, podemos extender esas funciones para que sean servidas por el servidor. Por ejemplo:</p>
 <div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
 <span class="normal"><a href="#__codelineno-23-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_root</span><span class="p">():</span>
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'¡Hola Mundo!'</span><span class="p">}</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'Hola Mundo!'</span><span class="p">}</span>
 </span></code></pre></div></td></tr></table></div>
-<p>Esta función en python básicamente retorna un diccionario con una clave llamada <code class="language-python highlight"><span class="s1">'message'</span></code> y un mensaje <code class="language-python highlight"><span class="s1">'¡Hola Mundo!'</span></code>. Si agregamos esta función en un nuevo archivo llamado <code>app.py</code> en el directorio <code>fast_zero</code>. Podemos hacer la llamada de ella por el terminal interactivo (<strong>REPL</strong>):</p>
-<div class="language-py highlight"><span class="filename">&gt;&gt;&gt; Terminal interactivo!</span><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">read_root</span><span class="p">()</span>
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'¡Hola Mundo!'</span><span class="p">}</span>
+<p>Esta función en python básicamente retorna un diccionario con una clave llamada <code class="language-python highlight"><span class="s1">'message'</span></code> y un mensaje <code class="language-python highlight"><span class="s1">'Hola Mundo!'</span></code>. Si agregamos esta función en un nuevo archivo llamado <code>app.py</code> en el directorio <code>fast_zero</code>. Podemos hacer la llamada de ella por el terminal interactivo (<strong>REPL</strong>):</p>
+<div class="language-py highlight"><span class="filename">&gt;&gt;&gt; Terminal interactivo</span><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">read_root</span><span class="p">()</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'Hola Mundo!'</span><span class="p">}</span>
 </span></code></pre></div>
-<p>De forma tradicional, como todas las funciones en python.</p>
 <details class="tip">
 <summary>Consejo: Cómo abrir el terminal interactivo (REPL)</summary>
 <p>Para abrir el terminal interactivo con tu código cargado, debes llamar a Python en la terminal usando <code>-i</code>:</p>
@@ -1828,12 +1908,12 @@
 </span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4"></a>
 </span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span> <span class="c1">#(3)!</span>
 </span></span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_root</span><span class="p">():</span> <span class="c1">#(4)!</span>
-</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'¡Hola Mundo!'</span><span class="p">}</span> <span class="c1">#(5)!</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'Hola Mundo!'</span><span class="p">}</span> <span class="c1">#(5)!</span>
 </span></code></pre></div></td></tr></table></div>
 <ol>
-<li>Importando de la biblioteca fastapi el objeto FastAPI</li>
-<li>Iniciando una aplicación FastAPI</li>
-<li>Definiendo un endpoint con la dirección <code>/</code> accesible por el método HTTP <code>GET</code></li>
+<li>Importa de la biblioteca fastapi el objeto FastAPI</li>
+<li>Inicia una aplicación FastAPI</li>
+<li>Define un endpoint con la dirección <code>/</code> accesible por el método HTTP <code>GET</code></li>
 <li>Función que será ejecutada cuando la dirección <code>/</code> sea accedida por un cliente</li>
 <li>Los datos que serán retornados por la dirección, cuando el endpoint sea llamado</li>
 </ol>
@@ -1888,7 +1968,7 @@
 </span></span><span id="__span-29-41"><a id="__codelineno-29-41" name="__codelineno-29-41" href="#__codelineno-29-41"></a><span class="hll">INFO:<span class="w">     </span>Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>application<span class="w"> </span>startup.
 </span></span><span id="__span-29-42"><a id="__codelineno-29-42" name="__codelineno-29-42" href="#__codelineno-29-42"></a><span class="hll">INFO:<span class="w">     </span>Application<span class="w"> </span>startup<span class="w"> </span>complete.
 </span></span></code></pre></div>
-<p>El mensaje de respuesta del CLI: <code>serving: http://127.0.0.1:8000</code> tiene una información bastante importante.</p>
+<p>El mensaje de respuesta del CLI: <code>serving: http://127.0.0.1:8000</code> contiene una información importante:</p>
 <p><img alt="Figura representando la división para &quot;protocolo&quot; con &quot;http://&quot; , &quot;dirección&quot; con &quot;127.0.0.1&quot; y &quot;puerto&quot; con &quot;:8000&quot;" class="center" src="../assets/01/endereco_http_black.png#only-light" />
 <img alt="Figura representando la división para &quot;protocolo&quot; con &quot;http://&quot; , &quot;dirección&quot; con &quot;127.0.0.1&quot; y &quot;puerto&quot; con &quot;:8000&quot;" class="center" src="../assets/01/endereco_http_white.png#only-dark" /></p>
 <ol>
@@ -1897,16 +1977,17 @@
 <li>El puerto <code>:8000</code>, que es el puerto de nuestra máquina que está reservado para nuestra aplicación.</li>
 </ol>
 <p>Ahora, con el servidor inicializado, podemos usar un cliente para acceder a la dirección <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a>.</p>
-<p>El cliente más tradicional de la web es el navegador. Podemos escribir la dirección en la barra de navegación y si todo ocurrió correctamente, debes ver el mensaje "¡Hola Mundo!" en formato JSON.</p>
+<p>El cliente más tradicional de la web es el navegador. Podemos escribir la dirección en la barra de navegación y si todo ocurrió correctamente debes ver el mensaje "Hola Mundo!" en formato JSON.</p>
 <p><img alt="Captura de pantalla del browser accediendo a &quot;http://127.0.0.1&quot;" class="center shadow" src="../assets/01/hola_mundo.png" /></p>
 <blockquote>
 <p>Para detener la ejecución de fastapi en el shell, escribe <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span> y el mensaje <code>Shutting down</code> aparecerá, mostrando que el servidor fue finalizado.</p>
 </blockquote>
 <details class="example">
 <summary>Diferentes clientes para nuestra aplicación</summary>
-<p>Existen otros clientes HTTP que no son el browser. Hay aplicaciones de línea de comando como <a href="https://curl.se/" target="_blank">curl</a>:</p>
+<p>Existen otros clientes HTTP que no son el browser. </p>
+<p>Hay aplicaciones de línea de comando como <a href="https://curl.se/" target="_blank">curl</a>:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>curl<span class="w"> </span><span class="m">127</span>.0.0.1:8000
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="o">{</span><span class="s2">"message"</span>:<span class="s2">"¡Hola Mundo!"</span><span class="o">}</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="o">{</span><span class="s2">"message"</span>:<span class="s2">"Hola Mundo!"</span><span class="o">}</span>
 </span></code></pre></div>
 <p>También existe un cliente HTTP escrito en python, el <a href="https://httpie.io/" target="_blank">HTTPie</a>:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>http<span class="w"> </span><span class="m">127</span>.0.0.1:8000
@@ -1917,12 +1998,12 @@
 </span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>server:<span class="w"> </span>uvicorn
 </span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>
 </span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="o">{</span>
-</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">    </span><span class="s2">"message"</span>:<span class="w"> </span><span class="s2">"¡Hola Mundo!"</span>
+</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">    </span><span class="s2">"message"</span>:<span class="w"> </span><span class="s2">"Hola Mundo!"</span>
 </span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="o">}</span>
 </span></code></pre></div>
-<p>Existen incluso aplicaciones gráficas de código abierto pensadas para ser clientes HTTP para APIs. Como el <a href="https://hoppscotch.io/" target="_blank">hoppscotch</a>:</p>
+<p>Existen incluso aplicaciones gráficas de código abierto pensadas para ser clientes HTTP para APIs, como <a href="https://hoppscotch.io/" target="_blank">hoppscotch</a>:</p>
 <p><img alt="Captura de pantalla de hoppscotch" class="center shadow" src="../assets/01/cliente_grafico_para_apis_hoppscotch.png" /></p>
-<p>O como el <a href="https://www.usebruno.com/" target="_blank">Bruno</a>:
+<p>O como <a href="https://www.usebruno.com/" target="_blank">Bruno</a>:
 <img alt="Captura de pantalla de bruno" class="center shadow" src="../assets/01/cliente_grafico_para_apis_bruno.png" /></p>
 </details>
 <h3 id="uvicorn">Uvicorn</h3>
@@ -1948,18 +2029,19 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span></code></pre></div>
 </details>
 <h2 id="instalando-las-herramientas-de-desarrollo">Instalando las herramientas de desarrollo</h2>
-<p>Las elecciones de herramientas de desarrollo, de forma general, son elecciones bastante personales. No suelen ser consensuales ni siquiera en equipos de desarrollo. Dicho esto, instalaremos algunas herramientas que nos parecen que son útiles para el desarrollo del proyecto.</p>
+<p>Las elecciones de herramientas de desarrollo son elecciones bastante personales, y no suele haber consenso ni siquiera en equipos de desarrollo. Dicho esto, instalaremos algunas herramientas que nos parecen que son útiles para el desarrollo del proyecto.</p>
 <p>Las herramientas elegidas son:</p>
 <ul>
-<li><a href="https://poethepoet.natn.io/index.html" target="_blank">poethepoet</a>: herramienta usada para creación de comandos. Como ejecutar la aplicación, correr los tests, etc.</li>
+<li><a href="https://poethepoet.natn.io/index.html" target="_blank">poethepoet</a>: herramienta usada para a
+la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 <li><a href="https://docs.pytest.org/" target="_blank">pytest</a>: herramienta para tests</li>
 <li><a href="https://coverage.readthedocs.io/" target="_blank">coverage</a>: herramienta para medir la cobertura de tests</li>
 <li><a href="https://docs.astral.sh/ruff/" target="_blank">ruff</a>: Una herramienta que tiene dos funciones en nuestro código:<ol>
 <li>Un analizador estático de código (un <a href="https://en.wikipedia.org/wiki/Lint_(software)" target="_blank">linter</a>), para avisarnos si estamos infringiendo alguna <a href="https://docs.astral.sh/ruff/rules/" target="_blank">buena práctica de programación</a>;</li>
-<li>Un formateador de código. Para seguir un estilo único de código. Vamos a basarnos en <a href="https://peps.python.org/pep-0008/" target="_blank">PEP-8</a>.</li>
+<li>Un formateador de código, para seguir un estilo único de código. Vamos a basarnos en <a href="https://peps.python.org/pep-0008/" target="_blank">PEP-8</a>.</li>
 </ol>
 </li>
-<li><a href="https://github.com/crate-ci/typos" target="_blank">typos</a>: detector de errores tipográficos en inglés, lo cual es útil para los hablantes nativos de castellano</li>
+<li><a href="https://github.com/crate-ci/typos" target="_blank">typos</a>: detector de errores tipográficos en inglés, lo cual es útil para los que no son hablantes nativos de inglés</li>
 </ul>
 <h3 id="instalando-las-herramientas-de-desarrollo_1">Instalando las herramientas de desarrollo</h3>
 <p>Todas las herramientas de desarrollo se instalan como dependencias de desarrollo (grupo <code>dev</code>):</p>
@@ -1968,14 +2050,14 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 <h2 id="configurando-las-herramientas-de-desarrollo">Configurando las herramientas de desarrollo</h2>
 <p>Después de la instalación de las herramientas de desarrollo, necesitamos definir las configuraciones de cada una individualmente en el archivo <code>pyproject.toml</code>.</p>
 <h3 id="ruff">Ruff</h3>
-<p><a href="https://docs.astral.sh/ruff/" target="_blank">Ruff</a> es una herramienta moderna en python, escrita en rust, compatible<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">2</a></sup> con los proyectos de análisis estático escritos y mantenidos originalmente por la comunidad en el proyecto <a href="https://github.com/PyCQA/" target="_blank">PYCQA</a><sup id="fnref:4"><a class="footnote-ref" href="#fn:4">3</a></sup> y tiene dos funciones principales:</p>
+<p><a href="https://docs.astral.sh/ruff/" target="_blank">Ruff</a> es una herramienta moderna, escrita en rust, compatible<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">2</a></sup> con los proyectos de análisis estático escritos y mantenidos originalmente por la comunidad en el proyecto <a href="https://github.com/PyCQA/" target="_blank">PYCQA</a><sup id="fnref:4"><a class="footnote-ref" href="#fn:4">3</a></sup> y tiene dos funciones principales:</p>
 <ol>
-<li>Analizar el código de forma estática (Linter): Efectuar la verificación si estamos programando de acuerdo con buenas prácticas de python.</li>
+<li>Analizar el código de forma estática (Linter): Verificar si estamos programando de acuerdo con buenas prácticas de python.</li>
 <li>Formatear el código (Formatter): Efectuar la verificación del código para estandarizar un estilo de código predefinido.</li>
 </ol>
-<p>Para configurar el ruff armamos la configuración en 3 <a href="https://toml.io/es/v1.0.0#tabla" target="_blank">tablas</a> distintas en el archivo <code>pyproject.toml</code>. Una para las configuraciones globales, una para el linter y una para el formateador.</p>
+<p>Para configurar el ruff armamos la configuración en 3 <a href="https://toml.io/es/v1.0.0#tabla" target="_blank">tablas</a> distintas en el archivo <code>pyproject.toml</code>: una para las configuraciones globales, otra para el linter y otra para el formateador.</p>
 <p><strong>Configuración global</strong></p>
-<p>En la configuración global del Ruff queremos alterar solamente dos cosas. La longitud de línea a 79 caracteres (conforme sugerido en la <a href="https://peps.python.org/pep-0008/" target="_blank">PEP-8</a>) y, a continuación, informaremos que el directorio de migraciones de base de datos será ignorado en la verificación y en el formateo:</p>
+<p>En la configuración global de Ruff vamos a modificar solamente dos cosas. La longitud de línea a 79 caracteres (conforme sugerido en la <a href="https://peps.python.org/pep-0008/" target="_blank">PEP-8</a>) y, a continuación, informaremos que el directorio de migraciones de base de datos será ignorado en la verificación y en el formateo:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-22">22</a></span>
 <span class="normal"><a href="#__codelineno-36-23">23</a></span>
 <span class="normal"><a href="#__codelineno-36-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-36-22"><a id="__codelineno-36-22" name="__codelineno-36-22"></a><span class="k">[tool.ruff]</span>
@@ -1984,13 +2066,13 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span></code></pre></div></td></tr></table></div>
 <details class="example" open="open">
 <summary>Nota sobre "migrations"</summary>
-<p>En esta fase de configuración, excluiremos la carpeta <code>migrations</code>, esto puede no tener mucho sentido en este momento. Sin embargo, cuando iniciemos el trabajo con la base de datos, la herramienta <code>Alembic</code> hace generación de código automático. Por ser códigos generados automáticamente, no queremos alterar la configuración hecha por ella.</p>
+<p>En esta fase de configuración, excluiremos la carpeta <code>migrations</code>. Esto puede no tener mucho sentido en este momento. Sin embargo, cuando iniciemos el trabajo con la base de datos, la herramienta <code>Alembic</code> hace generación de código automático. Por ser códigos generados automáticamente, no queremos alterar la configuración hecha por ella.</p>
 </details>
 <p><strong>Linter</strong></p>
 <p>Durante el análisis estático del código, queremos buscar por cosas específicas. En Ruff, necesitamos decir exactamente qué debe analizar. Esto se hace por códigos. Usaremos estos:</p>
 <ul>
 <li><code>I</code> (<a href="https://pycqa.github.io/isort/" target="_blank">Isort</a>): Verificación de ordenamiento de imports en orden alfabético</li>
-<li><code>F</code> (<a href="https://github.com/PyCQA/pyflakes" target="_blank">Pyflakes</a>): Busca por algunos errores en relación a buenas prácticas de código</li>
+<li><code>F</code> (<a href="https://github.com/PyCQA/pyflakes" target="_blank">Pyflakes</a>): Busca algunos errores  relacionados a buenas prácticas de código</li>
 <li><code>E</code> (Errores <a href="https://pycodestyle.pycqa.org/en/latest/" target="_blank">pycodestyle</a>): Errores de estilo de código</li>
 <li><code>W</code> (Avisos <a href="https://pycodestyle.pycqa.org/en/latest/" target="_blank">pycodestyle</a>): Avisos de cosas no recomendadas en el estilo de código</li>
 <li><code>PL</code> (<a href="https://pylint.pycqa.org/en/latest/index.html" target="_blank">Pylint</a>): Como el <code>F</code>, también busca por errores en relación a buenas prácticas de código</li>
@@ -2003,10 +2085,10 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span><span id="__span-37-28"><a id="__codelineno-37-28" name="__codelineno-37-28"></a><span class="n">select</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">'I'</span><span class="p">,</span><span class="w"> </span><span class="s1">'F'</span><span class="p">,</span><span class="w"> </span><span class="s1">'E'</span><span class="p">,</span><span class="w"> </span><span class="s1">'W'</span><span class="p">,</span><span class="w"> </span><span class="s1">'PL'</span><span class="p">,</span><span class="w"> </span><span class="s1">'PT'</span><span class="p">]</span>
 </span></code></pre></div></td></tr></table></div>
 <blockquote>
-<p>Para más información sobre la configuración y sobre los códigos del ruff y de los proyectos del PyCQA, puedes chequear la <a href="https://docs.astral.sh/ruff/rules" target="_blank">documentación del ruff</a> o las documentaciones originales de los proyectos <a href="https://github.com/PyCQA" target="_blank">PyQCA</a>.</p>
+<p>Para más información sobre la configuración y sobre los códigos de ruff y de los proyectos del PyCQA, puedes chequear la <a href="https://docs.astral.sh/ruff/rules" target="_blank">documentación de ruff</a> o las documentaciones originales de los proyectos <a href="https://github.com/PyCQA" target="_blank">PyQCA</a>.</p>
 </blockquote>
 <p><strong>Formatter</strong></p>
-<p>El formateo del Ruff prácticamente no necesita ser alterado. Pues va a seguir las buenas prácticas y usar la configuración global de <code>79</code> caracteres por línea. La única alteración que haremos es el uso de comillas simples <code>'</code> en lugar de comillas dobles <code>"</code>:</p>
+<p>El formateo de Ruff prácticamente no necesita ser alterado, pues va a seguir las buenas prácticas y usar la configuración global de <code>79</code> caracteres por línea. La única alteración que haremos es el uso de comillas simples <code>'</code> en lugar de comillas dobles <code>"</code>:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-30">30</a></span>
 <span class="normal"><a href="#__codelineno-38-31">31</a></span>
 <span class="normal"><a href="#__codelineno-38-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-38-30"><a id="__codelineno-38-30" name="__codelineno-38-30"></a><span class="k">[tool.ruff.format]</span>
@@ -2017,30 +2099,29 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 <p>Recordando que la opción de usar comillas simples es totalmente personal, puedes usar comillas dobles si quieres.</p>
 </blockquote>
 <h3 id="pytest">pytest</h3>
-<p>El <a href="https://docs.pytest.org/" target="_blank">Pytest</a> es un framework de tests, que usaremos para escribir y ejecutar nuestros tests. Lo configuraremos para reconocer el camino base para ejecución de los tests en la raíz del proyecto <code>.</code>:</p>
+<p><a href="https://docs.pytest.org/" target="_blank">Pytest</a> es un framework de tests, que usaremos para escribir y ejecutar nuestros tests. Lo configuraremos para reconocer el camino base para ejecución de los tests en la raíz del proyecto <code>.</code>:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-34">34</a></span>
 <span class="normal"><a href="#__codelineno-39-35">35</a></span>
 <span class="normal"><a href="#__codelineno-39-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-39-34"><a id="__codelineno-39-34" name="__codelineno-39-34"></a><span class="k">[tool.pytest]</span>
 </span><span id="__span-39-35"><a id="__codelineno-39-35" name="__codelineno-39-35"></a><span class="n">pythonpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">'.'</span><span class="p">]</span>
 </span><span id="__span-39-36"><a id="__codelineno-39-36" name="__codelineno-39-36"></a><span class="n">addopts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">'-p'</span><span class="p">,</span><span class="w"> </span><span class="s1">'no:warnings'</span><span class="p">,</span><span class="w"> </span><span class="s1">'--cov=fast_zero'</span><span class="p">,</span><span class="w"> </span><span class="s1">'--cov-context=test'</span><span class="p">]</span>
 </span></code></pre></div></td></tr></table></div>
-<p>En la segunda línea, usamos la opción <code>addopts</code> del pytest. Esta opción le dice que todas las veces en que el pytest sea llamado, va a agregar esos parámetros a la llamada, sin que tengamos que declararlos explícitamente.</p>
-<p>Quedando algo como:</p>
+<p>En la segunda línea, usamos la opción <code>addopts</code> del pytest. Esta opción le dice que todas las veces en que el pytest sea llamado, va a agregar esos parámetros a la llamada, sin que tengamos que declararlos explícitamente. Quedando algo como:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>pytest<span class="w"> </span>-p<span class="w"> </span>no:warnings<span class="w"> </span>--cov<span class="o">=</span>fast_zero<span class="w"> </span>--cov-context<span class="o">=</span><span class="nb">test</span>
 </span></code></pre></div>
-<p>Cada parámetro de esos tiene un significado importante:</p>
+<p>Cada uno de esos parámetros tiene el siguiente significado:</p>
 <ul>
 <li><code>-p no:warnings</code>: decimos que no queremos mensajes de "warnings" en la salida de los tests. Suele dejar más limpio.</li>
 <li><code>--cov=fast_zero</code>: directorio donde está nuestro código que será testeado, para mostrar por dónde pasan los tests</li>
 <li><code>--cov-context=test</code>: aísla tests en contextos, para decir exactamente qué test ejecuta cada línea de código.</li>
 </ul>
-<p>De esta forma, al testear, tendremos una visualización buena y coherente de lo que testean.</p>
+<p>De esta forma, al testear, tendremos una visualización limpia y coherente.</p>
 <blockquote>
 <p>Vamos a ver estas cosas en acción <a href="#introduccion-al-pytest-testeando-el-hello-world" target="_blank">aquí</a>.</p>
 </blockquote>
 <h3 id="typos">Typos</h3>
-<p>El <a href="https://github.com/crate-ci/typos" target="_blank">typos</a> nos va a ayudar con algunos errores que terminan sucediendo cuando escribimos código en inglés.</p>
-<p>Vamos a suponer que nuestro código esté así:</p>
+<p><a href="https://github.com/crate-ci/typos" target="_blank">Typos</a> nos va a ayudar con los errores que terminan sucediendo cuando escribimos código en inglés.</p>
+<p>Supongamos que nuestro código esté así:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
 <span class="normal"><a href="#__codelineno-41-2">2</a></span>
 <span class="normal"><a href="#__codelineno-41-3">3</a></span>
@@ -2053,33 +2134,33 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4"></a>
 </span><span id="__span-41-5"><a id="__codelineno-41-5" name="__codelineno-41-5"></a><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
 </span><span id="__span-41-6"><a id="__codelineno-41-6" name="__codelineno-41-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_root</span><span class="p">():</span>
-</span><span id="__span-41-7"><a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="hll">    <span class="k">return</span> <span class="p">{</span><span class="s1">'<ins class="critic">messsage</ins>'</span><span class="p">:</span> <span class="s1">'¡Hola Mundo!'</span><span class="p">}</span> <span class="c1">#(1)!</span>
+</span><span id="__span-41-7"><a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="hll">    <span class="k">return</span> <span class="p">{</span><span class="s1">'<ins class="critic">messsage</ins>'</span><span class="p">:</span> <span class="s1">'Hola Mundo!'</span><span class="p">}</span> <span class="c1">#(1)!</span>
 </span></span></code></pre></div></td></tr></table></div>
 <ol>
 <li>Subraya como un error de grafía la escritura del string <code class="language-py highlight"><span class="s1">'messsage'</span></code>. Escrita con una S de más.</li>
 </ol>
 <p>Subraya como un error de grafía la escritura del string <code class="language-py highlight"><span class="s1">'messsage'</span></code>. La palabra debería ser escrita con dos "me-ss-age", no con tres "me-sss-age".</p>
-<p>Este tipo de errores triviales son los que el Typos nos ayuda a detectar. Si lo ejecutamos, <code>typos</code>, en la terminal:</p>
+<p>Este tipo de errores triviales son los que Typos nos ayuda a detectar. Si ejecutamos <code>typos</code> en la terminal:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>typos
 </span></code></pre></div>
 <p>Nos presentará una respuesta como esta:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>error:<span class="w"> </span><span class="sb">`</span>messsage<span class="sb">`</span><span class="w"> </span>should<span class="w"> </span>be<span class="w"> </span><span class="sb">`</span>message<span class="sb">`</span>
 </span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">  </span>╭▸<span class="w"> </span>./fast_zero/app.py:7:14
 </span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="w">  </span>│
-</span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="m">7</span><span class="w"> </span>│<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="o">{</span><span class="s1">'messsage'</span>:<span class="w"> </span><span class="s1">'¡Hola Mundo!'</span><span class="o">}</span>
+</span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="m">7</span><span class="w"> </span>│<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="o">{</span><span class="s1">'messsage'</span>:<span class="w"> </span><span class="s1">'Hola Mundo!'</span><span class="o">}</span>
 </span><span id="__span-43-5"><a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="w">  </span>╰╴<span class="w">             </span>━━━━━━━━
 </span></code></pre></div>
-<p>Diciéndonos que el string contenido en la línea <code class="language-py highlight"><span class="mi">8</span></code> columna <code class="language-py highlight"><span class="mi">14</span></code> tiene un error: <code>messsage</code> debería ser <code>message</code>.</p>
+<p>Diciéndonos que el string contenido en la línea <code class="language-py highlight"><span class="mi">7</span></code> columna <code class="language-py highlight"><span class="mi">14</span></code> tiene un error: <code>messsage</code> debería ser <code>message</code>.</p>
 <h4 id="configurando-el-analisis">Configurando el análisis</h4>
-<p>Como hablantes de español, no siempre queremos escribir todo en inglés, como la documentación o el <code>README.md</code> del repositorio.</p>
+<p>Como hablantes de castellano, no siempre queremos escribir todo en inglés, como la documentación o el <code>README.md</code> del repositorio.</p>
 <p>En estos casos, podemos configurar el <code>typos</code> para ignorar determinados archivos:</p>
 <div class="language-py highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="p">[</span><span class="n">tool</span><span class="o">.</span><span class="n">typos</span><span class="o">.</span><span class="n">files</span><span class="p">]</span>
 </span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="n">extend</span><span class="o">-</span><span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"*.md"</span><span class="p">,</span> <span class="s2">"migrations"</span><span class="p">]</span> <span class="c1">#(1)!</span>
 </span></code></pre></div>
 <ol>
-<li>Aquí todos los archivos (<code>*</code>) con la extensión <code>.md</code> están siendo ignorados. El directorio <code class="language-py highlight"><span class="s2">"migrations"</span></code> va a ser ignorado preventivamente. Pero, este directorio solo será insertado en la clase 05.</li>
+<li>Aquí todos los archivos (<code>*</code>) con la extensión <code>.md</code> están siendo ignorados. El directorio <code class="language-py highlight"><span class="s2">"migrations"</span></code> va a ser ignorado preventivamente. </li>
 </ol>
-<p>De esta forma, el <code>typos</code> dejará de analizar archivos Markdown, por ejemplo.</p>
+<p>De esta forma, <code>typos</code> dejará de analizar archivos Markdown, por ejemplo.</p>
 <h3 id="poe-the-poet">Poe the Poet</h3>
 <p>La idea del <a href="https://github.com/nat-n/poethepoet" target="_blank">Poe the Poet</a> (o simplemente <code>poe</code>) es ser un ejecutor de tareas (<em>task runner</em>) integrado a nuestro ecosistema de desarrollo. En lugar de tener que recordar comandos largos y complejos, como los de FastAPI que vimos en la ejecución de la aplicación, ¿qué tal substituir todo simplemente por <code>poetry serve</code>?</p>
 <p>Esto funciona para cualquier comando complicado en nuestra aplicación, simplificando las llamadas y centralizando el flujo de trabajo en el archivo de configuración del proyecto.</p>
@@ -2090,8 +2171,8 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 <li>Instala el poethepoet en el mismo venv del pipx con el poetry, extendiendo las funcionalidades de él.</li>
 </ol>
 <details class="example">
-<summary>¿puedo instalar de otras formas?</summary>
-<p>Sí, puedes: <a href="https://poethepoet.natn.io/installation.html">Guía de instalación del poethepoet</a>, pero para el curso, el mejor camino tal vez sea vía pipx, como lo instalamos.</p>
+<summary>¿puedo instalarlo de otras formas?</summary>
+<p>Sí, puedes: <a href="https://poethepoet.natn.io/installation.html">Guía de instalación del poethepoet</a>, pero para el curso, el mejor camino es vía pipx.</p>
 </details>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-55">55</a></span>
 <span class="normal"><a href="#__codelineno-46-56">56</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-46-55"><a id="__codelineno-46-55" name="__codelineno-46-55"></a><span class="k">[tool.poe]</span><span class="w"> </span><span class="c1">#(1)!</span>
@@ -2123,8 +2204,8 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </ul>
 <p>Para ejecutar un comando, es bastante más simple, necesitando solamente pasar la palabra <code>poetry &lt;comando&gt;</code>.</p>
 <h4 id="entendiendo-tareas-en-secuencia">Entendiendo Tareas en Secuencia</h4>
-<p>Observa que para los comandos <code>format</code> y <code>test</code> utilizamos la propiedad <code>.sequence</code> en vez de pasar una string directa de comando. </p>
-<p>En el <strong>Poe the Poet</strong>, una secuencia nos permite encadenar múltiples comandos que serán ejecutados de forma lineal (uno después del otro). Un detalle crucial sobre el comportamiento de las secuencias es que como se ejecutan en cadena, si una falla, el poe no va a ejecutar las siguientes.</p>
+<p>Observa que para los comandos <code>format</code> y <code>test</code> utilizamos la propiedad <code>.sequence</code> en vez de pasar un string directo de comando. </p>
+<p>En <strong>Poe the Poet</strong>, una secuencia nos permite encadenar múltiples comandos que serán ejecutados de forma lineal (uno después del otro). Un detalle crucial sobre el comportamiento de las secuencias es que como se ejecutan en cadena, si una falla, poe no va a ejecutar las siguientes.</p>
 <hr />
 <details class="warning">
 <summary>Ejemplo de un archivo de configuración pyproject.toml completo</summary>
@@ -2249,10 +2330,10 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 <p>Un punto importante es que las versiones de los paquetes pueden variar dependiendo de la fecha en que hagas la instalación de los paquetes. Este archivo es solamente un ejemplo.</p>
 </details>
 <h3 id="los-efectos-de-estas-configuraciones-de-desarrollo">Los efectos de estas configuraciones de desarrollo</h3>
-<p>En caso de que hayas copiado el código que usamos para definir <code>fast_zero/app.py</code>, puedes testear los comandos que creamos para el <code>poe</code>:</p>
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>poetry<span class="w"> </span>lint
+<p>En caso de que hayas copiado el código que usamos para definir <code>fast_zero/app.py</code>, puedes testear los comandos que creamos para <code>poe</code>:</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>poetry<span class="w"> </span>lint
 </span></code></pre></div>
-<p>De esta forma, veremos que cometimos algunas infracciones en el formateo de la PEP-8. El ruff nos informará que deberíamos haber agregado dos líneas antes de una definición de función:</p>
+<p>De esta forma, veremos que cometimos algunas infracciones en el formateo según PEP-8. Ruff nos informa que deberíamos haber agregado dos líneas antes de una definición de función:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="n">fast_zero</span><span class="o">/</span><span class="n">app</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span> <span class="n">E302</span> <span class="p">[</span><span class="o">*</span><span class="p">]</span> <span class="n">Expected</span> <span class="mi">2</span> <span class="n">blank</span> <span class="n">lines</span><span class="p">,</span> <span class="n">found</span> <span class="mi">1</span>
 </span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>  <span class="o">|</span>
 </span><span id="__span-50-3"><a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="mi">3</span> <span class="o">|</span> <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
@@ -2260,7 +2341,7 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span><span id="__span-50-5"><a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="mi">5</span> <span class="o">|</span> <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
 </span><span id="__span-50-6"><a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a>  <span class="o">|</span> <span class="o">^</span> <span class="n">E302</span>
 </span><span id="__span-50-7"><a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a><span class="mi">6</span> <span class="o">|</span> <span class="k">def</span><span class="w"> </span><span class="nf">read_root</span><span class="p">():</span>
-</span><span id="__span-50-8"><a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a><span class="mi">7</span> <span class="o">|</span>     <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'¡Hola Mundo!'</span><span class="p">}</span>
+</span><span id="__span-50-8"><a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a><span class="mi">7</span> <span class="o">|</span>     <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'Hola Mundo!'</span><span class="p">}</span>
 </span><span id="__span-50-9"><a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a>  <span class="o">|</span>
 </span><span id="__span-50-10"><a id="__codelineno-50-10" name="__codelineno-50-10" href="#__codelineno-50-10"></a>  <span class="o">=</span> <span class="n">help</span><span class="p">:</span> <span class="n">Add</span> <span class="n">missing</span> <span class="n">blank</span> <span class="n">line</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </span><span id="__span-50-11"><a id="__codelineno-50-11" name="__codelineno-50-11" href="#__codelineno-50-11"></a>
@@ -2271,7 +2352,7 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Comando</label><label for="__tabbed_3_2">Resultado</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>poetry<span class="w"> </span>format
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>poetry<span class="w"> </span>format
 </span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>Found<span class="w"> </span><span class="m">1</span><span class="w"> </span>error<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>fixed,<span class="w"> </span><span class="m">0</span><span class="w"> </span>remaining<span class="o">)</span>.
 </span><span id="__span-51-3"><a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="m">3</span><span class="w"> </span>files<span class="w"> </span>left<span class="w"> </span>unchanged
 </span></code></pre></div>
@@ -2291,17 +2372,17 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span><span id="__span-52-5"><a id="__codelineno-52-5" name="__codelineno-52-5"></a><span class="hll">
 </span></span><span id="__span-52-6"><a id="__codelineno-52-6" name="__codelineno-52-6"></a><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
 </span><span id="__span-52-7"><a id="__codelineno-52-7" name="__codelineno-52-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_root</span><span class="p">():</span>
-</span><span id="__span-52-8"><a id="__codelineno-52-8" name="__codelineno-52-8"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'¡Hola Mundo!'</span><span class="p">}</span>
+</span><span id="__span-52-8"><a id="__codelineno-52-8" name="__codelineno-52-8"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'Hola Mundo!'</span><span class="p">}</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <h2 id="introduccion-al-pytest-testeando-el-hello-world">Introducción al Pytest: Testeando el "Hello, World!"</h2>
-<p>Antes de entender la dinámica de los tests, necesitamos entender el efecto que tienen en nuestro código. Podemos comenzar analizando la cobertura (cuánto de nuestro código está siendo efectivamente testeado). Vamos a ejecutar los tests:</p>
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
+<p>Antes de entender la dinámica de los tests, necesitamos entender el efecto que tienen en nuestro código. Podemos comenzar analizando la cobertura (cuánto de nuestro código está siendo efectivamente testeado). Ejecutemos los tests:</p>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
 </span></code></pre></div>
 <p>Tendremos una respuesta como esta:</p>
-<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="o">===========================</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">===========================</span>
+<div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal</span><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="o">===========================</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">===========================</span>
 </span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>platform<span class="w"> </span>linux<span class="w"> </span>--<span class="w"> </span>Python<span class="w"> </span><span class="m">3</span>.11.7,<span class="w"> </span>pytest-7.4.4,<span class="w"> </span>pluggy-1.3.0
 </span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>cachedir:<span class="w"> </span>.pytest_cache
 </span><span id="__span-54-4"><a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>rootdir:<span class="w"> </span>/home/dunossauro/git/fast_zero
@@ -2318,8 +2399,8 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span><span id="__span-54-15"><a id="__codelineno-54-15" name="__codelineno-54-15" href="#__codelineno-54-15"></a>TOTAL<span class="w">                       </span><span class="m">5</span><span class="w">      </span><span class="m">5</span><span class="w">     </span><span class="m">0</span>%
 </span></code></pre></div>
 <p>Las líneas en la terminal son referentes al pytest, que dijo que recolectó 0 ítems. Ningún test fue ejecutado.</p>
-<p>La parte importante de este Mensaje está en la tabla generada por el <code>coverage</code>. Que dice que tenemos 5 líneas de código (Stmts) en el archivo <code>fast_zero/app.py</code> y ninguna de ellas está cubierta por nuestros tests. Como podemos ver en la columna <code>Miss</code>.</p>
-<p>Por no encontrar ningún test, el pytest retornó un "error". Esto significa que nuestra tarea secuencial <code>test</code> no fue ejecutada. Podemos ejecutarla manualmente:</p>
+<p>La parte importante de este Mensaje está en la tabla generada por el <code>coverage</code>, que dice que tenemos 5 líneas de código (Stmts) en el archivo <code>fast_zero/app.py</code> y ninguna de ellas está cubierta por nuestros tests, como podemos ver en la columna <code>Miss</code>.</p>
+<p>Por no encontrar ningún test, pytest retornó un "error". Esto significa que nuestra tarea secuencial <code>test</code> no fue ejecutada. Podemos ejecutarla manualmente:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>poetry<span class="w"> </span>run<span class="w"> </span>coverage<span class="w"> </span>html<span class="w"> </span>--show-contexts
 </span><span id="__span-55-2"><a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>Wrote<span class="w"> </span>HTML<span class="w"> </span>report<span class="w"> </span>to<span class="w"> </span>htmlcov/index.html
 </span></code></pre></div>
@@ -2329,11 +2410,11 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 <p><img alt="navegador" class="center" src="../assets/01/navegador_com_pagina_de_cobertura_sem_testes.png" /></p>
 <p>Esto significa que necesitamos testear todo ese archivo.</p>
 <h3 id="escribiendo-el-test">Escribiendo el test</h3>
-<p>Ahora, escribiremos nuestro primer test con Pytest. Pero, antes de escribir el test, necesitamos crear un archivo específico para ellos. En la carpeta <code>tests</code>, vamos a crear un archivo llamado <code>test_app.py</code>.</p>
+<p>Ahora, escribiremos nuestro primer test con Pytest. Pero, antes de escribir el test, necesitamos crear un archivo específico para contener los tests. En la carpeta <code>tests</code> creamos un archivo llamado <code>test_app.py</code>.</p>
 <blockquote>
 <p>Por convención, todos los archivos de test del pytest deben iniciar con un prefijo test_<algo>.py</p>
 </blockquote>
-<p>Para testear el código hecho con FastAPI, necesitamos un cliente de test. La gran ventaja es que el FastAPI ya cuenta con un cliente de tests en el módulo <code>fastapi.testclient</code> con el objeto <code>TestClient</code>, que necesita recibir nuestro app como parámetro:</p>
+<p>Para testear el código hecho con FastAPI, necesitamos un cliente de test. La gran ventaja es que  FastAPI ya cuenta con un cliente de tests en el módulo <code>fastapi.testclient</code> con el objeto <code>TestClient</code>, que necesita recibir nuestro app como parámetro:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1">1</a></span>
 <span class="normal"><a href="#__codelineno-56-2">2</a></span>
 <span class="normal"><a href="#__codelineno-56-3">3</a></span>
@@ -2346,10 +2427,10 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span></code></pre></div></td></tr></table></div>
 <ol>
 <li>Importa del módulo <code>testclient</code> el objeto <code>TestClient</code></li>
-<li>Importa nuestro <code>app</code> definido en <code>fast_zero</code></li>
+<li>Importa nuestro <code>app</code> definida en <code>fast_zero</code></li>
 <li>Crea un cliente de tests usando nuestra aplicación como base</li>
 </ol>
-<p>Solo el hecho de haber definido un cliente ya nos muestra una cobertura bastante diferente:</p>
+<p>Por solo el hecho de haber definido un cliente, pytest ya nos muestra una cobertura bastante diferente:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
 </span><span id="__span-57-2"><a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="c1"># parte del mensaje fue omitida</span>
 </span><span id="__span-57-3"><a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="hll">collected<span class="w"> </span><span class="m">0</span><span class="w"> </span>items
@@ -2362,7 +2443,7 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span></span><span id="__span-57-10"><a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a>-------------------------------------------
 </span><span id="__span-57-11"><a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a>TOTAL<span class="w">                       </span><span class="m">5</span><span class="w">      </span><span class="m">1</span><span class="w">    </span><span class="m">80</span>%
 </span></code></pre></div>
-<p>Por no recolectar ningún test, el pytest todavía retornó un "error". Para ver la cobertura, necesitaremos ejecutar nuevamente el paso de cobertura manualmente:</p>
+<p>Por no haber recolectado ningún test, pytest retornó un "error". Para ver la cobertura, necesitaremos ejecutar nuevamente el paso de cobertura manualmente:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>poetry<span class="w"> </span>run<span class="w"> </span>coverage<span class="w"> </span>html<span class="w"> </span>--show-contexts
 </span><span id="__span-58-2"><a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>Wrote<span class="w"> </span>HTML<span class="w"> </span>report<span class="w"> </span>to<span class="w"> </span>htmlcov/index.html
 </span></code></pre></div>
@@ -2399,16 +2480,16 @@ Este comando le dice a uvicorn lo siguiente: en la carpeta fast_zero existe un a
 </span><span id="__span-59-14"><a id="__codelineno-59-14" name="__codelineno-59-14"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'Hola Mundo!'</span><span class="p">}</span>  <span class="c1"># (5)!</span>
 </span></code></pre></div></td></tr></table></div>
 <ol>
-<li>En el nombre de la función, escribimos generalmente lo que el test de hecho hace. Aquí estamos diciendo que root debe retornar el status OK y el mensaje "hola mundo". Root es el nombre dado a la raíz de la URL. El camino <code>/</code>, que colocamos en la definición del <code class="language-python highlight"><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span></code>. OK es el status que dice que la solicitud ocurrió con éxito en el protocolo HTTP.</li>
-<li>Aquí creamos el cliente de test de nuestro app</li>
-<li>En este punto, el <code>client</code> hace una solicitud. De la misma forma que el browser, un cliente de la API. En eso, llamamos a la dirección de root, usando el método GET.</li>
+<li>En el nombre de la función, escribimos generalmente lo que el test de hecho hace. Aquí estamos diciendo que root debe retornar el status OK y el mensaje "hola mundo". Root es el nombre dado a la raíz de la URL, el camino <code>/</code> que colocamos en la definición del <code class="language-python highlight"><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span></code>. OK es el status que dice que la solicitud ocurrió con éxito en el protocolo HTTP.</li>
+<li>Aquí creamos el cliente de test de nuestra app</li>
+<li>En este punto, el <code>client</code> hace una solicitud de la misma forma que el browser. Para hacer eso, pasamos la dirección de root, usando el método GET.</li>
 <li>Aquí hacemos la validación del código de respuesta, para saber si la respuesta es referente al código <code>200</code>, que significa <code>OK</code>. Más informaciones sobre este tópico <a href="../02/#buenas-practicas-para-constantes" target="_blank">aquí</a>.</li>
 <li>Al final, validamos si el diccionario que enviamos en la función es el mismo que recibimos cuando hicimos la solicitud.</li>
 <li>Importación de la biblioteca nativa de python que abstrae los códigos de respuesta y nos presenta el status. Más informaciones sobre este tópico <a href="../02/#buenas-practicas-para-constantes" target="_blank">aquí</a>.</li>
 </ol>
-<p>Este test hace una solicitud GET en el endpoint <code>/</code> y verifica si el código de status de la respuesta es 200 y si el contenido de la respuesta es <code>{'message': '¡Hola Mundo!'}</code>.</p>
+<p>Este test hace una solicitud GET en el endpoint <code>/</code> y verifica si el código de status de la respuesta es 200 y si el contenido de la respuesta es <code>{'message': 'Hola Mundo!'}</code>.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-60-1"><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>poetry<span class="w"> </span><span class="nb">test</span>
-</span><span id="__span-60-2"><a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="c1"># parte del mensaje fue omitida</span>
+</span><span id="__span-60-2"><a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="c1"># parte del mensaje fue omitido</span>
 </span><span id="__span-60-3"><a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="hll">collected<span class="w"> </span><span class="m">1</span><span class="w"> </span>item
 </span></span><span id="__span-60-4"><a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>
 </span><span id="__span-60-5"><a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="hll">tests/test_app.py::test_root_deve_retornar_ok_e_ola_mundo<span class="w"> </span>PASSED
