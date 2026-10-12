@@ -2050,7 +2050,7 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 <h2 id="configurando-las-herramientas-de-desarrollo">Configurando las herramientas de desarrollo</h2>
 <p>Después de la instalación de las herramientas de desarrollo, necesitamos definir las configuraciones de cada una individualmente en el archivo <code>pyproject.toml</code>.</p>
 <h3 id="ruff">Ruff</h3>
-<p><a href="https://docs.astral.sh/ruff/" target="_blank">Ruff</a> es una herramienta moderna, escrita en rust, compatible<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">2</a></sup> con los proyectos de análisis estático escritos y mantenidos originalmente por la comunidad en el proyecto <a href="https://github.com/PyCQA/" target="_blank">PYCQA</a><sup id="fnref:4"><a class="footnote-ref" href="#fn:4">3</a></sup> y tiene dos funciones principales:</p>
+<p><a href="https://docs.astral.sh/ruff/" target="_blank">Ruff</a> es una herramienta moderna, escrita en rust, compatible<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">2</a></sup> con los proyectos de análisis estático escritos y mantenidos originalmente por la comunidad en el proyecto <a href="https://github.com/PyCQA/" target="_blank">PYCQA</a> y tiene dos funciones principales:</p>
 <ol>
 <li>Analizar el código de forma estática (Linter): Verificar si estamos programando de acuerdo con buenas prácticas de python.</li>
 <li>Formatear el código (Formatter): Efectuar la verificación del código para estandarizar un estilo de código predefinido.</li>
@@ -2620,7 +2620,7 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 </ol>
 <p>Esto no es obligatorio en repositorios git, pero, como estamos buscando construir buenas prácticas de desarrollo de código, es importante practicarlas para interiorizarlas.</p>
 <h2 id="ejercicios">Ejercicios</h2>
-<p>Agrega el <code>typos</code> para analizar gramática en inglés para ser ejecutado antes de la etapa de lint, transformándola en una secuencia que corra el <code>typos</code> y el <code>ruff check</code> en la tabla <code>[tool.poe.tasks]</code> de tu archivo <code>pyproject.toml</code>.</p>
+<p>Agrega <code>typos</code> para analizar gramática en inglés para ser ejecutado antes de la etapa de lint, transformándola en una secuencia que corra <code>typos</code> y  <code>ruff check</code> en la tabla <code>[tool.poe.tasks]</code> de tu archivo <code>pyproject.toml</code>.</p>
 <p><a class="md-button" href="../ejercicios_resueltos/aula_01/">Ejercicios resueltos <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 7V5h2V4a2 2 0 0 1 2-2h6v7l2.5-1.5L18 9V2h1c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm4 4H5v2h2zm0-4V5H5v2zm0 12v-2H5v2z"/></svg></span></a></p>
 <h2 id="codigo-de-esta-leccion">Código de esta lección</h2>
 <p><a class="md-button" href="https://github.com/rmatuk/prog2/tree/main/codigo_aulas/01">Código <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M360.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m64.6 136.1c-12.5 12.5-12.5 32.8 0 45.3l73.4 73.4-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0zm-274.7 0c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l73.3-73.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span></a></p>
@@ -2634,9 +2634,6 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 </li>
 <li id="fn:3">
 <p>En algunos casos, existe una divergencia de opiniones entre los linters más tradicionales. Pero, en general, funciona bien.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-<li id="fn:4">
-<p>En versiones antiguas del texto, usábamos las herramientas del PyCQA como el pylint y el isort.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
