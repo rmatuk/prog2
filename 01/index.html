@@ -2099,30 +2099,29 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 <p>Recordando que la opción de usar comillas simples es totalmente personal, puedes usar comillas dobles si quieres.</p>
 </blockquote>
 <h3 id="pytest">pytest</h3>
-<p>El <a href="https://docs.pytest.org/" target="_blank">Pytest</a> es un framework de tests, que usaremos para escribir y ejecutar nuestros tests. Lo configuraremos para reconocer el camino base para ejecución de los tests en la raíz del proyecto <code>.</code>:</p>
+<p><a href="https://docs.pytest.org/" target="_blank">Pytest</a> es un framework de tests, que usaremos para escribir y ejecutar nuestros tests. Lo configuraremos para reconocer el camino base para ejecución de los tests en la raíz del proyecto <code>.</code>:</p>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-34">34</a></span>
 <span class="normal"><a href="#__codelineno-39-35">35</a></span>
 <span class="normal"><a href="#__codelineno-39-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-39-34"><a id="__codelineno-39-34" name="__codelineno-39-34"></a><span class="k">[tool.pytest]</span>
 </span><span id="__span-39-35"><a id="__codelineno-39-35" name="__codelineno-39-35"></a><span class="n">pythonpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">'.'</span><span class="p">]</span>
 </span><span id="__span-39-36"><a id="__codelineno-39-36" name="__codelineno-39-36"></a><span class="n">addopts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">'-p'</span><span class="p">,</span><span class="w"> </span><span class="s1">'no:warnings'</span><span class="p">,</span><span class="w"> </span><span class="s1">'--cov=fast_zero'</span><span class="p">,</span><span class="w"> </span><span class="s1">'--cov-context=test'</span><span class="p">]</span>
 </span></code></pre></div></td></tr></table></div>
-<p>En la segunda línea, usamos la opción <code>addopts</code> del pytest. Esta opción le dice que todas las veces en que el pytest sea llamado, va a agregar esos parámetros a la llamada, sin que tengamos que declararlos explícitamente.</p>
-<p>Quedando algo como:</p>
+<p>En la segunda línea, usamos la opción <code>addopts</code> del pytest. Esta opción le dice que todas las veces en que el pytest sea llamado, va a agregar esos parámetros a la llamada, sin que tengamos que declararlos explícitamente. Quedando algo como:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>pytest<span class="w"> </span>-p<span class="w"> </span>no:warnings<span class="w"> </span>--cov<span class="o">=</span>fast_zero<span class="w"> </span>--cov-context<span class="o">=</span><span class="nb">test</span>
 </span></code></pre></div>
-<p>Cada parámetro de esos tiene un significado importante:</p>
+<p>Cada uno de esos parámetros tiene el siguiente significado:</p>
 <ul>
 <li><code>-p no:warnings</code>: decimos que no queremos mensajes de "warnings" en la salida de los tests. Suele dejar más limpio.</li>
 <li><code>--cov=fast_zero</code>: directorio donde está nuestro código que será testeado, para mostrar por dónde pasan los tests</li>
 <li><code>--cov-context=test</code>: aísla tests en contextos, para decir exactamente qué test ejecuta cada línea de código.</li>
 </ul>
-<p>De esta forma, al testear, tendremos una visualización buena y coherente de lo que testean.</p>
+<p>De esta forma, al testear, tendremos una visualización limpia y coherente.</p>
 <blockquote>
 <p>Vamos a ver estas cosas en acción <a href="#introduccion-al-pytest-testeando-el-hello-world" target="_blank">aquí</a>.</p>
 </blockquote>
 <h3 id="typos">Typos</h3>
-<p>El <a href="https://github.com/crate-ci/typos" target="_blank">typos</a> nos va a ayudar con algunos errores que terminan sucediendo cuando escribimos código en inglés.</p>
-<p>Vamos a suponer que nuestro código esté así:</p>
+<p><a href="https://github.com/crate-ci/typos" target="_blank">Typos</a> nos va a ayudar con los errores que terminan sucediendo cuando escribimos código en inglés.</p>
+<p>Supongamos que nuestro código esté así:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
 <span class="normal"><a href="#__codelineno-41-2">2</a></span>
 <span class="normal"><a href="#__codelineno-41-3">3</a></span>
@@ -2141,7 +2140,7 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 <li>Subraya como un error de grafía la escritura del string <code class="language-py highlight"><span class="s1">'messsage'</span></code>. Escrita con una S de más.</li>
 </ol>
 <p>Subraya como un error de grafía la escritura del string <code class="language-py highlight"><span class="s1">'messsage'</span></code>. La palabra debería ser escrita con dos "me-ss-age", no con tres "me-sss-age".</p>
-<p>Este tipo de errores triviales son los que el Typos nos ayuda a detectar. Si lo ejecutamos, <code>typos</code>, en la terminal:</p>
+<p>Este tipo de errores triviales son los que Typos nos ayuda a detectar. Si ejecutamos <code>typos</code> en la terminal:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>typos
 </span></code></pre></div>
 <p>Nos presentará una respuesta como esta:</p>
@@ -2151,17 +2150,17 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 </span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="m">7</span><span class="w"> </span>│<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="o">{</span><span class="s1">'messsage'</span>:<span class="w"> </span><span class="s1">'¡Hola Mundo!'</span><span class="o">}</span>
 </span><span id="__span-43-5"><a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="w">  </span>╰╴<span class="w">             </span>━━━━━━━━
 </span></code></pre></div>
-<p>Diciéndonos que el string contenido en la línea <code class="language-py highlight"><span class="mi">8</span></code> columna <code class="language-py highlight"><span class="mi">14</span></code> tiene un error: <code>messsage</code> debería ser <code>message</code>.</p>
+<p>Diciéndonos que el string contenido en la línea <code class="language-py highlight"><span class="mi">7</span></code> columna <code class="language-py highlight"><span class="mi">14</span></code> tiene un error: <code>messsage</code> debería ser <code>message</code>.</p>
 <h4 id="configurando-el-analisis">Configurando el análisis</h4>
-<p>Como hablantes de español, no siempre queremos escribir todo en inglés, como la documentación o el <code>README.md</code> del repositorio.</p>
+<p>Como hablantes de castellano, no siempre queremos escribir todo en inglés, como la documentación o el <code>README.md</code> del repositorio.</p>
 <p>En estos casos, podemos configurar el <code>typos</code> para ignorar determinados archivos:</p>
 <div class="language-py highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="p">[</span><span class="n">tool</span><span class="o">.</span><span class="n">typos</span><span class="o">.</span><span class="n">files</span><span class="p">]</span>
 </span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="n">extend</span><span class="o">-</span><span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"*.md"</span><span class="p">,</span> <span class="s2">"migrations"</span><span class="p">]</span> <span class="c1">#(1)!</span>
 </span></code></pre></div>
 <ol>
-<li>Aquí todos los archivos (<code>*</code>) con la extensión <code>.md</code> están siendo ignorados. El directorio <code class="language-py highlight"><span class="s2">"migrations"</span></code> va a ser ignorado preventivamente. Pero, este directorio solo será insertado en la clase 05.</li>
+<li>Aquí todos los archivos (<code>*</code>) con la extensión <code>.md</code> están siendo ignorados. El directorio <code class="language-py highlight"><span class="s2">"migrations"</span></code> va a ser ignorado preventivamente. </li>
 </ol>
-<p>De esta forma, el <code>typos</code> dejará de analizar archivos Markdown, por ejemplo.</p>
+<p>De esta forma, <code>typos</code> dejará de analizar archivos Markdown, por ejemplo.</p>
 <h3 id="poe-the-poet">Poe the Poet</h3>
 <p>La idea del <a href="https://github.com/nat-n/poethepoet" target="_blank">Poe the Poet</a> (o simplemente <code>poe</code>) es ser un ejecutor de tareas (<em>task runner</em>) integrado a nuestro ecosistema de desarrollo. En lugar de tener que recordar comandos largos y complejos, como los de FastAPI que vimos en la ejecución de la aplicación, ¿qué tal substituir todo simplemente por <code>poetry serve</code>?</p>
 <p>Esto funciona para cualquier comando complicado en nuestra aplicación, simplificando las llamadas y centralizando el flujo de trabajo en el archivo de configuración del proyecto.</p>
@@ -2172,8 +2171,8 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 <li>Instala el poethepoet en el mismo venv del pipx con el poetry, extendiendo las funcionalidades de él.</li>
 </ol>
 <details class="example">
-<summary>¿puedo instalar de otras formas?</summary>
-<p>Sí, puedes: <a href="https://poethepoet.natn.io/installation.html">Guía de instalación del poethepoet</a>, pero para el curso, el mejor camino tal vez sea vía pipx, como lo instalamos.</p>
+<summary>¿puedo instalarlo de otras formas?</summary>
+<p>Sí, puedes: <a href="https://poethepoet.natn.io/installation.html">Guía de instalación del poethepoet</a>, pero para el curso, el mejor camino es vía pipx.</p>
 </details>
 <div class="language-toml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-55">55</a></span>
 <span class="normal"><a href="#__codelineno-46-56">56</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-46-55"><a id="__codelineno-46-55" name="__codelineno-46-55"></a><span class="k">[tool.poe]</span><span class="w"> </span><span class="c1">#(1)!</span>
