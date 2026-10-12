@@ -2513,7 +2513,7 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 <p><img alt="descripción" class="center" src="../assets/01/navegador_com_pagina_de_cobertura_com_teste_e_cxt.png" /></p>
 <p>Podemos ver exactamente el archivo de test y qué test en específico ejecutó la línea en cuestión: <code>tests/test_app.py::test_root_deve_retornar_ok_e_ola_mundo</code>. Esto facilita bastante el entendimiento de qué test pasa por determinado camino en la aplicación.</p>
 <h2 id="estructura-de-un-test">Estructura de un test</h2>
-<p>Ahora que escribimos nuestro primer test intuitivamente, podemos entender qué hace cada paso del test. Esta comprensión es vital, pues nos ayudará a escribir tests con más confianza y eficacia. Para desvendar el método detrás de nuestro enfoque, exploraremos una estrategia conocida como <a href="https://xp123.com/articles/3a-arrange-act-assert/" target="_blank">AAA</a>, que divide el test en tres fases distintas: Arrange, Act, Assert.</p>
+<p>Ahora que escribimos nuestro primer test, podemos entender intuitivamente qué hace cada paso del test. Esta comprensión es vital, pues nos ayudará a escribir tests con más confianza y eficacia. Para desentrañar el método detrás de nuestro enfoque, exploraremos una estrategia conocida como <a href="https://xp123.com/articles/3a-arrange-act-assert/" target="_blank">AAA</a>, que divide el test en tres fases distintas: Arrange, Act, Assert.</p>
 <p>Para analizar todas las etapas de un test, usaremos como ejemplo este primer test que escribimos:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-61-2"> 2</a></span>
@@ -2547,15 +2547,15 @@ la creación de comandos, como ejecutar una aplicación, correr tests, etc.</li>
 <h3 id="fase-1-organizar-arrange">Fase 1 - Organizar (Arrange)</h3>
 <p>En esta primera etapa, estamos preparando el entorno para el test. En el ejemplo, la línea con el comentario <code>Arrange</code> no es el test en sí, ella monta el entorno para que el test pueda ser ejecutado. Estamos configurando un <code>client</code> de tests para hacer la solicitud al <code>app</code>.</p>
 <h3 id="fase-2-actuar-act">Fase 2 - Actuar (Act)</h3>
-<p>Aquí es la etapa donde sucede la acción principal del test, que consiste en llamar al Sistema Bajo Test (<a href="http://xunitpatterns.com/SUT.html" target="_blank">SUT</a>). En nuestro caso, el SUT es la ruta <code>/</code>, y la acción es representada por la línea <code>response = client.get('/')</code>. Estamos ejercitando la ruta y almacenando su respuesta en la variable <code>response</code>. Es la fase en que el código de tests ejecuta el código de producción que está siendo testeado. Actuar aquí significa interactuar directamente con la parte del sistema que queremos evaluar, para ver cómo se comporta.</p>
-<h3 id="fase-3-afirmar-assert">Fase 3 - <em>Afirmar</em> (Assert)</h3>
-<p>Esta es la etapa de verificar si todo ocurrió como se esperaba. Es fácil notar dónde estamos haciendo la verificación, pues esa línea siempre tiene la palabra reservada <code>assert</code>. La verificación es booleana, o está correcta, o no está. Por eso, un test debe siempre incluir un <code>assert</code> para verificar si el comportamiento esperado está correcto.</p>
+<p>Aquí es la etapa donde sucede la acción principal del test, que consiste en llamar al Sistema Bajo Test (<a href="http://xunitpatterns.com/SUT.html" target="_blank">SUT</a>). En nuestro caso, el SUT es la ruta <code>/</code>, y la acción es representada por la línea <code>response = client.get('/')</code>. Estamos llamando a la ruta y almacenando su respuesta en la variable <code>response</code>. Es la fase en que el código de tests ejecuta el código de producción que está siendo testeado. Actuar aquí significa interactuar directamente con la parte del sistema que queremos evaluar, para ver cómo se comporta.</p>
+<h3 id="fase-3-afirmar-assert">Fase 3 - Afirmar (Assert)</h3>
+<p>En esta etapa verificamos si todo ocurrió como se esperaba. Es fácil notar dónde estamos haciendo la verificación, pues esas líneas siempre tienen la palabra reservada <code>assert</code>. La verificación es booleana, o está correcta, o no está. Por eso, un test debe siempre incluir un <code>assert</code> para verificar si el comportamiento esperado está correcto.</p>
 <hr />
-<p>Ahora que comprendemos qué hace cada línea de test en específico, podemos orientarnos de forma clara en los tests que escribiremos en el futuro. Cada una de las líneas usadas tiene una razón de estar en el test, y conocer esta estructura no solo nos da una comprensión más profunda de lo que estamos haciendo, sino que también nos da confianza para explorar y escribir tests más complejos.</p>
+<p>Ahora que comprendemos qué hace cada línea de test en específico, podemos orientarnos de forma clara en los tests que escribiremos en el futuro. Cada una de las líneas usadas tiene una razón de estar en el test, y conocer esta estructura no sólo nos da una comprensión más profunda de lo que estamos haciendo, sino que también nos da confianza para explorar y escribir tests más complejos.</p>
 <h2 id="creando-nuestro-repositorio-en-git">Creando nuestro repositorio en git</h2>
 <p>Antes de concluir, necesitamos ejecutar algunos pasos:</p>
 <ol>
-<li>Crear un archivo <code>.gitignore</code> para no agregar el entorno virtual y otros archivos innecesarios en el versionado de código.</li>
+<li>Crear un archivo <code>.gitignore</code> para no agregar el entorno virtual y otros archivos innecesarios al versionado de código.</li>
 <li>Crear un nuevo repositorio en GitHub para versionar el código.</li>
 <li>Subir el código que hicimos a GitHub.</li>
 </ol>
