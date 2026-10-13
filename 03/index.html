@@ -1650,12 +1650,12 @@
 <li>Escritura y ejecución de tests para validar el comportamiento de las rutas</li>
 </ul>
 <hr />
-<p>Bienvenidos de nuevo a nuestra serie de clases sobre la construcción de una aplicación utilizando FastAPI. En la última clase, abordamos conceptos básicos del desarrollo web y finalizamos la configuración de nuestro entorno. Hoy avanzaremos en la estructuración de los primeros endpoints de nuestra API, concentrándonos en las cuatro operaciones fundamentales de <strong>CRUD</strong> - Crear, Leer, Actualizar y Eliminar. Exploraremos cómo estas operaciones se aplican tanto a la comunicación web como a la interacción con la base de datos.</p>
+<p>En la última clase, abordamos conceptos básicos del desarrollo web y finalizamos la configuración de nuestro entorno. Hoy avanzaremos en la estructuración de los primeros endpoints de nuestra API, concentrándonos en las cuatro operaciones fundamentales de <strong>CRUD</strong>: Crear, Leer, Actualizar y Eliminar. Exploraremos cómo estas operaciones se aplican tanto a la comunicación web como a la interacción con la base de datos.</p>
 <p>El objetivo de esta clase es implementar un sistema de registro de usuarios en nuestra aplicación. Al final, podrás registrar, listar, modificar y eliminar usuarios, además de realizar tests para validar estas funcionalidades.</p>
 <details class="note">
 <summary>Nota para personas <strong>más experimentadas</strong> sobre esta clase</summary>
 <p>El principio detrás de esta clase es demostrar cómo construir los endpoints y los tests más básicos posibles.</p>
-<p>Tal vez te cause extrañeza el uso de una base de datos en una lista y los tests construidos a partir de efectos colaterales. Pero el objetivo principal es que las personas puedan concentrarse en la creación de los primeros tests sin mucho roce.</p>
+<p>Tal vez te cause extrañeza el uso de una lista como una base de datos y los tests construidos a partir de efectos colaterales. Pero el objetivo principal es que las personas puedan concentrarse en la creación de los primeros tests sin muchas dificultades.</p>
 <p>Estas cuestiones se resolverán en las clases siguientes.</p>
 </details>
 <h2 id="crud-y-http">CRUD y HTTP</h2>
@@ -1668,11 +1668,11 @@
 <li><strong>D</strong>elete (Eliminar): eliminar registros existentes de la base de datos.</li>
 </ul>
 <p>Con estas operaciones podemos realizar cualquier tipo de comportamiento en una base de datos. Podemos crear un registro, luego modificarlo y, tal vez después de todo eso, eliminarlo.</p>
-<p>Cuando hablamos de APIs que sirven datos, todas estas operaciones tienen alguna forma similar en el protocolo HTTP. El protocolo tiene verbos para indicar esas mismas acciones que queremos representar en la base de datos.</p>
+<p>Cuando hablamos de APIs que sirven datos, todas estas operaciones tienen alguna forma similar en el protocolo HTTP. El protocolo tiene verbos para indicar esas mismas acciones que queremos efectuar en la base de datos:</p>
 <ul>
 <li><strong>POST</strong>: se usa para solicitar que el servidor acepte un dato (recurso) enviado por el cliente.</li>
 <li><strong>GET</strong>: se usa cuando el cliente desea solicitar una información del servidor.</li>
-<li><strong>PUT</strong>: se usa en el momento en que el cliente desea informar alguna modificación de los datos al servidor.</li>
+<li><strong>PUT</strong>: se usa en el momento en que el cliente desea realizar alguna modificación de los datos al servidor.</li>
 <li><strong>DELETE</strong>: se usa para decirle al servidor que elimine determinado recurso.</li>
 </ul>
 <p>De esta forma podemos crear asociaciones entre los endpoints y la base de datos. Por ejemplo: cuando queramos insertar un dato en la base de datos, nosotros como clientes debemos comunicar esa intención al servidor usando el método POST enviando los datos (en nuestro caso en formato JSON) que deben persistirse en la base de datos. Con esto iniciamos el proceso de <em>create</em> en la base de datos.</p>
@@ -1713,9 +1713,9 @@
 <p>Las dos primeras etapas nos ayudan a definir la interfaz de comunicación y cómo será documentada. La tercera etapa es más específica e involucra decisiones sobre la interacción con la base de datos, validaciones adicionales y la definición de lo que constituye éxito o error en la solicitud.</p>
 <p>Estas etapas nos orientan en la implementación completa del endpoint, garantizando que nada sea olvidado.</p>
 <h2 id="iniciando-la-implementacion-de-la-ruta-post">Iniciando la implementación de la ruta POST</h2>
-<p>En esta clase, nuestro foco principal será desarrollar un sistema de registro de usuarios. Para eso, la implementación de una forma eficiente para crear nuevos usuarios en la base de datos es esencial. Exploraremos cómo utilizar el verbo HTTP POST, fundamental para comunicar al servidor nuestra intención de enviar nuevos datos, como en el registro de usuarios.</p>
+<p>En esta clase, nuestro foco principal será desarrollar un sistema de registro de usuarios. Para eso, la implementación de una forma eficiente para crear nuevos usuarios en la base de datos es esencial. Exploraremos cómo utilizar el verbo HTTP POST, fundamental para comunicar al servidor nuestra intención de enviar nuevos datos al registro de usuarios.</p>
 <h3 id="implementacion-del-endpoint">Implementación del endpoint</h3>
-<p>Para iniciar, crearemos un endpoint que acepta el verbo <code>POST</code> con datos en formato JSON. Este endpoint responderá con el status <code>201</code> en caso de éxito en la creación del recurso. Con esto, establecemos la base para nuestra funcionalidad de registro.</p>
+<p>Para iniciar, crearemos un endpoint que acepta el verbo <code>POST</code> con datos en formato JSON. Este endpoint responderá con el status <code>201</code> en caso de éxito en la creación del recurso. Con esto, establecemos la base para nuestra funcionalidad del registro.</p>
 <p>Usaremos el decorador <code class="language-python highlight"><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">()</span></code> de FastAPI para definir nuestro endpoint, que comenzará con la URL <code>/users/</code>, indicando dónde recibiremos los datos para crear nuevos usuarios:</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-15">15</a></span>
 <span class="normal"><a href="#__codelineno-0-16">16</a></span>
@@ -1731,9 +1731,6 @@
 </span></span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">():</span>
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a>    <span class="o">...</span>
 </span></code></pre></div></td></tr></table></div>
-<blockquote>
-<p>Conversaremos en breve sobre los códigos de respuesta en el tópico de <a href="#validacion-y-pydantic" target="_blank">pydantic</a></p>
-</blockquote>
 <h3 id="modelado-de-datos">Modelado de datos</h3>
 <p>El modelado de datos es una parte fundamental, donde consideramos tanto los datos recibidos del cliente como los datos que serán devueltos a él. Este enfoque asegura una comunicación eficaz y clara.</p>
 <h4 id="modelo-de-entrada-de-datos">Modelo de entrada de datos</h4>
@@ -1772,7 +1769,7 @@
 <p>El modelo de salida explica al cliente qué datos serán devueltos cuando se haga la llamada a este endpoint. Para que la API tenga un uso fluido, tenemos que especificar el retorno correctamente en la documentación.</p>
 <p>Si miramos el estado actual de respuesta de nuestra API, podemos ver que la respuesta en el swagger es <code class="language-python highlight"><span class="s2">"string"</span></code> para el código de respuesta <code class="language-python highlight"><span class="mi">201</span></code>:</p>
 <p><img alt="descripción" class="center shadow" src="../assets/03/swagger_sem_modelo_de_resposta.png" /></p>
-<p>Cuando hacemos una llamada con el método POST lo esperado es que los datos creados sean devueltos al cliente. Podríamos usar el mismo modelo de antes, el <code>UserSchema</code>, sin embargo, por una cuestión de seguridad, sería ideal no devolver la contraseña del usuario. Cuanto menos trafique en la red, mejor.</p>
+<p>Cuando hacemos una llamada con el método POST lo esperado es que los datos creados sean devueltos al cliente. Podríamos usar el mismo modelo de antes, el <code>UserSchema</code>, sin embargo, por una cuestión de seguridad, sería ideal no devolver la contraseña del usuario. </p>
 <p>De esta forma, podemos pensar en el mismo schema, pero sin la contraseña. Algo como:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"joao123"</span><span class="p">,</span>
@@ -1798,7 +1795,7 @@
 <p>Teniendo un modelo descriptivo de respuesta para el cliente en la documentación:</p>
 <p><img alt="descripción" class="center shadow" src="../assets/03/modelo_de_resposta_do_swagger.png" /></p>
 <h2 id="validacion-y-pydantic">Validación y pydantic</h2>
-<p>Un punto crucial de Pydantic es su habilidad para verificar si los datos son correctos mientras el programa está corriendo, garantizando que todo esté conforme a lo esperado. Haciendo que, en caso de que el cliente envíe un dato que no corresponde con el schema definido, se levante un error <code class="language-python highlight"><span class="mi">422</span></code>. Y en caso de que nuestra respuesta como servidor tampoco siga el schema, se levantará un error <code class="language-python highlight"><span class="mi">500</span></code>. Haciendo que sea una garantía de dos vías: nuestra API sigue la especificación de la documentación.</p>
+<p>Un punto crucial de Pydantic es su habilidad para verificar si los datos son correctos mientras el programa está corriendo, garantizando que todo esté conforme a lo esperado. Haciendo que, en caso de que el cliente envíe un dato que no corresponde con el schema definido, se levante un error <code class="language-python highlight"><span class="mi">422</span></code>. En caso de que nuestra respuesta como servidor tampoco siga el schema, se levantará un error <code class="language-python highlight"><span class="mi">500</span></code>. Haciendo que sea una garantía de dos vías: nuestra API sigue la especificación de la documentación.</p>
 <p>Cuando relacionamos un modelo a la respuesta del endpoint, Pydantic de forma automática crea un schema llamado <code>HTTPValidationError</code>:</p>
 <p><img alt="descripción" class="center shadow" src="../assets/03/422_no_swagger.png" /></p>
 <p>Este modelo se usa cuando el JSON enviado en la solicitud no cumple con los requisitos del schema.</p>
@@ -1848,7 +1845,7 @@
 <h3 id="extendiendo-la-validacion-con-e-mail">Extendiendo la validación con e-mail</h3>
 <p>Otro punto que debe ser considerado es la capacidad de extender los campos usados por pydantic en las anotaciones de tipo.</p>
 <p>Para garantizar que el campo <code>email</code> realmente contenga un e-mail válido, podemos usar una herramienta especial de Pydantic que verifica si el e-mail tiene el formato correcto, como la presencia de <code>@</code> y un dominio válido.</p>
-<p>Para eso, pydantic tiene un tipo de dato específico, el <a href="https://docs.pydantic.dev/latest/api/networks/#pydantic.networks.EmailStr" target="_blank"><code>EmailStr</code></a>. Que garantiza que el valor que será recibido por el schema sea de hecho un e-mail en formato válido. Podemos agregarlo al campo <code>email</code> en los modelos <code>UserSchema</code> y <code>UserPublic</code>:</p>
+<p>Para eso, pydantic tiene un tipo de dato específico, el <a href="https://docs.pydantic.dev/latest/api/networks/#pydantic.networks.EmailStr" target="_blank"><code>EmailStr</code></a>, que garantiza que el valor que será recibido por el schema sea de hecho un e-mail en formato válido. Podemos agregarlo al campo <code>email</code> en los modelos <code>UserSchema</code> y <code>UserPublic</code>:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">EmailStr</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Código omitido</span>
@@ -1878,18 +1875,17 @@
 <p>El intento resulta en un mensaje de error mostrado directamente en el Swagger, indicando un error de servidor interno (HTTP 500). Este tipo de error sugiere que algo salió mal del lado del servidor, pero no ofrece detalles específicos sobre la naturaleza del problema para el cliente. El error 500 es una respuesta genérica para indicar fallos en el servidor.</p>
 <p><img alt="captura de pantalla del swagger respondiendo el error 500" class="center shadow" src="../assets/03/erro_500_do_servidor.png" /></p>
 <p>Para investigar la causa exacta del error 500, es necesario consultar la consola o los logs de nuestra aplicación, donde se registran los detalles del error. En este caso, el error presentado en los logs es el siguiente:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">raise</span> <span class="n">ResponseValidationError</span><span class="p">(</span> <span class="c1"># (1)!</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">raise</span> <span class="n">ResponseValidationError</span><span class="p">(</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">fastapi</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ResponseValidationError</span><span class="p">:</span> <span class="mi">1</span> <span class="n">validation</span> <span class="n">errors</span><span class="p">:</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">{</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  <span class="s2">"type"</span><span class="p">:</span><span class="s2">"model_attributes_type"</span><span class="p">,</span>
 </span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>  <span class="s2">"loc"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"response"</span><span class="p">),</span>
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  <span class="s2">"msg"</span><span class="p">:</span><span class="s2">"Input should be a valid dictionary or object to extract fields from"</span><span class="p">,</span><span class="c1">#(2)!</span>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>  <span class="s2">"input"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span> <span class="c1">#(3)!</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  <span class="s2">"msg"</span><span class="p">:</span><span class="s2">"Input should be a valid dictionary or object to extract fields from"</span><span class="p">,</span><span class="c1">#(1)!</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>  <span class="s2">"input"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span> <span class="c1">#(2)!</span>
 </span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>  <span class="s2">"url"</span><span class="p">:</span><span class="s2">"https://errors.pydantic.dev/2.6/v/model_attributes_type"</span>
 </span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>El json de este mensaje de error aparece en una única línea. Yo hice el salto de línea para que fuera más fácil de leer la respuesta.</li>
 <li>El mensaje de error dice que el input pasado al modelo de pydantic debería ser un diccionario válido o un objeto del cual se pudieran extraer los campos.</li>
 <li>El objeto enviado al modelo</li>
 </ol>
@@ -1903,7 +1899,7 @@
 <p><img alt="Captura de pantalla del swagger mostrando el modelo de respuesta UserPublic correctamente con el código 201" class="center" src="../assets/03/swagger_sem_senha.png" /></p>
 <p>Este enfoque nos permite cerrar el ciclo de validación, demostrando la eficacia de Pydantic en la garantía de que los datos de respuesta estén correctos. Con esta implementación simple, establecemos la base para el desarrollo real del código del endpoint POST, preparando el terreno para una lógica más compleja que involucrará la creación y el manejo de usuarios dentro de nuestra aplicación.</p>
 <h2 id="de-vuelta-al-post">De vuelta al POST</h2>
-<p>Ahora que ya dominamos la definición de los modelos, podemos continuar con la clase y la implementación de los endpoints. Vamos a retomar la implementación del POST, agregando una base de datos falsa/simulada en memoria. Esto nos permitirá explorar las operaciones del CRUD sin la complejidad de la implementación de una base de datos real, facilitando la asimilación de los muchos conceptos discutidos en esta clase.</p>
+<p>Ahora que ya dominamos la definición de los modelos, podemos continuar con la implementación de los endpoints. Vamos a retomar la implementación del POST, agregando una base de datos falsa/simulada en memoria. Esto nos permitirá explorar las operaciones del CRUD sin la complejidad de la implementación de una base de datos real, facilitando la asimilación de los muchos conceptos discutidos en esta clase.</p>
 <h3 id="creando-una-base-de-datos-falsa">Creando una base de datos falsa</h3>
 <p>Para interactuar con estas rutas de manera práctica, vamos a crear una lista provisional que simulará una base de datos. Esto nos permitirá agregar datos y entender el funcionamiento de FastAPI. Por lo tanto, introducimos una lista provisional para actuar como nuestra “base” y modificamos nuestro endpoint para insertar nuestros modelos de Pydantic en esa lista:</p>
 <div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fast_zero.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">Message</span><span class="p">,</span> <span class="n">UserDB</span><span class="p">,</span> <span class="n">UserPublic</span><span class="p">,</span> <span class="n">UserSchema</span>
@@ -1924,7 +1920,7 @@
 </span></span></code></pre></div>
 <ol>
 <li>
-<p>La lista <code>database</code> es provisional. Está aquí solo para que entendamos los conceptos de crud; en las próximas clases trabajaremos con la creación de la base de datos definitiva.</p>
+<p>La lista <code>database</code> es provisional. Está aquí solo para que entendamos los conceptos de crud; en las próximas clases trabajaremos con bases de datos reales.</p>
 </li>
 <li>
 <p><code>.model_dump()</code> es un método de modelos de pydantic que convierte el objeto en diccionario. Por ejemplo, <code>user.model_dump()</code> haría la conversión en <code class="language-python highlight"><span class="p">{</span><span class="s1">'username'</span><span class="p">:</span> <span class="s1">'nombre del usuario'</span><span class="p">,</span> <span class="s1">'password'</span><span class="p">:</span> <span class="s1">'contraseña del usuario'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">:</span> <span class="s1">'email del usuario'</span><span class="p">}</span></code>. Los <code>**</code> quieren decir que el diccionario será desempaquetado en parámetros. Haciendo que la llamada sea equivalente a <code class="language-python highlight"><span class="n">UserDB</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">'nombre del usuario'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">'contraseña del usuario'</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">'email del usuario'</span><span class="p">,</span>  <span class="nb">id</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">database</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></p>
@@ -1965,7 +1961,7 @@
 </span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>
 </span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="c1"># parte de la respuesta fue omitida</span>
 </span></code></pre></div>
-<p>Vemos que tenemos 3 Miss. Posiblemente de las líneas que acabamos de escribir. Podemos mirar el HTML del coverage para estar seguros:</p>
+<p>Vemos que tenemos 3 Miss, posiblemente de las líneas que acabamos de escribir. Podemos mirar el HTML del coverage para estar seguros:</p>
 <p><img alt="descripción" class="center shadow" src="../assets/03/cobertura_get_sem_testes.png" width="700" /></p>
 <p>Entonces, vamos a escribir nuestro test. Este test para la ruta POST necesita verificar si la creación de un nuevo usuario funciona correctamente. Enviamos una solicitud POST con un nuevo usuario a la ruta /users/. Luego, verificamos si la respuesta tiene el status HTTP 201 (Creado) y si la respuesta contiene el nuevo usuario creado.</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-17">17</a></span>
