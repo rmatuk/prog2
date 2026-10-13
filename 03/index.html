@@ -783,7 +783,12 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#verificando-todo-antes-del-commit" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -791,11 +796,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1532,7 +1532,12 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#verificando-todo-antes-del-commit" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1540,11 +1545,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2140,8 +2140,8 @@
 <h2 id="implementando-la-ruta-put">Implementando la Ruta PUT</h2>
 <p>La ruta PUT se usa para actualizar las informaciones de un usuario existente. En el contexto del CRUD, el verbo HTTP PUT está asociado a la operación “Update”. Si la solicitud es exitosa, la ruta debe devolver el status HTTP 200 (OK). Sin embargo, si el usuario solicitado no es encontrado, deberíamos devolver el status HTTP 404 (No Encontrado).</p>
 <p>Una característica importante del verbo PUT es que está dirigido a un recurso en específico. En este caso, estamos dirigiendo la modificación a un <code>user</code> específico en la base de datos. El identificador de <code>user</code> es el campo <code>id</code> que estamos usando en los modelos de Pydantic. En este caso, nuestro endpoint debe recibir el identificador de quién será modificado.</p>
-<p>Para hacer esa identificación del recurso en la <a href="../02/#url" target="_blank">URL</a> usamos la siguiente combinación <code>/camino/recurso</code>. Pero, como el recurso es dinámico, debe ser enviado por el cliente. Haciendo que el valor tenga que ser una variable.</p>
-<p>Dentro de FastAPI, las variables de recursos se describen dentro de {}, como <code>{user_id}</code>. Haciendo que el camino completo de nuestro endpoint sea <code class="language-python highlight"><span class="s1">'/users/</span><span class="si">{user_id}</span><span class="s1">'</span></code>. De la siguiente forma:</p>
+<p>Para hacer esa identificación del recurso en la <a href="../02/#url" target="_blank">URL</a> usamos la siguiente combinación <code>/camino/recurso</code>. Pero, como el recurso es dinámico, debe ser enviado por el cliente, haciendo que el valor tenga que ser una variable.</p>
+<p>Dentro de FastAPI, las variables de recursos se describen dentro de {}, como <code>{user_id}</code>. Esto hace entonces que el camino completo de nuestro endpoint sea <code class="language-python highlight"><span class="s1">'/users/</span><span class="si">{user_id}</span><span class="s1">'</span></code>:</p>
 <div class="language-python highlight"><span class="filename">fast_zero/app.py</span><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span>
 </span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
 </span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="c1"># ...</span>
@@ -2199,7 +2199,7 @@
 <p>Con las rutas POST, GET y PUT implementadas, ahora podemos crear, recuperar y actualizar usuarios. La última operación CRUD que necesitamos implementar es Delete.</p>
 <h2 id="implementando-la-ruta-delete">Implementando la Ruta DELETE</h2>
 <p>La ruta DELETE se usa para eliminar un usuario de nuestro sistema. En el contexto del CRUD, el verbo HTTP DELETE está asociado a la operación “Delete”. Si la solicitud es exitosa, la ruta debe devolver el status HTTP 200 (OK). Sin embargo, si el usuario solicitado no es encontrado, deberíamos devolver el status HTTP 404 (No Encontrado).</p>
-<p>Este endpoint recibirá el ID del usuario que queremos eliminar. Nota que estamos lanzando una excepción HTTP cuando el ID del usuario está fuera del rango de nuestra lista (simulación de nuestra base de datos). Cuando logramos eliminar el usuario con éxito, devolvemos el mensaje de éxito en un modelo del tipo <code>Message</code>.</p>
+<p>Este endpoint recibirá el ID del usuario que queremos eliminar. Notar que estamos lanzando una excepción HTTP cuando el ID del usuario está fuera del rango de nuestra lista (simulación de nuestra base de datos). Cuando logramos eliminar el usuario con éxito, devolvemos el mensaje de éxito en un modelo del tipo <code>Message</code>.</p>
 <div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-44">44</a></span>
 <span class="normal"><a href="#__codelineno-26-45">45</a></span>
 <span class="normal"><a href="#__codelineno-26-46">46</a></span>
@@ -2233,7 +2233,7 @@
 </span><span id="__span-27-62"><a id="__codelineno-27-62" name="__codelineno-27-62"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span>
 </span><span id="__span-27-63"><a id="__codelineno-27-63" name="__codelineno-27-63"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'User deleted'</span><span class="p">}</span>
 </span></code></pre></div></td></tr></table></div>
-<h4 id="verificando-todo-antes-del-commit">Verificando todo antes del commit</h4>
+<h2 id="verificando-todo-antes-del-commit">Verificando todo antes del commit</h2>
 <p>Antes de hacer el commit, es una buena práctica verificar todo el código, y podemos hacerlo con las acciones que creamos con poe.</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>$<span class="w"> </span>poetry<span class="w"> </span>lint
 </span></code></pre></div>
@@ -2303,8 +2303,8 @@
 </span></code></pre></div>
 <p>Eso quiere decir que hizo un GET en <code>/users</code>, pero no recibió el dato esperado. Es decir, tenemos la visión explícita de la interdependencia de los tests.</p>
 <hr />
-<p>En la implementación actual, no es posible escapar de esto sin dar un rodeo grande e innecesario en la implementación, ya que no vamos a mantener esta base “falsa”; lo que queremos es exactamente lo opuesto: utilizar una base de datos real.</p>
-<p>Para que el aislamiento funcione adecuadamente, necesitaremos de un mecanismo que reinicie la base de datos en cada test, pero todavía no tenemos una base de datos real. Será introducida en la aplicación en la <a href="../04/" target="_blank">clase 04</a>, todavía con algunas interferencias. El mecanismo que hará que los tests no interfieran en otros y sean independientes será introducido en la <a href="../05/#testeando-el-endpoint-post-users-con-pytest-y-fixtures" target="_blank">clase 05</a>.</p>
+<p>En la implementación actual, no es posible escapar de esto sin dar un rodeo grande e innecesario en la implementación, ya que no vamos a mantener esta base “falsa”, lo que queremos es exactamente lo opuesto: utilizar una base de datos real.</p>
+<p>Para que el aislamiento funcione adecuadamente, necesitaremos de un mecanismo que reinicie la base de datos en cada test, pero todavía no tenemos una base de datos real. Será introducida en la aplicación en la <a href="../04/" target="_blank">clase 04</a>, todavía con algunas interferencias. El mecanismo que hará que los tests no interfieran unos con otros y sean independientes será introducido en la <a href="../05/#testeando-el-endpoint-post-users-con-pytest-y-fixtures" target="_blank">clase 05</a>.</p>
 <h3 id="se-podria-haber-sabido-esto-antes">¿Se podría haber sabido esto antes?</h3>
 <p>Sí, es posible descubrirlo simplemente cambiando el orden de los tests. El problema es que variar el orden manualmente podría acarrear otros casos parecidos. Randomizar la ejecución de todos los tests es una buena solución, haciendo que estos casos no ocurran más, sin depender del conocimiento tácito de todos los tests por quien los implementó.</p>
 <p>Pytest tiene un plugin para eso llamado <a href="https://github.com/pytest-dev/pytest-random-order" target="_blank">pytest-random-order</a>, que puede cambiar el orden de todos los tests en cada ejecución:</p>
@@ -2354,7 +2354,7 @@
 <p>El papel de los tests en cada etapa no puede ser subestimado. Los tests no solo nos ayudan a asegurar que nuestro código está funcionando como se espera, sino que también nos permiten refinar nuestras soluciones y detectar problemas potenciales antes de que afecten la funcionalidad general de nuestro sistema. ¡Nunca subestimes la importancia de ejecutar tus tests siempre que hagas un cambio en tu código!</p>
 <p>Hasta aquí, sin embargo, trabajamos con una “base de datos” provisional, en forma de una lista de Python, que es volátil y no persiste los datos de una ejecución de la aplicación a otra. Para que nuestra aplicación sea útil en un escenario del mundo real, necesitamos almacenar nuestros datos de forma más duradera. Ahí es donde entran las bases de datos.</p>
 <p>Otro punto que debe destacarse es que nuestras implementaciones de tests sufren interferencia de los tests anteriores. Los tests deben funcionar de forma aislada, sin la dependencia de un test anterior. Vamos a ajustar eso en el futuro.</p>
-<p>En el próximo tópico, exploraremos una de las partes más críticas de cualquier aplicación - la conexión e interacción con una base de datos. Aprenderemos a integrar nuestra aplicación FastAPI con una base de datos real, permitiendo la persistencia de nuestros datos de usuario entre las sesiones de la aplicación.</p>
+<p>En el próximo tópico, exploraremos una de las partes más críticas de cualquier aplicación: la conexión e interacción con una base de datos. Aprenderemos a integrar nuestra aplicación FastAPI con una base de datos real, permitiendo la persistencia de nuestros datos de usuario entre las sesiones de la aplicación.</p>
 
 
 
