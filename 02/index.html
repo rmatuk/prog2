@@ -1938,7 +1938,7 @@
 <p><img alt="Captura de pantalla de la página inicial del swagger UI" class="center shadow" src="../assets/02/captura_de_tela_swagger_ui.png" /></p>
 <p>Esta imagen nos da una visión general de los endpoints disponibles en nuestra aplicación, en este caso, el endpoint <code>/</code> que acepta el verbo HTTP <code>GET</code>. Al explorar más a fondo y hacer clic en ese método:</p>
 <p><img alt="Captura de pantalla de la documentación del / en el swagger UI" class="center shadow" src="../assets/02/documenta%C3%A7%C3%A3o_do_swagger_ui_do_endpoint_GET.png" /></p>
-<p>En la documentación, es posible observar diversas informaciones cruciales, como el <a href="#codigos-de-respuesta">código de respuesta</a> <code>200</code>, que indica éxito, el tipo de dato retornado por el <a href="#encabezado">encabezado</a> (<code>application/json</code>) y un ejemplo del valor de retorno. Sin embargo, la documentación actual sugiere, incorrectamente, que el retorno es una <code>string</code>, cuando, en realidad, nuestra aplicación retorna un objeto <a href="#comunicacion-en-json" target="_blank">JSON</a>. Esa diferencia será abordada en breve.</p>
+<p>En la documentación, es posible observar diversas informaciones cruciales, como el <a href="#codigos-de-respuesta">código de respuesta</a> <code>200</code>, que indica éxito, el tipo de dato retornado por el <a href="#encabezado">encabezado</a> (<code>application/json</code>) y un ejemplo del valor de retorno. Sin embargo, la documentación actual sugiere, incorrectamente, que el retorno es un <code>string</code>, cuando, en realidad, nuestra aplicación retorna un objeto <a href="#comunicacion-en-json" target="_blank">JSON</a>. Esa diferencia será abordada en breve.</p>
 <p>Un aspecto interesante de Swagger UI es la posibilidad de interactuar directamente con la API a través de la interfaz. Al hacer clic en <code>Try it out</code>, un botón <code>Execute</code> se vuelve disponible:</p>
 <p><img alt="Captura de pantalla del clic en el botón try it out del swagger, presentando el botón execute." class="center shadow" src="../assets/02/captura_de_tela_do_botao_execute_na_swagger_ui.png" /></p>
 <p>Hacer clic en <code>Execute</code> convierte a Swagger en un cliente temporal de nuestra API, enviando una solicitud al servidor y exhibiendo la respuesta:</p>
@@ -1965,7 +1965,7 @@
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">docs_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">redoc_url</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </span></code></pre></div>
-<p>De esta forma podrías desactivar los dos, uno u otro. Este es un código de ejemplo, en caso de que quieras hacer eso. Vamos a usar bastante el swagger durante el desarrollo del curso, entonces es importante que no lo desactives.</p>
+<p>De esta forma podrías desactivar las dos, una u otra. </p>
 </details>
 <h2 id="comunicacion-en-json">Comunicación en JSON</h2>
 <p>Cuando discutimos APIs "modernas"<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, nos referimos a APIs que priorizan el tráfico de datos, dejando de lado la capa de presentación, como el <a href="#html">HTML</a>. El objetivo es transmitir datos de forma agnóstica para diferentes tipos de clientes. En ese contexto, el JSON (JavaScript Object Notation) se volvió el medio estándar, gracias a su ligereza y facilidad de lectura tanto por humanos como por máquinas.</p>
@@ -2008,10 +2008,10 @@
 </span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"message"</span><span class="p">]</span>
 </span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Donde estamos diciendo al cliente que al llamar a la API, será retornado un objeto, ese objeto contiene la propiedad <code class="language-python highlight"><span class="s2">"message"</span></code>, el mensaje será del tipo <code>string</code>. Al final, vemos que el campo <code>message</code> es requerido. Eso quiere decir que siempre será enviado en la respuesta.</p>
+<p>donde estamos diciendo al cliente que al llamar a la API, será retornado un objeto que contiene la propiedad <code class="language-python highlight"><span class="s2">"message"</span></code> de tipo <code>string</code>. Al final, vemos que el campo <code>message</code> es requerido. Eso quiere decir que siempre será enviado en la respuesta.</p>
 <details class="example">
 <summary>¿Y en casos más complicados, cómo quedaría el schema?</summary>
-<p>Para el ejemplo que hicimos antes, sobre los libros, el schema sería así:
+<p>Para el ejemplo sobre los libros, el schema sería así:
 <div class="language-json highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span>
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2047,7 +2047,7 @@
 <p class="admonition-title">Sobre la terminología</p>
 <p>Aunque el término <code>schema</code> sea bastante utilizado en python para referirse al formato de los objetos transferidos, en algunos otros contextos y lenguajes podemos referirnos a estos modelos como <a href="https://es.wikipedia.org/wiki/Objeto_de_Transferencia_de_Datos" target="_blank">DTOs</a> (objetos de transferencia de datos). </p>
 </div>
-<p>Por ejemplo, el schema JSON <code>{'message': '¡Hola mundo!'}</code>. Con Pydantic, podemos representar ese schema en la forma de una clase Python llamada <code>Message</code>. Esto se hace de manera intuitiva y directa:</p>
+<p>Por ejemplo, consideremos el schema JSON <code>{'message': '¡Hola mundo!'}</code>. Con Pydantic, podemos representar este schema en la forma de una clase Python llamada <code>Message</code>. Esto se hace de manera intuitiva y directa:</p>
 <div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">fast_zero/schemas.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
@@ -2097,9 +2097,9 @@
 <h2 id="codigo-de-esta-leccion">Código de esta lección</h2>
 <p><a class="md-button" href="https://github.com/rmatuk/prog2/tree/main/codigo_aulas/02">Código <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M360.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m64.6 136.1c-12.5 12.5-12.5 32.8 0 45.3l73.4 73.4-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0zm-274.7 0c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l73.3-73.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span></a></p>
 <h2 id="conclusion">Conclusión</h2>
-<p>En esta clase, navegamos brevemente por el vasto mundo del desarrollo web con foco en APIs, abrazando desde los fundamentos de la comunicación en la web hasta las prácticas de intercambio de datos. Exploramos el modelo cliente-servidor, entendimos algunos detalles de los mensajes HTTP y tuvimos una introducción sobre URLs y HTML. Aunque el HTML desempeña un papel central en la capa de presentación, nuestro foco recayó sobre las APIs, particularmente aquellas que intercambian JSON, un formato de datos.</p>
+<p>En esta clase, navegamos brevemente por el vasto mundo del desarrollo web con foco en APIs, desde los fundamentos de la comunicación en la web hasta las prácticas de intercambio de datos. Exploramos el modelo cliente-servidor, entendimos algunos detalles de los mensajes HTTP y tuvimos una introducción sobre URLs y HTML. Aunque el HTML desempeña un papel central en la capa de presentación, nuestro foco recayó sobre las APIs, particularmente aquellas que intercambian JSON, un formato de datos.</p>
 <p>Profundizamos en el uso de herramientas y conceptos vitales para la creación de APIs, como FastAPI y Pydantic, que juntos ofrecen una poderosa combinación para la validación de datos y la generación automática de documentación. La exploración de Swagger UI y Redoc enriqueció nuestro entendimiento sobre la importancia de la documentación accesible y clara para APIs, facilitando tanto el desarrollo como la usabilidad.</p>
-<p>Esta clase nos dio una fundamentación básica para avanzar en la construcción de APIs. Aunque hayamos ejemplificado los conceptos con FastAPI, estos conceptos teóricos pueden ayudarte a desarrollar herramientas web en cualquier tecnología o lenguaje.</p>
+<p>Esta clase nos dio un fundamento básico para avanzar en la construcción de APIs. Aunque hayamos ejemplificado los conceptos con FastAPI, estos conceptos teóricos pueden ayudarte a desarrollar herramientas web en cualquier tecnología o lenguaje.</p>
 <p>¡Nos vemos en las próximas clases para aplicar todos estos conceptos de forma más profundizada!</p>
 <div class="footnote">
 <hr />
@@ -2108,7 +2108,7 @@
 <p>El código 209 no es un status code válido en el http, por eso se usa como ejemplo.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:2">
-<p>A pesar de la noción común de que las APIs modernas están diseñadas para comunicarse en JSON, existen debates intensos sobre las mejores prácticas para la transferencia de datos en APIs. Una lectura recomendada es el libro <a href="https://hypermedia.systems/" target="_blank">hypermedia systems</a>, que es gratuito y ofrece percepciones valiosas.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p>A pesar de la noción común de que las APIs modernas están diseñadas para comunicarse en JSON, existen debates intensos sobre las mejores prácticas para la transferencia de datos en APIs. Una lectura recomendada es el libro <a href="https://hypermedia.systems/" target="_blank">hypermedia systems</a>, que es gratuito y ofrece perspectivas valiosas.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
