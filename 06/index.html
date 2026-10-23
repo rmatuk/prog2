@@ -1454,7 +1454,7 @@
 <p>Además, hasta ahora, estamos almacenando las contraseñas de los usuarios como texto plano en la base de datos, lo cual es una práctica insegura. Corregiremos esto utilizando la biblioteca pwdlib para encriptar las contraseñas.</p>
 <h2 id="que-es-un-jwt">Qué es un JWT</h2>
 <p>El JWT es un estándar (RFC 7519) que define una manera compacta y autónoma de transmitir información entre las partes de manera segura. Esta información se transmite como un objeto JSON que es firmado digitalmente usando un secreto (con el algoritmo HMAC) o un par de claves pública/privada usando RSA, o ECDSA.</p>
-<p>Un JWT consiste en tres partes:</p>
+<p>Un JWT consiste de tres partes:</p>
 <ol>
 <li>
 <p><strong>Header:</strong> El encabezado del JWT consiste típicamente en dos componentes: el tipo de token, que es JWT en este caso, y el algoritmo de firma, como HMAC SHA256 o RSA. Esta información se codifica en Base64Url y forma la primera parte del JWT.</p>
@@ -1482,8 +1482,8 @@
 </span></code></pre></div>
 </li>
 </ol>
-<p>Estas tres partes se separan por puntos (.) y juntas forman un token JWT.</p>
-<p>Formando la estructura: <code>HEADER.PAYLOAD.SIGNATURE</code> que forman un token parecido a</p>
+<p>Estas tres partes se separan por puntos (.) y juntas forman un token JWT, formando la estructura: <code>HEADER.PAYLOAD.SIGNATURE</code>. </p>
+<p>Por ejemplo, un token JWT sería de esta forma:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZUB0ZXN0LmNvbSIsImV4cCI6MTY5MDI1ODE1M30.Nx0P_ornVwJBH_LLLVrlJoh6RmJeXR-Nr7YJ_mlGY04
 </span></code></pre></div>
 <p>Es importante resaltar que, a pesar de que la información en un JWT está codificada, no está cifrada. Esto significa que cualquier persona con acceso al token puede decodificar y leer la información en él. Sin embargo, sin el secreto usado para firmar el token, no pueden modificar la información o forjar un nuevo token. Por lo tanto, no debemos incluir información sensible o confidencial en el payload del JWT.</p>

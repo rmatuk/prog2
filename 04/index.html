@@ -1850,7 +1850,7 @@
 </span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="go">-------------------------------------------</span>
 </span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="go">TOTAL                      54      2    96%</span>
 </span></code></pre></div>
-<p>En este caso, podemos ver que todos nuestros tests pasaron con éxito. Esto significa que nuestra funcionalidad de creación de usuario está funcionando correctamente y que nuestro modelo de usuario está siendo correctamente persistido en la base de datos.</p>
+<p>En este caso, podemos ver que todos nuestros tests pasaron con éxito. Esto significa que nuestra funcionalidad de creación de usuarios está funcionando correctamente y que nuestro modelo de usuario está siendo correctamente persistido en la base de datos.</p>
 <p>Aunque todo se esté encajando bien, este test aún no es muy bueno, pues no hace la validación del objeto como un todo, ya que hay campos en el modelo que no fueron testeados (por ejemplo, <code>created_at</code>). Es decir, conseguimos validar que toda la estructura de la base de datos funciona, pero todavía no conseguimos garantizar que todos los campos de los modelos funcionen correctamente.</p>
 <h2 id="eventos-del-orm">Eventos del ORM</h2>
 <p>Aunque nuestros tests hayan sido ejecutados exitosamente, tenemos un problema si queremos validar el objeto como un todo, por existir algunos campos de la tabla que escapan del mecanismo de creación del objeto <code class="language-python highlight"><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>.</p>

@@ -1384,7 +1384,7 @@
 <hr />
 <p>En esta clase, además de aprender a containerizar nuestra aplicación FastAPI, también abordaremos la migración de la base de datos SQLite a PostgreSQL.</p>
 <h2 id="contenedores-y-nuestra-aplicacion">Contenedores y nuestra aplicación</h2>
-<p>Siempre que pensamos en distribuir una aplicación, necesitamos garantizar que pueda ser ejecutada de la misma forma en cualquier entorno. Una de las formas más comunes de hacer esto es mediante <strong>contenedores</strong>.</p>
+<p>Siempre que pensemos en distribuir una aplicación, necesitamos garantizar que pueda ser ejecutada de la misma forma en cualquier entorno. Una de las formas más comunes de hacer esto es mediante <strong>contenedores</strong>.</p>
 <p>Un <strong>contenedor</strong> es un entorno aislado que reúne una aplicación con todo lo que necesita para funcionar, como bibliotecas, dependencias y configuraciones. De esta forma, la aplicación se ejecuta de la misma manera en cualquier computadora o servidor que posea un mecanismo de ejecución de contenedores instalado, independientemente del sistema operativo o de las configuraciones del entorno.</p>
 <p>Para crear y gestionar estos contenedores, utilizaremos <a href="https://www.docker.com/" target="_blank">Docker</a>, una plataforma que permite crear, distribuir y ejecutar aplicaciones en contenedores. Docker automatiza la creación y el manejo de estos entornos, facilitando el desarrollo, las pruebas, la implementación y la compartición de aplicaciones. Esto hace el proceso más consistente, reduce problemas de incompatibilidad entre entornos y simplifica la distribución de software.</p>
 <details class="warning">
@@ -1397,7 +1397,7 @@
 <p>Los pasos para ambos tipos de instalación pueden encontrarse en la documentación oficial de Docker: <a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank">link</a>.</p>
 </div>
 <div class="tabbed-block">
-<p>La instalación en Linux variará de acuerdo con tu distribución. Las distribuciones más tradicionales (basadas en Debian y RHEL pueden encontrarse en la documentación oficial de Docker: <a href="https://docs.docker.com/desktop/install/linux-install/" target="_blank">link</a>.</p>
+<p>La instalación en Linux variará de acuerdo con tu distribución. Las distribuciones más tradicionales (basadas en Debian y RHEL) pueden encontrarse en la documentación oficial de Docker: <a href="https://docs.docker.com/desktop/install/linux-install/" target="_blank">link</a>.</p>
 <p>Otras distribuciones deben tener el paquete de Docker disponible en sus repositorios. Como distros basadas en <a href="https://wiki.archlinux.org/title/Docker" target="_blank">Archlinux</a>.</p>
 </div>
 <div class="tabbed-block">
@@ -1538,7 +1538,7 @@
 </span></code></pre></div>
 <p>Este comando lista todas las imágenes Docker disponibles en tu sistema.</p>
 <h3 id="ejecutando-el-contenedor">Ejecutando el contenedor</h3>
-<p>Para ejecutar el contenedor, usamos el comando <code>docker run</code>. Especificamos el nombre del contenedor con la flag <code>--name</code>, indicamos la imagen que queremos ejecutar y la tag que queremos usar <code>&lt;nombre_de_la_imagen&gt;:&lt;tag&gt;</code>. La flag <code>-p</code> sirve para mapear el puerto del host al puerto del contenedor <code>&lt;puerto_del_host&gt;:&lt;puerto_del_contenedor&gt;</code>. Por lo tanto, tendremos el siguiente comando:</p>
+<p>Para ejecutar el contenedor, usamos el comando <code>docker run</code>. Especificamos el nombre del contenedor con el flag <code>--name</code>, indicamos la imagen que queremos ejecutar y el tag que queremos usar <code>&lt;nombre_de_la_imagen&gt;:&lt;tag&gt;</code>. El flag <code>-p</code> sirve para mapear el puerto del host al puerto del contenedor <code>&lt;puerto_del_host&gt;:&lt;puerto_del_contenedor&gt;</code>. Por lo tanto, tendremos el siguiente comando:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>fastzeroapp<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span>fast_zero:latest
 </span></code></pre></div>
 <p>Este comando iniciará nuestra aplicación en un contenedor Docker, que estará escuchando en el puerto 8000. Para probar si todo está funcionando correctamente, puedes acceder a <code>http://localhost:8000</code> en un navegador o usar un comando como:</p>
@@ -1567,7 +1567,7 @@
 </span></code></pre></div>
 </li>
 </ol>
-<p>Ambos comandos (stop y rm) usan el nombre del contenedor que definimos anteriormente con la flag <code>--name</code>. Es una buena práctica mantener la gestión de tus contenedores, principalmente durante el desarrollo, para evitar un uso excesivo de recursos o conflictos de nombres y puertos.</p>
+<p>Ambos comandos (stop y rm) usan el nombre del contenedor que definimos anteriormente con el flag <code>--name</code>. Es una buena práctica mantener la gestión de tus contenedores, principalmente durante el desarrollo, para evitar un uso excesivo de recursos o conflictos de nombres y puertos.</p>
 <h2 id="introduciendo-postgresql">Introduciendo PostgreSQL</h2>
 <p><a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a> es un Sistema de Gestión de Bases de Datos Objeto-Relacional (ORDBMS) poderoso y de código abierto. Es ampliamente utilizado en producción en muchos proyectos debido a su robustez, escalabilidad y conjunto de recursos extensos.</p>
 <p>Cambiar a una base de datos como PostgreSQL tiene varios beneficios:</p>
@@ -1596,7 +1596,7 @@
 <ul>
 <li><strong>Flag <code>-e</code></strong>:</li>
 </ul>
-<p>Esta flag se usa para definir variables de entorno en el contenedor. En el contexto de PostgreSQL, estas variables son esenciales. Configuran el nombre de usuario, nombre de la base de datos y contraseña durante la primera ejecución del contenedor. Sin ellas, PostgreSQL puede no iniciar de la forma esperada. Es una forma práctica de configurar PostgreSQL sin interactuar manualmente o crear archivos de configuración.</p>
+<p>Este flag se usa para definir variables de entorno en el contenedor. En el contexto de PostgreSQL, estas variables son esenciales. Configuran el nombre de usuario, nombre de la base de datos y contraseña durante la primera ejecución del contenedor. Sin ellas, PostgreSQL puede no iniciar de la forma esperada. Es una forma práctica de configurar PostgreSQL sin interactuar manualmente o crear archivos de configuración.</p>
 <ul>
 <li><strong>Puerto <code>5432</code></strong>:</li>
 </ul>
@@ -1631,7 +1631,7 @@
 <p class="admonition-title">En caso de que hayas alterado las variables de entorno del contenedor</p>
 <p>Si alteraste <code>app_user</code>, <code>app_password</code> o <code>app_db</code> al inicializar el contenedor PostgreSQL, garantiza que esos valores se reflejen en la cadena de conexión anterior. La palabra <code>localhost</code> indica que la base de datos PostgreSQL está siendo ejecutada en la misma máquina que tu aplicación. Si la base de datos está en una máquina diferente, sustituye <code>localhost</code> por la dirección IP correspondiente y, si es necesario, ajusta el puerto <code>5432</code>.</p>
 </div>
-<p>Para que la instalación de <code>psycopg</code> esté en la imagen Docker, necesitamos hacer un nuevo build. Para que la nueva versión del <code>pyproject.toml</code> sea copiada y los nuevos paquetes sean instalados:</p>
+<p>Para que la instalación de <code>psycopg</code> esté en la imagen Docker, necesitamos hacer un nuevo build,  para que la nueva versión del <code>pyproject.toml</code> sea copiada y los nuevos paquetes sean instalados:</p>
 <div class="language-shell highlight"><span class="filename">$ Ejecución en la terminal!</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>fastzeroapp<span class="w"> </span><span class="c1">#(1)!</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span><span class="s2">"fast_zero"</span><span class="w"> </span>.<span class="w"> </span><span class="c1">#(2)!</span>
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>fastzeroapp<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span>fast_zero:latest<span class="w"> </span><span class="c1">#(3)!</span>
